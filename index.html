@@ -8,7 +8,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
-
 <style>
 :root {
   --gold: #C9A84C;
@@ -21,711 +20,477 @@
   --surface-2: #1E1E1E;
   --white: #F5F0E8;
   --muted: #888880;
-  --red: #C0392B;
+  --green: #2ECC71;
   --font-display: 'Bebas Neue', sans-serif;
   --font-condensed: 'Barlow Condensed', sans-serif;
   --font-body: 'Barlow', sans-serif;
 }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--obsidian);color:var(--white);font-family:var(--font-body);font-weight:400;line-height:1.6;overflow-x:hidden;cursor:crosshair}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:0.35}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--obsidian)}::-webkit-scrollbar-thumb{background:var(--gold-dark)}
+::selection{background:var(--gold);color:var(--obsidian)}
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; font-size: 16px; }
-body {
-  background: var(--obsidian);
-  color: var(--white);
-  font-family: var(--font-body);
-  font-weight: 400;
-  line-height: 1.6;
-  overflow-x: hidden;
-  cursor: crosshair;
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1.25rem 4rem;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(to bottom,rgba(8,8,8,0.95),transparent);backdrop-filter:blur(2px);transition:background 0.4s}
+nav.scrolled{background:rgba(8,8,8,0.97);border-bottom:1px solid rgba(201,168,76,0.15)}
+.nav-logo{font-family:var(–font-display);font-size:1.5rem;letter-spacing:0.15em;color:var(–gold);text-decoration:none}
+.nav-logo span{color:var(–white)}
+.nav-links{display:flex;gap:2rem;list-style:none;align-items:center}
+.nav-links a{font-family:var(–font-condensed);font-size:0.82rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(–muted);text-decoration:none;transition:color 0.2s}
+.nav-links a:hover{color:var(–gold)}
+.nav-cta{background:var(–gold);color:var(–obsidian)!important;padding:0.6rem 1.4rem;font-weight:700!important;letter-spacing:0.15em!important;transition:background 0.2s,transform 0.2s!important}
+.nav-cta:hover{background:var(–gold-light)!important;transform:translateY(-1px)}
+
+/* SECTION NAV PILLS */
+.section-nav{position:fixed;top:80px;left:50%;transform:translateX(-50%);z-index:990;display:flex;gap:0.4rem;background:rgba(8,8,8,0.92);border:1px solid rgba(201,168,76,0.2);border-radius:100px;padding:0.5rem 0.75rem;backdrop-filter:blur(10px);opacity:0;transition:opacity 0.4s;white-space:nowrap}
+.section-nav.visible{opacity:1}
+.snav-pill{font-family:var(–font-condensed);font-size:0.72rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(–muted);text-decoration:none;padding:0.4rem 0.9rem;border-radius:100px;transition:all 0.2s;cursor:pointer;background:transparent;border:none}
+.snav-pill:hover,.snav-pill.active{background:var(–gold);color:var(–obsidian)}
+.snav-pill.hl{background:rgba(201,168,76,0.15);color:var(–gold);border:1px solid rgba(201,168,76,0.3)}
+.snav-pill.hl:hover{background:var(–gold);color:var(–obsidian)}
+
+/* HERO */
+#hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:hidden;padding:8rem 2rem 4rem}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 100%,rgba(201,168,76,0.08) 0%,transparent 70%),radial-gradient(ellipse 60% 40% at 20% 50%,rgba(201,168,76,0.04) 0%,transparent 60%),linear-gradient(180deg,#080808 0%,#0D0D0D 50%,#080808 100%)}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(201,168,76,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,0.04) 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 20%,transparent 80%)}
+.hero-stripe{position:absolute;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,transparent,var(–gold-dark),transparent);opacity:0.4;animation:stripeMove 6s ease-in-out infinite alternate}
+.hero-stripe:nth-child(1){left:15%;animation-delay:0s}
+.hero-stripe:nth-child(2){left:85%;animation-delay:-2s}
+.hero-stripe:nth-child(3){left:50%;opacity:0.15;animation-delay:-4s}
+@keyframes stripeMove{from{opacity:0.1}to{opacity:0.45}}
+
+.hero-august-banner{display:inline-flex;align-items:center;gap:0.75rem;background:var(–gold);color:var(–obsidian);font-family:var(–font-condensed);font-size:0.8rem;font-weight:800;letter-spacing:0.3em;text-transform:uppercase;padding:0.5rem 1.5rem;margin-bottom:1.5rem;opacity:0;animation:fadeUp 0.8s 0.1s ease forwards}
+.hero-eyebrow{font-family:var(–font-condensed);font-size:0.8rem;font-weight:700;letter-spacing:0.45em;text-transform:uppercase;color:var(–gold);margin-bottom:1.5rem;opacity:0;animation:fadeUp 0.8s 0.2s ease forwards}
+.hero-title{font-family:var(–font-display);font-size:clamp(5rem,15vw,14rem);line-height:0.85;letter-spacing:0.02em;color:var(–white);position:relative;opacity:0;animation:fadeUp 0.8s 0.4s ease forwards}
+.hero-title .gold{color:var(–gold)}
+.hero-title::after{content:‘ZIM GRAND PRIX’;position:absolute;inset:0;color:transparent;-webkit-text-stroke:1px rgba(201,168,76,0.15);transform:translate(3px,3px);z-index:-1}
+.hero-sub{font-family:var(–font-condensed);font-size:clamp(1.1rem,2.5vw,1.6rem);font-weight:300;letter-spacing:0.3em;text-transform:uppercase;color:var(–muted);margin-top:1.5rem;margin-bottom:3rem;opacity:0;animation:fadeUp 0.8s 0.6s ease forwards}
+.hero-sub strong{color:var(–gold);font-weight:600}
+.hero-date-badge{display:inline-flex;align-items:center;gap:1.5rem;border:1px solid rgba(201,168,76,0.3);padding:1rem 2rem;margin-bottom:3rem;opacity:0;animation:fadeUp 0.8s 0.8s ease forwards}
+.hero-date-badge .divider{width:1px;height:30px;background:rgba(201,168,76,0.3)}
+.hero-date-item{text-align:center}
+.hero-date-item .label{font-family:var(–font-condensed);font-size:0.7rem;letter-spacing:0.3em;text-transform:uppercase;color:var(–gold);display:block}
+.hero-date-item .value{font-family:var(–font-condensed);font-size:1.1rem;font-weight:600;color:var(–white);display:block}
+.hero-ctas{display:flex;gap:1rem;align-items:center;flex-wrap:wrap;justify-content:center;opacity:0;animation:fadeUp 0.8s 1s ease forwards}
+.hero-scroll{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:0.5rem;opacity:0;animation:fadeUp 0.8s 1.4s ease forwards}
+.hero-scroll span{font-family:var(–font-condensed);font-size:0.65rem;letter-spacing:0.4em;text-transform:uppercase;color:var(–gold)}
+.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(–gold),transparent);animation:scrollPulse 2s ease-in-out infinite}
+@keyframes scrollPulse{0%,100%{opacity:0.3;transform:scaleY(1)}50%{opacity:1;transform:scaleY(1.1)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+
+/* BUTTONS */
+.btn-primary{font-family:var(–font-condensed);font-size:1rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;background:var(–gold);color:var(–obsidian);padding:1rem 2.5rem;text-decoration:none;display:inline-block;transition:all 0.2s;position:relative;overflow:hidden;cursor:pointer;border:none}
+.btn-primary::before{content:’’;position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);transition:left 0.4s}
+.btn-primary:hover::before{left:100%}
+.btn-primary:hover{background:var(–gold-light);transform:translateY(-2px)}
+.btn-secondary{font-family:var(–font-condensed);font-size:1rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;background:transparent;color:var(–white);padding:1rem 2.5rem;text-decoration:none;display:inline-block;border:1px solid rgba(245,240,232,0.3);transition:all 0.2s;cursor:pointer}
+.btn-secondary:hover{border-color:var(–gold);color:var(–gold);transform:translateY(-2px)}
+
+/* STATS BAR */
+.stats-bar{background:var(–gold);padding:1.2rem 4rem;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.stat-item{display:flex;flex-direction:column;align-items:center;padding:0 3rem;border-right:1px solid rgba(8,8,8,0.2);flex:1;max-width:200px}
+.stat-item:last-child{border-right:none}
+.stat-num{font-family:var(–font-display);font-size:2rem;color:var(–obsidian);line-height:1}
+.stat-label{font-family:var(–font-condensed);font-size:0.7rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(8,8,8,0.6)}
+
+/* AFTER PARTY BANNER */
+.afterparty-banner{background:linear-gradient(135deg,#0D0A02,#1A1205,#0D0A02);border-top:1px solid rgba(201,168,76,0.3);border-bottom:1px solid rgba(201,168,76,0.3);padding:2.5rem 4rem;display:flex;align-items:center;justify-content:center;gap:4rem;position:relative;overflow:hidden}
+.afterparty-banner::before{content:‘🎵’;position:absolute;font-size:8rem;opacity:0.04;left:5%;top:50%;transform:translateY(-50%)}
+.afterparty-banner::after{content:‘🎶’;position:absolute;font-size:8rem;opacity:0.04;right:5%;top:50%;transform:translateY(-50%)}
+.ap-label{font-family:var(–font-condensed);font-size:0.7rem;font-weight:700;letter-spacing:0.45em;text-transform:uppercase;color:var(–gold);margin-bottom:0.4rem}
+.ap-title{font-family:var(–font-display);font-size:clamp(2rem,4vw,3.5rem);color:var(–white);line-height:1;margin-bottom:0.5rem}
+.ap-sub{font-family:var(–font-condensed);font-size:1rem;color:var(–muted);letter-spacing:0.1em}
+.ap-sub strong{color:var(–gold)}
+.ap-pill{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.35);padding:0.6rem 1.5rem;font-family:var(–font-condensed);font-size:0.85rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(–gold);margin-top:1rem;cursor:pointer;text-decoration:none;transition:all 0.2s}
+.ap-pill:hover{background:var(–gold);color:var(–obsidian)}
+
+/* SECTIONS */
+section{padding:7rem 4rem;max-width:1400px;margin:0 auto}
+.section-full{max-width:100%;padding-left:0;padding-right:0}
+.section-eyebrow{font-family:var(–font-condensed);font-size:0.75rem;font-weight:700;letter-spacing:0.45em;text-transform:uppercase;color:var(–gold);margin-bottom:1rem;display:flex;align-items:center;gap:1rem}
+.section-eyebrow::before{content:’’;width:30px;height:1px;background:var(–gold)}
+.section-title{font-family:var(–font-display);font-size:clamp(2.5rem,6vw,5rem);line-height:0.9;letter-spacing:0.02em;color:var(–white);margin-bottom:1.5rem}
+.section-title .gold{color:var(–gold)}
+.section-lead{font-size:1.15rem;color:var(–muted);max-width:600px;line-height:1.7}
+
+/* FORMAT */
+.format-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:4rem;background:rgba(201,168,76,0.1)}
+.format-day{background:var(–surface);padding:3rem 2.5rem;position:relative;overflow:hidden;transition:transform 0.3s}
+.format-day::before{content:’’;position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(–gold-dark),var(–gold));transform:scaleX(0);transform-origin:left;transition:transform 0.4s ease}
+.format-day:hover::before{transform:scaleX(1)}
+.format-day:hover{transform:translateY(-4px)}
+.day-number{font-family:var(–font-display);font-size:6rem;line-height:1;color:rgba(201,168,76,0.08);position:absolute;top:1rem;right:1.5rem;pointer-events:none}
+.day-label{font-family:var(–font-condensed);font-size:0.75rem;font-weight:700;letter-spacing:0.35em;text-transform:uppercase;color:var(–gold);margin-bottom:0.4rem}
+.day-name{font-family:var(–font-display);font-size:2.5rem;letter-spacing:0.05em;color:var(–white);margin-bottom:2rem}
+.day-events{list-style:none;display:flex;flex-direction:column;gap:1.2rem}
+.day-event{display:flex;flex-direction:column;gap:0.2rem;padding-left:1rem;border-left:2px solid rgba(201,168,76,0.2);transition:border-color 0.3s}
+.format-day:hover .day-event{border-color:rgba(201,168,76,0.4)}
+.event-time{font-family:var(–font-condensed);font-size:0.7rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(–gold)}
+.event-name{font-family:var(–font-condensed);font-size:1rem;font-weight:600;color:var(–white)}
+.event-desc{font-size:0.85rem;color:var(–muted);line-height:1.4}
+
+/* TICKETS */
+.tickets-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:4rem;background:rgba(201,168,76,0.06)}
+.ticket-card{background:var(–surface);padding:2.5rem 2rem;display:flex;flex-direction:column;position:relative;overflow:hidden;transition:transform 0.3s;cursor:pointer}
+.ticket-card::after{content:’’;position:absolute;bottom:0;left:0;right:0;height:0;background:linear-gradient(to top,rgba(201,168,76,0.06),transparent);transition:height 0.4s}
+.ticket-card:hover{transform:translateY(-6px)}
+.ticket-card:hover::after{height:100%}
+.ticket-card.hero-star{background:linear-gradient(145deg,#1A1508,#141410,#1A1508);border:2px solid var(–gold);transform:scale(1.03);z-index:2;box-shadow:0 0 40px rgba(201,168,76,0.15),0 20px 60px rgba(0,0,0,0.6)}
+.ticket-card.hero-star:hover{transform:scale(1.03) translateY(-6px)}
+.ticket-card.hero-star::before{content:’’;position:absolute;inset:-2px;background:linear-gradient(135deg,var(–gold),transparent,var(–gold));z-index:-1;opacity:0;animation:goldGlow 3s ease-in-out infinite}
+@keyframes goldGlow{0%,100%{opacity:0}50%{opacity:0.3}}
+.hero-star-badge{background:var(–gold);color:var(–obsidian);font-family:var(–font-display);font-size:0.75rem;letter-spacing:0.2em;text-align:center;padding:0.4rem 0;margin:-2.5rem -2rem 1.5rem -2rem;position:relative}
+.scarcity-bar{background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);padding:0.6rem 0.75rem;margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem}
+.scarcity-dot{width:6px;height:6px;background:#E8B84B;border-radius:50%;animation:pulse 1.5s ease-in-out infinite;flex-shrink:0}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+.scarcity-text{font-family:var(–font-condensed);font-size:0.72rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(–gold)}
+.ticket-tier{font-family:var(–font-condensed);font-size:0.7rem;font-weight:700;letter-spacing:0.35em;text-transform:uppercase;color:var(–gold);margin-bottom:0.5rem}
+.ticket-name{font-family:var(–font-display);font-size:2rem;letter-spacing:0.05em;color:var(–white);margin-bottom:1.5rem;line-height:1}
+.ticket-price{font-family:var(–font-display);font-size:3.5rem;color:var(–gold);line-height:1;margin-bottom:0.5rem}
+.ticket-price sup{font-size:1.5rem;vertical-align:top;margin-top:0.5rem}
+.ticket-price-note{font-family:var(–font-condensed);font-size:0.75rem;color:var(–muted);letter-spacing:0.1em;margin-bottom:1.5rem}
+.ticket-value-anchor{font-family:var(–font-condensed);font-size:0.8rem;color:rgba(201,168,76,0.4);text-decoration:line-through;margin-bottom:0.3rem}
+.ticket-includes{list-style:none;display:flex;flex-direction:column;gap:0.75rem;flex:1;margin-bottom:2rem}
+.ticket-includes li{font-size:0.9rem;color:var(–muted);display:flex;align-items:flex-start;gap:0.6rem;line-height:1.3}
+.ticket-includes li::before{content:‘✓’;color:var(–gold);font-weight:700;flex-shrink:0;margin-top:0.05rem}
+.ticket-includes li.no{opacity:0.4;text-decoration:line-through}
+.ticket-includes li.no::before{content:‘✗’;color:var(–muted)}
+.afterparty-addon{background:rgba(201,168,76,0.06);border:1px dashed rgba(201,168,76,0.3);padding:0.9rem 1rem;margin-bottom:1.2rem}
+.afterparty-addon .addon-label{font-family:var(–font-condensed);font-size:0.7rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(–gold);margin-bottom:0.3rem}
+.afterparty-addon .addon-text{font-size:0.82rem;color:var(–muted);line-height:1.4}
+.afterparty-addon .addon-price{font-family:var(–font-display);font-size:1.4rem;color:var(–gold-light);margin-top:0.3rem}
+
+/* DRIVERS */
+.driver-hero{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start}
+.driver-requirements{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2.5rem}
+.req-card{background:var(–surface);padding:1.5rem;border-left:3px solid var(–gold-dark);transition:border-color 0.3s}
+.req-card:hover{border-color:var(–gold)}
+.req-icon{font-size:1.5rem;margin-bottom:0.5rem;display:block}
+.req-title{font-family:var(–font-condensed);font-size:0.85rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(–gold);margin-bottom:0.3rem}
+.req-text{font-size:0.85rem;color:var(–muted);line-height:1.5}
+.pricing-breakdown{background:var(–surface);padding:2.5rem;border:1px solid rgba(201,168,76,0.15)}
+.pricing-row{display:flex;justify-content:space-between;align-items:center;padding:1.2rem 0;border-bottom:1px solid rgba(255,255,255,0.05)}
+.pricing-row:last-of-type{border-bottom:none}
+.pricing-label{font-family:var(–font-condensed);font-size:0.95rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase}
+.pricing-amount{font-family:var(–font-display);font-size:1.8rem;color:var(–gold)}
+.pricing-row.highlight{background:rgba(201,168,76,0.05);padding:1.2rem 1rem;margin:0 -1rem}
+.prize-pool{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2rem}
+.prize-item{background:var(–obsidian-light);padding:1.5rem;text-align:center;border-top:3px solid transparent}
+.prize-item:nth-child(1){border-color:var(–gold)}
+.prize-item:nth-child(2){border-color:#C0C0C0}
+.prize-item:nth-child(3){border-color:#CD7F32}
+.prize-position{font-family:var(–font-display);font-size:1.5rem;letter-spacing:0.05em}
+.prize-amount{font-family:var(–font-display);font-size:2rem;color:var(–gold)}
+.prize-extras{font-size:0.75rem;color:var(–muted);margin-top:0.3rem;line-height:1.4}
+
+/* CORPORATE */
+.corporate-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:6rem;align-items:center;margin-top:4rem}
+.corporate-visual{background:var(–surface);padding:3rem;border:1px solid rgba(201,168,76,0.2);position:relative}
+.corporate-visual::before{content:‘CORPORATE TEAM’;position:absolute;top:1.5rem;right:1.5rem;font-family:var(–font-display);font-size:4rem;color:rgba(201,168,76,0.04);line-height:1;text-align:right}
+.team-price{font-family:var(–font-display);font-size:6rem;color:var(–gold);line-height:1;margin-bottom:0.5rem}
+.team-price-label{font-family:var(–font-condensed);font-size:0.8rem;letter-spacing:0.3em;text-transform:uppercase;color:var(–muted);margin-bottom:2rem}
+.team-includes{list-style:none;display:flex;flex-direction:column;gap:1rem}
+.team-includes li{display:flex;align-items:center;gap:1rem;font-family:var(–font-condensed);font-size:1.05rem;font-weight:600;letter-spacing:0.05em;color:var(–white)}
+.team-includes li::before{content:’’;width:8px;height:8px;background:var(–gold);flex-shrink:0;transform:rotate(45deg)}
+
+/* FORMS */
+#waitlist{position:relative;overflow:hidden}
+.form-container{display:grid;grid-template-columns:1fr 1fr;gap:4rem;margin-top:4rem}
+.form-tabs{display:flex;gap:0;margin-bottom:2rem;border:1px solid rgba(201,168,76,0.2)}
+.form-tab{flex:1;font-family:var(–font-condensed);font-size:0.85rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;padding:0.9rem;text-align:center;cursor:pointer;transition:all 0.2s;background:transparent;color:var(–muted);border:none;border-right:1px solid rgba(201,168,76,0.2)}
+.form-tab:last-child{border-right:none}
+.form-tab.active{background:var(–gold);color:var(–obsidian)}
+.form-tab:hover:not(.active){color:var(–gold)}
+.reg-form{background:var(–surface);padding:2.5rem;border:1px solid rgba(201,168,76,0.1)}
+.form-group{margin-bottom:1.5rem}
+.form-group label{display:block;font-family:var(–font-condensed);font-size:0.75rem;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:var(–gold);margin-bottom:0.5rem}
+.form-group label .opt{color:var(–muted);font-weight:400;letter-spacing:0.1em;text-transform:none;font-size:0.7rem}
+.form-group input,.form-group select,.form-group textarea{width:100%;background:var(–obsidian-light);border:1px solid rgba(201,168,76,0.15);color:var(–white);font-family:var(–font-body);font-size:0.95rem;padding:0.85rem 1rem;outline:none;transition:border-color 0.2s;cursor:crosshair}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(–gold)}
+.form-group select option{background:var(–obsidian-light)}
+.form-group textarea{resize:vertical;min-height:80px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.form-note{font-size:0.8rem;color:var(–muted);margin-top:1rem;line-height:1.5;text-align:center}
+.field-error{border-color:#E74C3C !important}
+.error-msg{font-size:0.75rem;color:#E74C3C;margin-top:0.3rem}
+
+/* ATTENDEE FIELDS */
+.attendee-fields{display:flex;flex-direction:column;gap:0.75rem;margin-top:0.75rem}
+.attendee-row{display:flex;gap:0.5rem;align-items:center}
+.attendee-row input{flex:1;background:var(–obsidian-light);border:1px solid rgba(201,168,76,0.15);color:var(–white);font-family:var(–font-body);font-size:0.9rem;padding:0.7rem 0.85rem;outline:none;transition:border-color 0.2s;cursor:crosshair}
+.attendee-row input:focus{border-color:var(–gold)}
+.attendee-num{font-family:var(–font-condensed);font-size:0.75rem;font-weight:700;color:var(–gold);width:24px;flex-shrink:0}
+
+/* CONFIRMATION CARD */
+.confirmation-card{display:none;background:linear-gradient(145deg,#0D0A02,#141410,#0D0A02);border:1px solid var(–gold);padding:3rem;text-align:center;position:relative;overflow:hidden}
+.confirmation-card.visible{display:block}
+.confirmation-card::before{content:‘ZGP’;position:absolute;font-family:var(–font-display);font-size:12rem;color:rgba(201,168,76,0.03);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;white-space:nowrap}
+.conf-check{font-size:3rem;margin-bottom:1rem;display:block}
+.conf-title{font-family:var(–font-display);font-size:2.5rem;color:var(–gold);letter-spacing:0.1em;margin-bottom:0.5rem}
+.conf-name{font-family:var(–font-condensed);font-size:1.3rem;font-weight:600;color:var(–white);margin-bottom:0.5rem}
+.conf-divider{width:60px;height:1px;background:var(–gold);margin:1.5rem auto}
+.conf-refs{display:flex;flex-direction:column;gap:0.5rem;margin-bottom:1.5rem}
+.conf-ref-item{display:flex;align-items:center;justify-content:center;gap:1rem;background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.2);padding:0.75rem 1.5rem}
+.conf-ref-id{font-family:var(–font-display);font-size:1.5rem;color:var(–gold);letter-spacing:0.1em}
+.conf-ref-name{font-family:var(–font-condensed);font-size:0.85rem;color:var(–muted)}
+.conf-message{font-size:0.9rem;color:var(–muted);line-height:1.8;max-width:500px;margin:0 auto}
+.conf-message strong{color:var(–white)}
+.conf-message .gold{color:var(–gold);font-weight:600}
+.conf-footer{margin-top:2rem;padding-top:1.5rem;border-top:1px solid rgba(201,168,76,0.15);font-family:var(–font-condensed);font-size:0.8rem;letter-spacing:0.2em;text-transform:uppercase;color:var(–gold)}
+
+/* FAQ */
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:4rem;background:rgba(201,168,76,0.06)}
+.faq-item{background:var(–surface);border:none;cursor:pointer;text-align:left;width:100%;padding:2rem;position:relative;transition:background 0.2s}
+.faq-item:hover,.faq-item.open{background:var(–obsidian-light)}
+.faq-question{font-family:var(–font-condensed);font-size:1.05rem;font-weight:700;letter-spacing:0.05em;color:var(–white);display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.faq-question .icon{color:var(–gold);font-size:1.2rem;transition:transform 0.3s;flex-shrink:0}
+.faq-item.open .faq-question .icon{transform:rotate(45deg)}
+.faq-answer{font-size:0.9rem;color:var(–muted);line-height:1.7;max-height:0;overflow:hidden;transition:max-height 0.4s ease,padding 0.3s}
+.faq-item.open .faq-answer{max-height:300px;padding-top:1rem}
+
+/* CONTACT */
+.contact-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:6rem;align-items:start;margin-top:4rem}
+.contact-info{display:flex;flex-direction:column;gap:2.5rem}
+.contact-block-title{font-family:var(–font-condensed);font-size:0.75rem;font-weight:700;letter-spacing:0.35em;text-transform:uppercase;color:var(–gold);margin-bottom:0.5rem}
+.contact-block-text{font-size:1rem;color:var(–white)}
+.contact-block-sub{font-size:0.85rem;color:var(–muted);margin-top:0.25rem}
+
+/* FOOTER */
+footer{background:var(–obsidian);border-top:1px solid rgba(201,168,76,0.1);padding:4rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap}
+.footer-logo{font-family:var(–font-display);font-size:2rem;letter-spacing:0.15em;color:var(–gold)}
+.footer-logo span{color:rgba(245,240,232,0.4)}
+.footer-text{font-family:var(–font-condensed);font-size:0.8rem;letter-spacing:0.15em;color:var(–muted);text-align:center}
+.footer-links{display:flex;gap:2rem;list-style:none}
+.footer-links a{font-family:var(–font-condensed);font-size:0.8rem;letter-spacing:0.15em;text-transform:uppercase;color:var(–muted);text-decoration:none;transition:color 0.2s}
+.footer-links a:hover{color:var(–gold)}
+.gold-divider{width:100%;height:1px;background:linear-gradient(90deg,transparent,var(–gold-dark),var(–gold),var(–gold-dark),transparent);opacity:0.4}
+
+/* URGENCY BAR */
+.urgency-bar{position:fixed;bottom:0;left:0;right:0;z-index:900;text-align:center;padding:0.75rem 2rem;display:flex;align-items:center;justify-content:center;gap:2rem;transform:translateY(100%);transition:transform 0.4s ease,background 0.6s ease}
+.urgency-bar.visible{transform:translateY(0)}
+.urgency-bar.mode-driver{background:var(–gold);color:var(–obsidian)}
+.urgency-bar.mode-ticket{background:linear-gradient(90deg,#1A1205,#252010,#1A1205);border-top:1px solid var(–gold);color:var(–white)}
+.urgency-text{font-family:var(–font-condensed);font-size:0.9rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase}
+.urgency-bar.mode-ticket .urgency-text{color:var(–gold)}
+.urgency-bar .btn-primary{padding:0.5rem 1.5rem;font-size:0.85rem}
+.urgency-bar.mode-driver .btn-primary{background:var(–obsidian);color:var(–gold)}
+.urgency-bar.mode-ticket .btn-primary{background:var(–gold);color:var(–obsidian)}
+.urgency-close{position:absolute;right:1.5rem;background:none;border:none;cursor:pointer;font-size:1.2rem;opacity:0.6}
+.urgency-bar.mode-driver .urgency-close{color:var(–obsidian)}
+.urgency-bar.mode-ticket .urgency-close{color:var(–white)}
+
+/* SPINNER */
+.spinner{display:inline-block;width:16px;height:16px;border:2px solid rgba(8,8,8,0.3);border-top-color:var(–obsidian);border-radius:50%;animation:spin 0.7s linear infinite;vertical-align:middle;margin-right:0.5rem}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal.revealed{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:0.1s}
+.reveal-delay-2{transition-delay:0.2s}
+.reveal-delay-3{transition-delay:0.3s}
+
+/* RESPONSIVE */
+@media(max-width:1100px){
+nav{padding:1.25rem 2rem}.nav-links{gap:1.2rem}
+section{padding:5rem 2rem}
+.format-grid{grid-template-columns:1fr}
+.tickets-grid{grid-template-columns:1fr 1fr}
+.driver-hero{grid-template-columns:1fr;gap:3rem}
+.form-container{grid-template-columns:1fr}
+.corporate-grid{grid-template-columns:1fr;gap:3rem}
+.contact-grid{grid-template-columns:1fr;gap:3rem}
+.faq-grid{grid-template-columns:1fr}
+.stats-bar{flex-wrap:wrap;padding:1.2rem 2rem}
+footer{padding:2.5rem 2rem;flex-direction:column;text-align:center}
+.section-nav{display:none}
+.afterparty-banner{flex-direction:column;gap:1.5rem;padding:2rem;text-align:center}
+}
+@media(max-width:700px){
+.tickets-grid{grid-template-columns:1fr}
+.ticket-card.hero-star{transform:none}
+.prize-pool{grid-template-columns:1fr}
+.driver-requirements{grid-template-columns:1fr}
+.form-row{grid-template-columns:1fr}
+.hero-ctas{flex-direction:column}
+.nav-links{display:none}
 }
 
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 9999;
-  opacity: 0.35;
+/* ─── LOGO IMAGE ─── */
+.nav-logo-img { display:flex; align-items:center; text-decoration:none; flex-shrink:0; }
+.nav-logo-image { height:48px; width:auto; object-fit:contain; display:block; }
+
+.footer-logo-img { display:flex; align-items:center; text-decoration:none; }
+.footer-logo-image { height:60px; width:auto; object-fit:contain; display:block; }
+
+/* ─── MOBILE HAMBURGER ─── */
+.nav-hamburger {
+display:none;
+flex-direction:column;
+gap:5px;
+background:none;
+border:none;
+cursor:pointer;
+padding:4px;
+z-index:1100;
+}
+.nav-hamburger span {
+display:block;
+width:24px;
+height:2px;
+background:var(–gold);
+transition:all 0.3s;
+}
+.nav-hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity:0; }
+.nav-hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+
+/* ─── MOBILE NAV OVERLAY ─── */
+.mobile-nav-overlay {
+display:none;
+position:fixed;
+inset:0;
+background:rgba(8,8,8,0.98);
+z-index:1050;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+gap:2rem;
+}
+.mobile-nav-overlay.open { display:flex; }
+.mobile-nav-overlay a {
+font-family:var(–font-display);
+font-size:2.5rem;
+letter-spacing:0.15em;
+color:var(–muted);
+text-decoration:none;
+transition:color 0.2s;
+}
+.mobile-nav-overlay a:hover { color:var(–gold); }
+.mobile-nav-overlay .mobile-cta {
+background:var(–gold);
+color:var(–obsidian);
+padding:0.8rem 2rem;
+font-size:1.5rem;
 }
 
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: var(--obsidian); }
-::-webkit-scrollbar-thumb { background: var(--gold-dark); }
-::selection { background: var(--gold); color: var(--obsidian); }
+/* ─── COMPREHENSIVE MOBILE FIXES ─── */
+@media (max-width: 768px) {
+/* Nav */
+nav { padding:0.9rem 1.25rem; }
+.nav-logo-image { height:38px; }
+.nav-links { display:none; }
+.nav-hamburger { display:flex; }
 
-/* ─── NAV ─── */
-nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 1000;
-  padding: 1.25rem 4rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: linear-gradient(to bottom, rgba(8,8,8,0.95), transparent);
-  backdrop-filter: blur(2px);
-  transition: background 0.4s;
-}
-
-nav.scrolled {
-  background: rgba(8,8,8,0.97);
-  border-bottom: 1px solid rgba(201,168,76,0.15);
-}
-
-.nav-logo {
-  font-family: var(--font-display);
-  font-size: 1.5rem;
-  letter-spacing: 0.15em;
-  color: var(--gold);
-  text-decoration: none;
-}
-.nav-logo span { color: var(--white); }
-
-.nav-links {
-  display: flex;
-  gap: 2rem;
-  list-style: none;
-  align-items: center;
-}
-
-.nav-links a {
-  font-family: var(--font-condensed);
-  font-size: 0.82rem;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--muted);
-  text-decoration: none;
-  transition: color 0.2s;
-}
-.nav-links a:hover { color: var(--gold); }
-
-.nav-cta {
-  background: var(--gold);
-  color: var(--obsidian) !important;
-  padding: 0.6rem 1.4rem;
-  font-weight: 700 !important;
-  letter-spacing: 0.15em !important;
-  transition: background 0.2s, transform 0.2s !important;
-}
-.nav-cta:hover { background: var(--gold-light) !important; transform: translateY(-1px); color: var(--obsidian) !important; }
-
-/* ─── QUICK NAV PILLS (new) ─── */
-.section-nav {
-  position: fixed;
-  top: 80px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 990;
-  display: flex;
-  gap: 0.4rem;
-  background: rgba(8,8,8,0.92);
-  border: 1px solid rgba(201,168,76,0.2);
-  border-radius: 100px;
-  padding: 0.5rem 0.75rem;
-  backdrop-filter: blur(10px);
-  opacity: 0;
-  transition: opacity 0.4s;
-  white-space: nowrap;
-}
-.section-nav.visible { opacity: 1; }
-
-.snav-pill {
-  font-family: var(--font-condensed);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--muted);
-  text-decoration: none;
-  padding: 0.4rem 0.9rem;
-  border-radius: 100px;
-  transition: all 0.2s;
-  cursor: pointer;
-  background: transparent;
-  border: none;
-}
-.snav-pill:hover, .snav-pill.active { background: var(--gold); color: var(--obsidian); }
-.snav-pill.highlight-pill { background: rgba(201,168,76,0.15); color: var(--gold); border: 1px solid rgba(201,168,76,0.3); }
-.snav-pill.highlight-pill:hover { background: var(--gold); color: var(--obsidian); }
-
-/* ─── HERO ─── */
-#hero {
-  position: relative;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  overflow: hidden;
-  padding: 8rem 2rem 4rem;
-}
-
-.hero-bg {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 80% 60% at 50% 100%, rgba(201,168,76,0.08) 0%, transparent 70%),
-    radial-gradient(ellipse 60% 40% at 20% 50%, rgba(201,168,76,0.04) 0%, transparent 60%),
-    linear-gradient(180deg, #080808 0%, #0D0D0D 50%, #080808 100%);
-}
-
-.hero-grid {
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
-  background-size: 80px 80px;
-  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 80%);
-}
-
-.hero-stripe { position: absolute; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, transparent, var(--gold-dark), transparent); opacity: 0.4; animation: stripeMove 6s ease-in-out infinite alternate; }
-.hero-stripe:nth-child(1) { left: 15%; animation-delay: 0s; }
-.hero-stripe:nth-child(2) { left: 85%; animation-delay: -2s; }
-.hero-stripe:nth-child(3) { left: 50%; opacity: 0.15; animation-delay: -4s; }
-
-@keyframes stripeMove { from { opacity: 0.1; } to { opacity: 0.45; } }
-
-.hero-eyebrow {
-  font-family: var(--font-condensed);
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.45em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 1.5rem;
-  opacity: 0;
-  animation: fadeUp 0.8s 0.2s ease forwards;
-}
-
-/* August badge */
-.hero-august-banner {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.75rem;
-  background: var(--gold);
-  color: var(--obsidian);
-  font-family: var(--font-condensed);
-  font-size: 0.8rem;
-  font-weight: 800;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  padding: 0.5rem 1.5rem;
-  margin-bottom: 1.5rem;
-  opacity: 0;
-  animation: fadeUp 0.8s 0.1s ease forwards;
-}
-.hero-august-banner::before, .hero-august-banner::after { content: '◆'; font-size: 0.5rem; }
-
-.hero-title {
-  font-family: var(--font-display);
-  font-size: clamp(5rem, 15vw, 14rem);
-  line-height: 0.85;
-  letter-spacing: 0.02em;
-  color: var(--white);
-  position: relative;
-  opacity: 0;
-  animation: fadeUp 0.8s 0.4s ease forwards;
-}
-.hero-title .gold { color: var(--gold); }
-.hero-title::after { content: 'ZIM GRAND PRIX'; position: absolute; inset: 0; color: transparent; -webkit-text-stroke: 1px rgba(201,168,76,0.15); transform: translate(3px, 3px); z-index: -1; }
-
-.hero-sub {
-  font-family: var(--font-condensed);
-  font-size: clamp(1.1rem, 2.5vw, 1.6rem);
-  font-weight: 300;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-top: 1.5rem;
-  margin-bottom: 3rem;
-  opacity: 0;
-  animation: fadeUp 0.8s 0.6s ease forwards;
-}
-.hero-sub strong { color: var(--gold); font-weight: 600; }
-
+/* Hero */
+#hero { padding: 7rem 1.25rem 5rem; min-height:100svh; }
+.hero-august-banner { font-size:0.65rem; letter-spacing:0.2em; padding:0.4rem 1rem; margin-bottom:1rem; }
+.hero-eyebrow { font-size:0.65rem; letter-spacing:0.3em; margin-bottom:1rem; }
+.hero-title { font-size:clamp(3.5rem,18vw,6rem); }
+.hero-sub { font-size:0.9rem; letter-spacing:0.15em; margin-bottom:1.5rem; }
 .hero-date-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 1.5rem;
-  border: 1px solid rgba(201,168,76,0.3);
-  padding: 1rem 2rem;
-  margin-bottom: 3rem;
-  opacity: 0;
-  animation: fadeUp 0.8s 0.8s ease forwards;
+flex-direction:column;
+gap:0.75rem;
+padding:1rem 1.25rem;
+margin-bottom:2rem;
+width:90%;
+max-width:320px;
 }
-.hero-date-badge .divider { width: 1px; height: 30px; background: rgba(201,168,76,0.3); }
-.hero-date-item { text-align: center; }
-.hero-date-item .label { font-family: var(--font-condensed); font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); display: block; }
-.hero-date-item .value { font-family: var(--font-condensed); font-size: 1.1rem; font-weight: 600; color: var(--white); display: block; }
+.hero-date-badge .divider { width:60px; height:1px; }
+.hero-date-item .label { font-size:0.6rem; }
+.hero-date-item .value { font-size:0.9rem; }
+.hero-ctas { flex-direction:column; width:100%; padding:0 1rem; }
+.hero-ctas .btn-primary, .hero-ctas .btn-secondary { width:100%; text-align:center; padding:0.9rem 1.5rem; font-size:0.9rem; }
 
-.hero-ctas {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  flex-wrap: wrap;
-  justify-content: center;
-  opacity: 0;
-  animation: fadeUp 0.8s 1s ease forwards;
+/* Stats bar */
+.stats-bar { padding:1rem; flex-wrap:wrap; gap:0; }
+.stat-item { padding:0.6rem 1rem; border-right:none; border-bottom:1px solid rgba(8,8,8,0.15); flex:0 0 50%; max-width:50%; }
+.stat-item:nth-child(odd) { border-right:1px solid rgba(8,8,8,0.15); }
+.stat-item:last-child { flex:0 0 100%; border-right:none; border-bottom:none; }
+.stat-num { font-size:1.5rem; }
+.stat-label { font-size:0.6rem; }
+
+/* After party banner */
+.afterparty-banner { flex-direction:column; gap:1.5rem; padding:2rem 1.25rem; text-align:center; }
+.ap-title { font-size:2rem; }
+.afterparty-banner::before, .afterparty-banner::after { font-size:4rem; }
+
+/* Sections */
+section { padding:3.5rem 1.25rem; }
+.section-title { font-size:clamp(2rem,10vw,3.5rem); }
+.section-lead { font-size:1rem; }
+
+/* Format grid */
+.format-grid { grid-template-columns:1fr; }
+.format-day { padding:2rem 1.25rem; }
+.day-name { font-size:2rem; }
+
+/* Tickets */
+.tickets-grid { grid-template-columns:1fr; gap:1rem; background:transparent; }
+.ticket-card { padding:2rem 1.25rem; }
+.ticket-card.hero-star { transform:none; border-width:2px; }
+.ticket-card.hero-star:hover { transform:translateY(-4px); }
+.ticket-price { font-size:3rem; }
+
+/* Driver section */
+.driver-hero { grid-template-columns:1fr; gap:2rem; }
+.driver-requirements { grid-template-columns:1fr; }
+.prize-pool { grid-template-columns:1fr; }
+
+/* Corporate */
+.corporate-grid { grid-template-columns:1fr; gap:2rem; }
+.team-price { font-size:4rem; }
+
+/* Registration form */
+.form-container { grid-template-columns:1fr; gap:2rem; }
+.form-tabs { flex-wrap:wrap; }
+.form-tab { font-size:0.75rem; padding:0.75rem 0.5rem; }
+.reg-form { padding:1.5rem 1.25rem; }
+.form-row { grid-template-columns:1fr; }
+.attendee-row { flex-direction:row; }
+
+/* Confirmation card */
+.confirmation-card { padding:2rem 1.25rem; }
+.conf-title { font-size:1.8rem; }
+.conf-ref-id { font-size:1.2rem; }
+.conf-ref-item { flex-direction:column; gap:0.25rem; padding:0.6rem 1rem; }
+
+/* FAQ */
+.faq-grid { grid-template-columns:1fr; }
+.faq-item { padding:1.5rem 1.25rem; }
+
+/* Contact */
+.contact-grid { grid-template-columns:1fr; gap:2rem; }
+
+/* Footer */
+footer { padding:2rem 1.25rem; flex-direction:column; text-align:center; gap:1.5rem; }
+.footer-logo-image { height:50px; }
+.footer-links { flex-wrap:wrap; justify-content:center; gap:1rem; }
+
+/* Urgency bar */
+.urgency-bar { flex-wrap:wrap; gap:0.5rem; padding:0.75rem 1rem; padding-right:3rem; }
+.urgency-text { font-size:0.75rem; flex:0 0 100%; text-align:center; }
+.urgency-bar .btn-primary { padding:0.5rem 1.2rem; font-size:0.8rem; }
+.urgency-close { right:0.75rem; }
 }
 
-.btn-primary {
-  font-family: var(--font-condensed);
-  font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  background: var(--gold);
-  color: var(--obsidian);
-  padding: 1rem 2.5rem;
-  text-decoration: none;
-  display: inline-block;
-  transition: all 0.2s;
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
-  border: none;
+@media (max-width: 480px) {
+.hero-title { font-size:clamp(3rem,20vw,5rem); }
+.stat-item { flex:0 0 100%; border-right:none; }
+nav { padding:0.75rem 1rem; }
+.nav-logo-image { height:34px; }
 }
-.btn-primary::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); transition: left 0.4s; }
-.btn-primary:hover::before { left: 100%; }
-.btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
 
-.btn-secondary {
-  font-family: var(--font-condensed);
-  font-size: 1rem;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  background: transparent;
-  color: var(--white);
-  padding: 1rem 2.5rem;
-  text-decoration: none;
-  display: inline-block;
-  border: 1px solid rgba(245,240,232,0.3);
-  transition: all 0.2s;
-  cursor: pointer;
-}
-.btn-secondary:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
-
-.hero-scroll { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; opacity: 0; animation: fadeUp 0.8s 1.4s ease forwards; }
-.hero-scroll span { font-family: var(--font-condensed); font-size: 0.65rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); }
-.scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--gold), transparent); animation: scrollPulse 2s ease-in-out infinite; }
-
-@keyframes scrollPulse { 0%, 100% { opacity: 0.3; transform: scaleY(1); } 50% { opacity: 1; transform: scaleY(1.1); } }
-@keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-
-/* ─── STATS BAR ─── */
-.stats-bar {
-  background: var(--gold);
-  padding: 1.2rem 4rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0;
-  overflow: hidden;
-}
-.stat-item { display: flex; flex-direction: column; align-items: center; padding: 0 3rem; border-right: 1px solid rgba(8,8,8,0.2); flex: 1; max-width: 200px; }
-.stat-item:last-child { border-right: none; }
-.stat-num { font-family: var(--font-display); font-size: 2rem; color: var(--obsidian); line-height: 1; }
-.stat-label { font-family: var(--font-condensed); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(8,8,8,0.6); }
-
-/* ─── AFTER PARTY BANNER (new) ─── */
-.afterparty-banner {
-  background: linear-gradient(135deg, #0D0A02, #1A1205, #0D0A02);
-  border-top: 1px solid rgba(201,168,76,0.3);
-  border-bottom: 1px solid rgba(201,168,76,0.3);
-  padding: 2.5rem 4rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4rem;
-  position: relative;
-  overflow: hidden;
-}
-.afterparty-banner::before {
-  content: '🎵';
-  position: absolute;
-  font-size: 8rem;
-  opacity: 0.04;
-  left: 5%;
-  top: 50%;
-  transform: translateY(-50%);
-}
-.afterparty-banner::after {
-  content: '🎶';
-  position: absolute;
-  font-size: 8rem;
-  opacity: 0.04;
-  right: 5%;
-  top: 50%;
-  transform: translateY(-50%);
-}
-.ap-content { text-align: center; }
-.ap-label { font-family: var(--font-condensed); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.45em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.4rem; }
-.ap-title { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.5rem); color: var(--white); line-height: 1; margin-bottom: 0.5rem; }
-.ap-sub { font-family: var(--font-condensed); font-size: 1rem; color: var(--muted); letter-spacing: 0.1em; }
-.ap-sub strong { color: var(--gold); }
-.ap-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: rgba(201,168,76,0.12);
-  border: 1px solid rgba(201,168,76,0.35);
-  padding: 0.6rem 1.5rem;
-  font-family: var(--font-condensed);
-  font-size: 0.85rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-top: 1rem;
-  cursor: pointer;
-  text-decoration: none;
-  transition: all 0.2s;
-}
-.ap-pill:hover { background: var(--gold); color: var(--obsidian); }
-
-/* ─── SECTIONS SHARED ─── */
-section { padding: 7rem 4rem; max-width: 1400px; margin: 0 auto; }
-.section-full { max-width: 100%; padding-left: 0; padding-right: 0; }
-
-.section-eyebrow {
-  font-family: var(--font-condensed);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.45em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-.section-eyebrow::before { content: ''; width: 30px; height: 1px; background: var(--gold); }
-
-.section-title { font-family: var(--font-display); font-size: clamp(2.5rem, 6vw, 5rem); line-height: 0.9; letter-spacing: 0.02em; color: var(--white); margin-bottom: 1.5rem; }
-.section-title .gold { color: var(--gold); }
-.section-lead { font-size: 1.15rem; color: var(--muted); max-width: 600px; line-height: 1.7; }
-
-/* ─── FORMAT ─── */
-#format { position: relative; }
-
-.format-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 4rem; background: rgba(201,168,76,0.1); }
-.format-day { background: var(--surface); padding: 3rem 2.5rem; position: relative; overflow: hidden; transition: transform 0.3s; }
-.format-day::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--gold-dark), var(--gold)); transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease; }
-.format-day:hover::before { transform: scaleX(1); }
-.format-day:hover { transform: translateY(-4px); }
-
-.day-number { font-family: var(--font-display); font-size: 6rem; line-height: 1; color: rgba(201,168,76,0.08); position: absolute; top: 1rem; right: 1.5rem; pointer-events: none; }
-.day-label { font-family: var(--font-condensed); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.4rem; }
-.day-name { font-family: var(--font-display); font-size: 2.5rem; letter-spacing: 0.05em; color: var(--white); margin-bottom: 2rem; }
-.day-events { list-style: none; display: flex; flex-direction: column; gap: 1.2rem; }
-.day-event { display: flex; flex-direction: column; gap: 0.2rem; padding-left: 1rem; border-left: 2px solid rgba(201,168,76,0.2); transition: border-color 0.3s; }
-.format-day:hover .day-event { border-color: rgba(201,168,76,0.4); }
-.event-time { font-family: var(--font-condensed); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
-.event-name { font-family: var(--font-condensed); font-size: 1rem; font-weight: 600; color: var(--white); }
-.event-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.4; }
-
-/* ─── TICKETS ─── */
-#tickets { background: var(--obsidian-mid); max-width: 100%; padding: 7rem 4rem; }
-.tickets-inner { max-width: 1400px; margin: 0 auto; }
-
-.tickets-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; margin-top: 4rem; background: rgba(201,168,76,0.06); }
-
-.ticket-card {
-  background: var(--surface);
-  padding: 2.5rem 2rem;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  overflow: hidden;
-  transition: transform 0.3s;
-  cursor: pointer;
-}
-.ticket-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 0; background: linear-gradient(to top, rgba(201,168,76,0.06), transparent); transition: height 0.4s; }
-.ticket-card:hover { transform: translateY(-6px); }
-.ticket-card:hover::after { height: 100%; }
-
-/* HERO PASS — psychological star card */
-.ticket-card.hero-star {
-  background: linear-gradient(145deg, #1A1508, #141410, #1A1508);
-  border: 2px solid var(--gold);
-  position: relative;
-  transform: scale(1.03);
-  z-index: 2;
-  box-shadow: 0 0 40px rgba(201,168,76,0.15), 0 20px 60px rgba(0,0,0,0.6);
-}
-.ticket-card.hero-star:hover { transform: scale(1.03) translateY(-6px); }
-
-/* pulsing glow */
-.ticket-card.hero-star::before {
-  content: '';
-  position: absolute;
-  inset: -2px;
-  border-radius: 0;
-  background: linear-gradient(135deg, var(--gold), transparent, var(--gold));
-  z-index: -1;
-  opacity: 0;
-  animation: goldGlow 3s ease-in-out infinite;
-}
-@keyframes goldGlow { 0%, 100% { opacity: 0; } 50% { opacity: 0.3; } }
-
-.hero-star-badge {
-  background: var(--gold);
-  color: var(--obsidian);
-  font-family: var(--font-display);
-  font-size: 0.75rem;
-  letter-spacing: 0.2em;
-  text-align: center;
-  padding: 0.4rem 0;
-  margin: -2.5rem -2rem 1.5rem -2rem;
-  position: relative;
-}
-.hero-star-social-proof {
-  font-family: var(--font-condensed);
-  font-size: 0.72rem;
-  color: var(--muted);
-  font-style: italic;
-  margin-top: 0.5rem;
-  margin-bottom: 1rem;
-  line-height: 1.4;
-}
-.hero-star-social-proof strong { color: var(--gold-light); }
-
-.scarcity-bar {
-  background: rgba(201,168,76,0.08);
-  border: 1px solid rgba(201,168,76,0.2);
-  padding: 0.6rem 0.75rem;
-  margin-bottom: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-.scarcity-dot { width: 6px; height: 6px; background: #E8B84B; border-radius: 50%; animation: pulse 1.5s ease-in-out infinite; flex-shrink: 0; }
-@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-.scarcity-text { font-family: var(--font-condensed); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); }
-
-.featured-badge { position: absolute; top: 0; right: 0; background: var(--gold); color: var(--obsidian); font-family: var(--font-condensed); font-size: 0.65rem; font-weight: 800; letter-spacing: 0.25em; text-transform: uppercase; padding: 0.35rem 1rem; }
-
-.ticket-tier { font-family: var(--font-condensed); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
-.ticket-name { font-family: var(--font-display); font-size: 2rem; letter-spacing: 0.05em; color: var(--white); margin-bottom: 1.5rem; line-height: 1; }
-.ticket-price { font-family: var(--font-display); font-size: 3.5rem; color: var(--gold); line-height: 1; margin-bottom: 0.5rem; }
-.ticket-price sup { font-size: 1.5rem; vertical-align: top; margin-top: 0.5rem; }
-.ticket-price-note { font-family: var(--font-condensed); font-size: 0.75rem; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 1.5rem; }
-
-.ticket-includes { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; flex: 1; margin-bottom: 2rem; }
-.ticket-includes li { font-size: 0.9rem; color: var(--muted); display: flex; align-items: flex-start; gap: 0.6rem; line-height: 1.3; }
-.ticket-includes li::before { content: '✓'; color: var(--gold); font-weight: 700; flex-shrink: 0; margin-top: 0.05rem; }
-.ticket-includes li.not-included { opacity: 0.4; text-decoration: line-through; }
-.ticket-includes li.not-included::before { content: '✗'; color: var(--muted); }
-
-/* After party add-on inside single day card */
-.afterparty-addon {
-  background: rgba(201,168,76,0.06);
-  border: 1px dashed rgba(201,168,76,0.3);
-  padding: 0.9rem 1rem;
-  margin-bottom: 1.2rem;
-  border-radius: 2px;
-}
-.afterparty-addon .addon-label { font-family: var(--font-condensed); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.3rem; }
-.afterparty-addon .addon-text { font-size: 0.82rem; color: var(--muted); line-height: 1.4; }
-.afterparty-addon .addon-price { font-family: var(--font-display); font-size: 1.4rem; color: var(--gold-light); margin-top: 0.3rem; }
-
-/* value anchor strikethrough */
-.ticket-value-anchor { font-family: var(--font-condensed); font-size: 0.8rem; color: rgba(201,168,76,0.4); text-decoration: line-through; margin-bottom: 0.3rem; }
-
-/* ─── DRIVERS ─── */
-#drivers { position: relative; overflow: hidden; }
-.driver-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
-.driver-requirements { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2.5rem; }
-.req-card { background: var(--surface); padding: 1.5rem; border-left: 3px solid var(--gold-dark); transition: border-color 0.3s; }
-.req-card:hover { border-color: var(--gold); }
-.req-icon { font-size: 1.5rem; margin-bottom: 0.5rem; display: block; }
-.req-title { font-family: var(--font-condensed); font-size: 0.85rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.3rem; }
-.req-text { font-size: 0.85rem; color: var(--muted); line-height: 1.5; }
-.pricing-breakdown { background: var(--surface); padding: 2.5rem; border: 1px solid rgba(201,168,76,0.15); }
-.pricing-row { display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
-.pricing-row:last-of-type { border-bottom: none; }
-.pricing-label { font-family: var(--font-condensed); font-size: 0.95rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
-.pricing-amount { font-family: var(--font-display); font-size: 1.8rem; color: var(--gold); }
-.pricing-row.highlight { background: rgba(201,168,76,0.05); padding: 1.2rem 1rem; margin: 0 -1rem; }
-.prize-pool { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
-.prize-item { background: var(--obsidian-light); padding: 1.5rem; text-align: center; border-top: 3px solid transparent; transition: border-color 0.3s; }
-.prize-item:nth-child(1) { border-color: var(--gold); }
-.prize-item:nth-child(2) { border-color: #C0C0C0; }
-.prize-item:nth-child(3) { border-color: #CD7F32; }
-.prize-position { font-family: var(--font-display); font-size: 1.5rem; letter-spacing: 0.05em; }
-.prize-amount { font-family: var(--font-display); font-size: 2rem; color: var(--gold); }
-.prize-extras { font-size: 0.75rem; color: var(--muted); margin-top: 0.3rem; line-height: 1.4; }
-
-/* ─── CORPORATE ─── */
-#corporate { background: var(--obsidian-mid); max-width: 100%; padding: 7rem 4rem; }
-.corporate-inner { max-width: 1400px; margin: 0 auto; }
-.corporate-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 6rem; align-items: center; margin-top: 4rem; }
-.corporate-visual { background: var(--surface); padding: 3rem; border: 1px solid rgba(201,168,76,0.2); position: relative; }
-.corporate-visual::before { content: 'CORPORATE TEAM'; position: absolute; top: 1.5rem; right: 1.5rem; font-family: var(--font-display); font-size: 4rem; color: rgba(201,168,76,0.04); line-height: 1; text-align: right; }
-.team-price { font-family: var(--font-display); font-size: 6rem; color: var(--gold); line-height: 1; margin-bottom: 0.5rem; }
-.team-price-label { font-family: var(--font-condensed); font-size: 0.8rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); margin-bottom: 2rem; }
-.team-includes { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
-.team-includes li { display: flex; align-items: center; gap: 1rem; font-family: var(--font-condensed); font-size: 1.05rem; font-weight: 600; letter-spacing: 0.05em; color: var(--white); }
-.team-includes li::before { content: ''; width: 8px; height: 8px; background: var(--gold); flex-shrink: 0; transform: rotate(45deg); }
-
-/* ─── REGISTRATION FORM ─── */
-#waitlist { position: relative; overflow: hidden; }
-.form-container { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 4rem; }
-.form-left .section-lead { margin-bottom: 2rem; }
-.form-tabs { display: flex; gap: 0; margin-bottom: 2rem; border: 1px solid rgba(201,168,76,0.2); }
-.form-tab { flex: 1; font-family: var(--font-condensed); font-size: 0.85rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.9rem; text-align: center; cursor: pointer; transition: all 0.2s; background: transparent; color: var(--muted); border: none; border-right: 1px solid rgba(201,168,76,0.2); }
-.form-tab:last-child { border-right: none; }
-.form-tab.active { background: var(--gold); color: var(--obsidian); }
-.form-tab:hover:not(.active) { color: var(--gold); }
-
-.reg-form { background: var(--surface); padding: 2.5rem; border: 1px solid rgba(201,168,76,0.1); }
-.form-group { margin-bottom: 1.5rem; }
-.form-group label { display: block; font-family: var(--font-condensed); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
-.form-group input, .form-group select, .form-group textarea { width: 100%; background: var(--obsidian-light); border: 1px solid rgba(201,168,76,0.15); color: var(--white); font-family: var(--font-body); font-size: 0.95rem; padding: 0.85rem 1rem; outline: none; transition: border-color 0.2s; cursor: crosshair; }
-.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--gold); }
-.form-group select option { background: var(--obsidian-light); }
-.form-group textarea { resize: vertical; min-height: 100px; }
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-.form-submit { width: 100%; margin-top: 0.5rem; }
-.form-note { font-size: 0.8rem; color: var(--muted); margin-top: 1rem; line-height: 1.5; text-align: center; }
-
-.result-card { display: none; background: var(--surface); border: 1px solid var(--gold); padding: 2.5rem; text-align: center; }
-.result-card.visible { display: block; }
-.result-id { font-family: var(--font-display); font-size: 3rem; color: var(--gold); letter-spacing: 0.1em; margin: 1rem 0; }
-.result-type { font-family: var(--font-condensed); font-size: 0.75rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--muted); }
-.result-name { font-family: var(--font-condensed); font-size: 1.2rem; font-weight: 600; color: var(--white); margin-top: 0.5rem; }
-.result-divider { width: 50px; height: 1px; background: var(--gold); margin: 1.5rem auto; }
-.result-message { font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
-
-/* Spreadsheet (hidden) */
-#data-store { display: none; }
-
-/* ─── FAQ ─── */
-#faq { background: var(--obsidian-mid); max-width: 100%; padding: 7rem 4rem; }
-.faq-inner { max-width: 1400px; margin: 0 auto; }
-.faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 4rem; background: rgba(201,168,76,0.06); }
-.faq-item { background: var(--surface); border: none; cursor: pointer; text-align: left; width: 100%; padding: 2rem; position: relative; transition: background 0.2s; }
-.faq-item:hover { background: var(--obsidian-light); }
-.faq-item.open { background: var(--obsidian-light); }
-.faq-question { font-family: var(--font-condensed); font-size: 1.05rem; font-weight: 700; letter-spacing: 0.05em; color: var(--white); display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
-.faq-question .icon { color: var(--gold); font-size: 1.2rem; transition: transform 0.3s; flex-shrink: 0; }
-.faq-item.open .faq-question .icon { transform: rotate(45deg); }
-.faq-answer { font-size: 0.9rem; color: var(--muted); line-height: 1.7; max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s; }
-.faq-item.open .faq-answer { max-height: 300px; padding-top: 1rem; }
-
-/* ─── CONTACT ─── */
-#contact { position: relative; }
-.contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 6rem; align-items: start; margin-top: 4rem; }
-.contact-info { display: flex; flex-direction: column; gap: 2.5rem; }
-.contact-block-title { font-family: var(--font-condensed); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
-.contact-block-text { font-size: 1rem; color: var(--white); }
-.contact-block-sub { font-size: 0.85rem; color: var(--muted); margin-top: 0.25rem; }
-
-/* ─── FOOTER ─── */
-footer { background: var(--obsidian); border-top: 1px solid rgba(201,168,76,0.1); padding: 4rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
-.footer-logo { font-family: var(--font-display); font-size: 2rem; letter-spacing: 0.15em; color: var(--gold); }
-.footer-logo span { color: rgba(245,240,232,0.4); }
-.footer-text { font-family: var(--font-condensed); font-size: 0.8rem; letter-spacing: 0.15em; color: var(--muted); text-align: center; }
-.footer-links { display: flex; gap: 2rem; list-style: none; }
-.footer-links a { font-family: var(--font-condensed); font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
-.footer-links a:hover { color: var(--gold); }
-
-.gold-divider { width: 100%; height: 1px; background: linear-gradient(90deg, transparent, var(--gold-dark), var(--gold), var(--gold-dark), transparent); opacity: 0.4; }
-
-/* ─── URGENCY BAR (alternates between driver & ticket) ─── */
-.urgency-bar {
-  position: fixed;
-  bottom: 0; left: 0; right: 0;
-  z-index: 900;
-  text-align: center;
-  padding: 0.75rem 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 2rem;
-  transform: translateY(100%);
-  transition: transform 0.4s ease, background 0.6s ease;
-}
-.urgency-bar.visible { transform: translateY(0); }
-.urgency-bar.mode-driver { background: var(--gold); color: var(--obsidian); }
-.urgency-bar.mode-ticket { background: linear-gradient(90deg, #1A1205, #252010, #1A1205); border-top: 1px solid var(--gold); color: var(--white); }
-
-.urgency-text { font-family: var(--font-condensed); font-size: 0.9rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; }
-.urgency-bar.mode-ticket .urgency-text { color: var(--gold); }
-.urgency-bar .btn-primary { padding: 0.5rem 1.5rem; font-size: 0.85rem; }
-.urgency-bar.mode-driver .btn-primary { background: var(--obsidian); color: var(--gold); }
-.urgency-bar.mode-ticket .btn-primary { background: var(--gold); color: var(--obsidian); }
-.urgency-close { position: absolute; right: 1.5rem; background: none; border: none; cursor: pointer; font-size: 1.2rem; opacity: 0.6; }
-.urgency-bar.mode-driver .urgency-close { color: var(--obsidian); }
-.urgency-bar.mode-ticket .urgency-close { color: var(--white); }
-
-/* ─── INLINE TICKET FORM ─── */
-.inline-form-panel { display: none; background: var(--surface); border: 1px solid rgba(201,168,76,0.2); padding: 2rem; margin-top: 1.5rem; }
-.inline-form-panel.open { display: block; }
-
-/* ─── REVEAL ─── */
-.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
-.reveal.revealed { opacity: 1; transform: translateY(0); }
-.reveal-delay-1 { transition-delay: 0.1s; }
-.reveal-delay-2 { transition-delay: 0.2s; }
-.reveal-delay-3 { transition-delay: 0.3s; }
-
-/* ─── RESPONSIVE ─── */
-@media (max-width: 1100px) {
-  nav { padding: 1.25rem 2rem; }
-  .nav-links { gap: 1.2rem; }
-  section { padding: 5rem 2rem; }
-  #tickets, #corporate, #faq { padding: 5rem 2rem; }
-  .format-grid { grid-template-columns: 1fr; }
-  .tickets-grid { grid-template-columns: 1fr 1fr; }
-  .driver-hero { grid-template-columns: 1fr; gap: 3rem; }
-  .form-container { grid-template-columns: 1fr; }
-  .corporate-grid { grid-template-columns: 1fr; gap: 3rem; }
-  .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
-  .faq-grid { grid-template-columns: 1fr; }
-  .stats-bar { padding: 1.2rem 2rem; flex-wrap: wrap; }
-  footer { padding: 2.5rem 2rem; flex-direction: column; text-align: center; }
-  .section-nav { display: none; }
-  .afterparty-banner { flex-direction: column; gap: 1.5rem; padding: 2rem; text-align: center; }
-}
-@media (max-width: 700px) {
-  .tickets-grid { grid-template-columns: 1fr; }
-  .ticket-card.hero-star { transform: none; }
-  .ticket-card.hero-star:hover { transform: translateY(-6px); }
-  .prize-pool { grid-template-columns: 1fr; }
-  .driver-requirements { grid-template-columns: 1fr; }
-  .form-row { grid-template-columns: 1fr; }
-  .hero-ctas { flex-direction: column; }
-  .nav-links { display: none; }
-  .hero-date-badge { gap: 1rem; padding: 0.75rem 1.25rem; }
-}
 </style>
-
 </head>
-
 <body>
 
-<!-- Hidden data store (acts as in-browser spreadsheet) -->
-
-<table id="data-store">
-  <thead>
-    <tr>
-      <th>Timestamp</th><th>RefID</th><th>Type</th><th>FirstName</th><th>LastName</th>
-      <th>Email</th><th>Phone</th><th>Detail1</th><th>Detail2</th><th>Detail3</th><th>Notes</th>
-    </tr>
-  </thead>
-  <tbody id="data-rows"></tbody>
-</table>
-
-<!-- ─── NAV ─── -->
+<!-- NAV -->
 
 <nav id="nav">
-  <a href="#hero" class="nav-logo">ZIM<span>GP</span></a>
+  <a href="#hero" class="nav-logo-img"><img src="data:image/jpeg;base64,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" alt="Zim Grand Prix" class="nav-logo-image"></a>
   <ul class="nav-links">
     <li><a href="#format">Event</a></li>
     <li><a href="#tickets">Tickets</a></li>
@@ -735,20 +500,33 @@ footer { background: var(--obsidian); border-top: 1px solid rgba(201,168,76,0.1)
     <li><a href="#faq">FAQ</a></li>
     <li><a href="#waitlist" class="nav-cta">Register Now</a></li>
   </ul>
+  <button class="nav-hamburger" id="hamburger" onclick="toggleMobileNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+<!-- MOBILE NAV OVERLAY -->
+<div class="mobile-nav-overlay" id="mobile-nav">
+  <a href="#format" onclick="closeMobileNav()">Event</a>
+  <a href="#tickets" onclick="closeMobileNav()">Tickets</a>
+  <a href="#afterparty-section" onclick="closeMobileNav()">After Party</a>
+  <a href="#drivers" onclick="closeMobileNav()">Race Entry</a>
+  <a href="#corporate" onclick="closeMobileNav()">Corporate</a>
+  <a href="#faq" onclick="closeMobileNav()">FAQ</a>
+  <a href="#waitlist" class="mobile-cta" onclick="closeMobileNav()">Register Now</a>
+</div>
 
-<!-- ─── SECTION NAV PILLS ─── -->
+<!-- SECTION NAV PILLS -->
 
 <div class="section-nav" id="section-nav">
-  <a href="#format" class="snav-pill" data-section="format">📅 Event Format</a>
-  <a href="#tickets" class="snav-pill highlight-pill" data-section="tickets">🎟 Tickets</a>
+  <a href="#format" class="snav-pill" data-section="format">📅 Event</a>
+  <a href="#tickets" class="snav-pill hl" data-section="tickets">🎟 Tickets</a>
   <a href="#afterparty-section" class="snav-pill" data-section="afterparty-section">🎵 After Party</a>
   <a href="#drivers" class="snav-pill" data-section="drivers">🏎 Race Entry</a>
   <a href="#corporate" class="snav-pill" data-section="corporate">🏢 Corporate</a>
-  <a href="#waitlist" class="snav-pill highlight-pill" data-section="waitlist">✍ Register</a>
+  <a href="#waitlist" class="snav-pill hl" data-section="waitlist">✍ Register</a>
 </div>
 
-<!-- ─── HERO ─── -->
+<!-- HERO -->
 
 <section id="hero" class="section-full" style="padding:0;">
   <div class="hero-bg"></div>
@@ -756,93 +534,49 @@ footer { background: var(--obsidian); border-top: 1px solid rgba(201,168,76,0.1)
   <div class="hero-stripe"></div>
   <div class="hero-stripe"></div>
   <div class="hero-stripe"></div>
-
   <div class="hero-august-banner">◆ August 2026 · Harare, Zimbabwe ◆</div>
   <p class="hero-eyebrow">Zimbabwe's First Professional Kart Racing Championship</p>
   <h1 class="hero-title">ZIM<br><span class="gold">GRAND</span><br>PRIX</h1>
   <p class="hero-sub"><strong>Harare, Zimbabwe</strong> &nbsp;·&nbsp; August 2026 &nbsp;·&nbsp; 3 Days of Pure Speed</p>
-
   <div class="hero-date-badge">
-    <div class="hero-date-item">
-      <span class="label">Day 1 · Friday</span>
-      <span class="value">Welcome & Qualifying</span>
-    </div>
+    <div class="hero-date-item"><span class="label">Day 1 · Friday</span><span class="value">Welcome & Qualifying</span></div>
     <div class="divider"></div>
-    <div class="hero-date-item">
-      <span class="label">Day 2 · Saturday</span>
-      <span class="value">Heat Races & Festival</span>
-    </div>
+    <div class="hero-date-item"><span class="label">Day 2 · Saturday</span><span class="value">Heat Races & Festival</span></div>
     <div class="divider"></div>
-    <div class="hero-date-item">
-      <span class="label">Day 3 · Sunday</span>
-      <span class="value">Championship Final</span>
-    </div>
+    <div class="hero-date-item"><span class="label">Day 3 · Sunday</span><span class="value">Championship Final</span></div>
   </div>
-
   <div class="hero-ctas">
     <a href="#waitlist" class="btn-primary">Secure Your Spot</a>
     <a href="#drivers" class="btn-secondary">Enter as a Driver</a>
   </div>
-
-  <div class="hero-scroll">
-    <span>Scroll</span>
-    <div class="scroll-line"></div>
-  </div>
+  <div class="hero-scroll"><span>Scroll</span><div class="scroll-line"></div></div>
 </section>
 
-<!-- ─── STATS BAR ─── -->
+<!-- STATS BAR -->
 
 <div class="stats-bar">
-  <div class="stat-item">
-    <span class="stat-num">$3,000</span>
-    <span class="stat-label">Winner Prize Pool</span>
-  </div>
-  <div class="stat-item">
-    <span class="stat-num">40</span>
-    <span class="stat-label">Championship Laps</span>
-  </div>
-  <div class="stat-item">
-    <span class="stat-num">3</span>
-    <span class="stat-label">Days of Racing</span>
-  </div>
-  <div class="stat-item">
-    <span class="stat-num">$150</span>
-    <span class="stat-label">Early Bird Entry</span>
-  </div>
-  <div class="stat-item">
-    <span class="stat-num">AUG</span>
-    <span class="stat-label">2026 · Harare</span>
-  </div>
+  <div class="stat-item"><span class="stat-num">$3,000</span><span class="stat-label">Winner Prize Pool</span></div>
+  <div class="stat-item"><span class="stat-num">40</span><span class="stat-label">Championship Laps</span></div>
+  <div class="stat-item"><span class="stat-num">3</span><span class="stat-label">Days of Racing</span></div>
+  <div class="stat-item"><span class="stat-num">$150</span><span class="stat-label">Early Bird Entry</span></div>
+  <div class="stat-item"><span class="stat-num">AUG</span><span class="stat-label">2026 · Harare</span></div>
 </div>
 
-<!-- ─── FORMAT ─── -->
+<!-- FORMAT -->
 
 <section id="format">
   <div class="section-eyebrow reveal">The Event Format</div>
   <h2 class="section-title reveal reveal-delay-1">THREE DAYS.<br><span class="gold">ONE CHAMPION.</span></h2>
   <p class="section-lead reveal reveal-delay-2">Every session builds toward Sunday's showdown. Whether you're racing or watching, the Zim Grand Prix delivers an experience unlike anything Zimbabwe has seen before.</p>
-
   <div class="format-grid reveal">
     <div class="format-day">
       <div class="day-number">01</div>
       <div class="day-label">Day One · Friday · August 2026</div>
       <div class="day-name">ARRIVAL</div>
       <ul class="day-events">
-        <li class="day-event">
-          <span class="event-time">Morning</span>
-          <span class="event-name">Welcome Function</span>
-          <span class="event-desc">Official opening ceremony. Meet drivers, teams, and the ZGP community.</span>
-        </li>
-        <li class="day-event">
-          <span class="event-time">Afternoon</span>
-          <span class="event-name">Practice Sessions</span>
-          <span class="event-desc">Learn the circuit. Dial in your kart. Find your rhythm before it counts.</span>
-        </li>
-        <li class="day-event">
-          <span class="event-time">Evening</span>
-          <span class="event-name">Qualifying — Time Trials</span>
-          <span class="event-desc">One flying lap. Your fastest time locks in your starting position. Every tenth matters.</span>
-        </li>
+        <li class="day-event"><span class="event-time">Morning</span><span class="event-name">Welcome Function</span><span class="event-desc">Official opening ceremony. Meet drivers, teams, and the ZGP community.</span></li>
+        <li class="day-event"><span class="event-time">Afternoon</span><span class="event-name">Practice Sessions</span><span class="event-desc">Learn the circuit. Dial in your kart. Find your rhythm before it counts.</span></li>
+        <li class="day-event"><span class="event-time">Evening</span><span class="event-name">Qualifying — Time Trials</span><span class="event-desc">One flying lap. Your fastest time locks in your grid position. Every tenth matters.</span></li>
       </ul>
     </div>
     <div class="format-day">
@@ -850,21 +584,9 @@ footer { background: var(--obsidian); border-top: 1px solid rgba(201,168,76,0.1)
       <div class="day-label">Day Two · Saturday · August 2026</div>
       <div class="day-name">BATTLE</div>
       <ul class="day-events">
-        <li class="day-event">
-          <span class="event-time">All Day</span>
-          <span class="event-name">Heat Races</span>
-          <span class="event-desc">Shorter, intense elimination races. Only the quickest drivers advance to Sunday's final.</span>
-        </li>
-        <li class="day-event">
-          <span class="event-time">Parallel</span>
-          <span class="event-name">Family Festival</span>
-          <span class="event-desc">Food vendors, live entertainment, and a full festival atmosphere alongside the racing.</span>
-        </li>
-        <li class="day-event">
-          <span class="event-time">Evening</span>
-          <span class="event-name">Corporate Team Challenge</span>
-          <span class="event-desc">Companies battle for the Brand of the Year title. Business rivalry. Track-style.</span>
-        </li>
+        <li class="day-event"><span class="event-time">All Day</span><span class="event-name">Heat Races</span><span class="event-desc">Shorter, intense elimination races. Only the quickest drivers advance to Sunday's final.</span></li>
+        <li class="day-event"><span class="event-time">Parallel</span><span class="event-name">Family Festival</span><span class="event-desc">Food vendors, live entertainment, and a full festival atmosphere alongside the racing.</span></li>
+        <li class="day-event"><span class="event-time">Evening</span><span class="event-name">Corporate Team Challenge</span><span class="event-desc">Companies battle for the Brand of the Year title. Business rivalry. Track-style.</span></li>
       </ul>
     </div>
     <div class="format-day">
@@ -872,21 +594,9 @@ footer { background: var(--obsidian); border-top: 1px solid rgba(201,168,76,0.1)
       <div class="day-label">Day Three · Sunday · August 2026</div>
       <div class="day-name">GLORY</div>
       <ul class="day-events">
-        <li class="day-event">
-          <span class="event-time">Afternoon</span>
-          <span class="event-name">Championship Final — 40 Laps</span>
-          <span class="event-desc">The top drivers. The same karts. Pure skill. $3,000 to the winner.</span>
-        </li>
-        <li class="day-event">
-          <span class="event-time">Post-Race</span>
-          <span class="event-name">Podium Ceremony</span>
-          <span class="event-desc">Champagne. Prize money. Signed posters. The moment you've been working toward.</span>
-        </li>
-        <li class="day-event">
-          <span class="event-time">🎵 Night</span>
-          <span class="event-name">After Party — Live Music</span>
-          <span class="event-desc">Local artists perform live. The circuit becomes a concert. HERO Pass, VIP & after party add-on holders only.</span>
-        </li>
+        <li class="day-event"><span class="event-time">Afternoon</span><span class="event-name">Championship Final — 40 Laps</span><span class="event-desc">The top drivers. Same karts. Pure skill. $3,000 to the winner.</span></li>
+        <li class="day-event"><span class="event-time">Post-Race</span><span class="event-name">Podium Ceremony</span><span class="event-desc">Champagne. Prize money. Signed posters. The moment you've been working toward.</span></li>
+        <li class="day-event"><span class="event-time">🎵 Night</span><span class="event-name">After Party — Live Music</span><span class="event-desc">Local artists perform live. The circuit becomes a concert. Hero Pass, VIP & add-on holders only.</span></li>
       </ul>
     </div>
   </div>
@@ -894,106 +604,84 @@ footer { background: var(--obsidian); border-top: 1px solid rgba(201,168,76,0.1)
 
 <div class="gold-divider"></div>
 
-<!-- ─── AFTER PARTY BANNER ─── -->
+<!-- AFTER PARTY -->
 
 <div id="afterparty-section" class="afterparty-banner">
-  <div class="ap-content">
+  <div>
     <div class="ap-label">Sunday Night · August 2026 · After the Final</div>
     <div class="ap-title">LIVE MUSIC.<br>LIVE ARTISTS.</div>
     <div class="ap-sub">Zimbabwe's top artists perform live on the circuit. <strong>Artists to be announced.</strong></div>
     <a href="#tickets" class="ap-pill">🎟 Get After Party Access</a>
   </div>
-  <div style="text-align:center;">
-    <div style="font-family:var(--font-condensed); font-size:0.7rem; font-weight:700; letter-spacing:0.35em; text-transform:uppercase; color:var(--gold); margin-bottom:1rem;">How to Attend</div>
-    <div style="display:flex; flex-direction:column; gap:0.75rem;">
-      <div style="display:flex; align-items:center; gap:1rem; background:rgba(201,168,76,0.06); border:1px solid rgba(201,168,76,0.15); padding:0.9rem 1.2rem;">
-        <span style="font-family:var(--font-display); font-size:1.5rem; color:var(--gold);">HERO</span>
-        <div style="font-family:var(--font-condensed); font-size:0.82rem; color:var(--muted); text-align:left;">Hero Pass ($60) — included</div>
-      </div>
-      <div style="display:flex; align-items:center; gap:1rem; background:rgba(201,168,76,0.06); border:1px solid rgba(201,168,76,0.15); padding:0.9rem 1.2rem;">
-        <span style="font-family:var(--font-display); font-size:1.5rem; color:var(--gold);">VIP</span>
-        <div style="font-family:var(--font-condensed); font-size:0.82rem; color:var(--muted); text-align:left;">VIP Pass ($120) — included</div>
-      </div>
-      <div style="display:flex; align-items:center; gap:1rem; background:rgba(201,168,76,0.06); border:1px solid rgba(201,168,76,0.15); padding:0.9rem 1.2rem;">
-        <span style="font-family:var(--font-display); font-size:1.2rem; color:var(--gold);">+$20</span>
-        <div style="font-family:var(--font-condensed); font-size:0.82rem; color:var(--muted); text-align:left;">Add-on with Single Day ($25) ticket</div>
-      </div>
+  <div>
+    <div style="font-family:var(--font-condensed);font-size:0.7rem;font-weight:700;letter-spacing:0.35em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;">How to Attend</div>
+    <div style="display:flex;flex-direction:column;gap:0.75rem;">
+      <div style="display:flex;align-items:center;gap:1rem;background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.15);padding:0.9rem 1.2rem;"><span style="font-family:var(--font-display);font-size:1.5rem;color:var(--gold);">HERO</span><div style="font-family:var(--font-condensed);font-size:0.82rem;color:var(--muted);">Hero Pass ($60) — included</div></div>
+      <div style="display:flex;align-items:center;gap:1rem;background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.15);padding:0.9rem 1.2rem;"><span style="font-family:var(--font-display);font-size:1.5rem;color:var(--gold);">VIP</span><div style="font-family:var(--font-condensed);font-size:0.82rem;color:var(--muted);">VIP Pass ($120) — included</div></div>
+      <div style="display:flex;align-items:center;gap:1rem;background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.15);padding:0.9rem 1.2rem;"><span style="font-family:var(--font-display);font-size:1.2rem;color:var(--gold);">+$20</span><div style="font-family:var(--font-condensed);font-size:0.82rem;color:var(--muted);">Add-on with Single Day ($25) ticket</div></div>
     </div>
   </div>
 </div>
 
 <div class="gold-divider"></div>
 
-<!-- ─── TICKETS ─── -->
+<!-- TICKETS -->
 
-<div id="tickets" style="background: var(--obsidian-mid); max-width: 100%;">
-  <section class="tickets-inner" style="max-width:1400px; margin:0 auto; padding: 7rem 4rem;">
+<div id="tickets" style="background:var(--obsidian-mid);max-width:100%;">
+  <section style="max-width:1400px;margin:0 auto;padding:7rem 4rem;">
     <div class="section-eyebrow reveal">Spectator Tickets · August 2026</div>
     <h2 class="section-title reveal reveal-delay-1">CHOOSE YOUR<br><span class="gold">EXPERIENCE.</span></h2>
-    <p class="section-lead reveal reveal-delay-2">From trackside general admission to fully immersive VIP, there's a pass for every fan. Register now to lock in your spot before the event goes public.</p>
+    <p class="section-lead reveal reveal-delay-2">Register now to lock in your spot. This is a waitlist — no payment today. Payment details and your official ticket will follow once the event is confirmed.</p>
+    <div class="tickets-grid reveal">
 
 ```
-<div class="tickets-grid reveal">
-
-  <!-- Ticket 1 — Single Day -->
-  <div class="ticket-card">
+  <!-- Single Day -->
+  <div class="ticket-card" onclick="scrollToForm('spectator','SINGLE DAY — $25')">
     <div class="ticket-tier">Spectator</div>
     <div class="ticket-name">SINGLE DAY</div>
     <div class="ticket-price"><sup>$</sup>25</div>
     <div class="ticket-price-note">One day of your choice</div>
     <ul class="ticket-includes">
-      <li>One full day access (Friday, Saturday, or Sunday)</li>
+      <li>One full day — Friday, Saturday or Sunday</li>
       <li>General admission seating</li>
       <li>Live timing displays</li>
       <li>Food vendor access</li>
-      <li class="not-included">Paddock access</li>
-      <li class="not-included">Programme & wristband</li>
-      <li class="not-included">After party access</li>
+      <li class="no">Paddock access</li>
+      <li class="no">Programme & wristband</li>
+      <li class="no">After party</li>
     </ul>
     <div class="afterparty-addon">
-      <div class="addon-label">🎵 Add After Party Access</div>
-      <div class="addon-text">Watch the 40-lap final then stay for live music from Zimbabwe's top artists.</div>
-      <div class="addon-price">+$20 <span style="font-size:0.8rem; color:var(--muted); font-family:var(--font-body); font-style:italic;">add-on</span></div>
+      <div class="addon-label">🎵 Add After Party</div>
+      <div class="addon-text">Stay for live music from Zimbabwe's top artists Sunday night.</div>
+      <div class="addon-price">+$20 <span style="font-size:0.8rem;color:var(--muted);font-family:var(--font-body);font-style:italic;">add-on</span></div>
     </div>
-    <button class="btn-primary form-submit" onclick="openTicketForm('SINGLE DAY — $25', 'ZGP-T')">Join Waitlist — $25</button>
+    <button class="btn-primary" style="width:100%;" onclick="event.stopPropagation();scrollToForm('spectator','SINGLE DAY — $25')">Join Waitlist — $25</button>
   </div>
 
-  <!-- Ticket 2 — HERO PASS (star card) -->
-  <div class="ticket-card hero-star">
+  <!-- HERO PASS -->
+  <div class="ticket-card hero-star" onclick="scrollToForm('spectator','HERO PASS — $60')">
     <div class="hero-star-badge">✦ THE PEOPLE'S CHOICE — MOST POPULAR ✦</div>
     <div class="ticket-tier">Best Value · Lowest Regret</div>
     <div class="ticket-name">HERO PASS</div>
-    <div class="ticket-value-anchor">Worth $100+ separately</div>
+    <div class="ticket-value-anchor">Worth $100+ individually</div>
     <div class="ticket-price"><sup>$</sup>60</div>
     <div class="ticket-price-note" style="color:var(--gold);">Everything. All 3 days. No compromises.</div>
-
-    <div class="scarcity-bar">
-      <div class="scarcity-dot"></div>
-      <div class="scarcity-text">Limited numbered passes — selling fast</div>
-    </div>
-
-    <div class="hero-star-social-proof">
-      <strong>"The only pass where you won't spend the weekend wishing you'd upgraded."</strong> — All 3 days · paddock · after party · wristband · programme
-    </div>
-
+    <div class="scarcity-bar"><div class="scarcity-dot"></div><div class="scarcity-text">Limited numbered passes — securing fast</div></div>
+    <div style="font-family:var(--font-condensed);font-size:0.75rem;color:var(--muted);font-style:italic;margin-bottom:1rem;line-height:1.4;"><strong style="color:var(--gold-light);">"The only pass where you won't spend the weekend wishing you'd upgraded."</strong></div>
     <ul class="ticket-includes">
       <li><strong style="color:var(--white);">All 3 days</strong> — Friday through Sunday</li>
-      <li><strong style="color:var(--white);">Paddock access</strong> — get trackside, close to the action</li>
+      <li><strong style="color:var(--white);">Paddock access</strong> — trackside, close to the action</li>
       <li>Official event programme</li>
       <li>Exclusive photo opportunity</li>
       <li><strong style="color:var(--white);">Limited edition ZGP wristband</strong> (numbered)</li>
       <li><strong style="color:var(--white);">🎵 After party included</strong> — live music, Sunday night</li>
     </ul>
-
-    <div style="background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.3); padding: 0.8rem 1rem; margin-bottom: 1.2rem; font-family:var(--font-condensed); font-size:0.82rem; color:var(--muted); line-height:1.5;">
-      💡 <strong style="color:var(--gold);">Simple maths:</strong> Single Day ($25) + After Party add-on ($20) = $45. The Hero Pass gives you <strong style="color:var(--white);">all 3 days</strong>, the after party, paddock access, wristband, and programme for $60. The choice makes itself.
-    </div>
-
-    <button class="btn-primary form-submit" style="font-size:1.05rem; padding:1.1rem;" onclick="openTicketForm('HERO PASS — $60', 'ZGP-T')">✦ Claim Your Hero Pass — $60</button>
+    <div style="background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.3);padding:0.8rem 1rem;margin-bottom:1.2rem;font-family:var(--font-condensed);font-size:0.82rem;color:var(--muted);line-height:1.5;">💡 <strong style="color:var(--gold);">The maths:</strong> Single Day ($25) + After Party ($20) = $45 for <em>one</em> day. Hero Pass = all 3 days + after party + paddock + wristband + programme for <strong style="color:var(--white);">$60</strong>.</div>
+    <button class="btn-primary" style="width:100%;font-size:1.05rem;padding:1.1rem;" onclick="event.stopPropagation();scrollToForm('spectator','HERO PASS — $60')">✦ Claim Your Hero Pass — $60</button>
   </div>
 
-  <!-- Ticket 3 — VIP -->
-  <div class="ticket-card">
+  <!-- VIP -->
+  <div class="ticket-card" onclick="scrollToForm('spectator','VIP PASS — $120')">
     <div class="ticket-tier">Premium</div>
     <div class="ticket-name">VIP PASS</div>
     <div class="ticket-price"><sup>$</sup>120</div>
@@ -1009,11 +697,11 @@ footer { background: var(--obsidian); border-top: 1px solid rgba(201,168,76,0.1)
       <li>Meet the drivers — up close</li>
       <li>Signed poster (numbered, limited)</li>
     </ul>
-    <button class="btn-primary form-submit" onclick="openTicketForm('VIP PASS — $120', 'ZGP-T')">Join Waitlist — $120</button>
+    <button class="btn-primary" style="width:100%;" onclick="event.stopPropagation();scrollToForm('spectator','VIP PASS — $120')">Join Waitlist — $120</button>
   </div>
 
-  <!-- Ticket 4 — Driver (redirects) -->
-  <div class="ticket-card" onclick="switchToDriver()" style="cursor:pointer;">
+  <!-- Driver entry -->
+  <div class="ticket-card" onclick="scrollToForm('driver','')">
     <div class="ticket-tier">Competitor</div>
     <div class="ticket-name">DRIVER ENTRY</div>
     <div class="ticket-price"><sup>$</sup>150</div>
@@ -1024,64 +712,10 @@ footer { background: var(--obsidian); border-top: 1px solid rgba(201,168,76,0.1)
       <li>Practice + qualifying + races</li>
       <li>Compete for $3,000 prize</li>
       <li>All 3 days access as driver</li>
-      <li>Top 3 get event tickets for family</li>
+      <li>Top 3 get tickets for family</li>
     </ul>
-    <button class="btn-primary form-submit" onclick="event.stopPropagation(); switchToDriver()">Register as Driver — $150</button>
+    <button class="btn-primary" style="width:100%;" onclick="event.stopPropagation();scrollToForm('driver','')">Register as Driver — $150</button>
   </div>
-
-</div>
-
-<!-- Quick ticket form -->
-<div class="inline-form-panel" id="ticket-quick-form">
-  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
-    <div>
-      <div style="font-family: var(--font-condensed); font-size:0.75rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--gold); margin-bottom:0.3rem;">Selected</div>
-      <div id="selected-ticket-label" style="font-family: var(--font-display); font-size: 1.5rem; color: var(--white);"></div>
-    </div>
-    <button onclick="closeTicketForm()" style="background:none; border:none; color:var(--muted); cursor:pointer; font-size:1.5rem;">✕</button>
-  </div>
-  <div class="form-row">
-    <div class="form-group">
-      <label>First Name *</label>
-      <input type="text" id="tkt-firstname" placeholder="Your first name">
-    </div>
-    <div class="form-group">
-      <label>Last Name *</label>
-      <input type="text" id="tkt-lastname" placeholder="Your last name">
-    </div>
-  </div>
-  <div class="form-row">
-    <div class="form-group">
-      <label>Email Address *</label>
-      <input type="email" id="tkt-email" placeholder="you@email.com">
-    </div>
-    <div class="form-group">
-      <label>Phone (optional)</label>
-      <input type="tel" id="tkt-phone" placeholder="+263 ...">
-    </div>
-  </div>
-  <div class="form-row">
-    <div class="form-group">
-      <label>Number of Tickets</label>
-      <select id="tkt-qty">
-        <option>1 ticket</option>
-        <option>2 tickets</option>
-        <option>3 tickets</option>
-        <option>4 tickets</option>
-        <option>5+ tickets</option>
-      </select>
-    </div>
-    <div class="form-group" id="afterparty-addon-row" style="display:none;">
-      <label>After Party Add-on</label>
-      <select id="tkt-afterparty">
-        <option value="NO">No thanks</option>
-        <option value="YES">Yes — add after party (+$20 p/person)</option>
-      </select>
-    </div>
-  </div>
-  <button class="btn-primary" style="width:100%;" onclick="submitTicket()">Confirm Waitlist Spot</button>
-  <p class="form-note">⚡ No payment now. We'll contact you with payment details and your official reference number once the event is confirmed.</p>
-  <div class="result-card" id="ticket-result" style="margin-top:1rem;"></div>
 </div>
 ```
 
@@ -1090,149 +724,120 @@ footer { background: var(--obsidian); border-top: 1px solid rgba(201,168,76,0.1)
 
 <div class="gold-divider"></div>
 
-<!-- ─── DRIVERS ─── -->
+<!-- DRIVERS -->
 
 <section id="drivers">
   <div class="section-eyebrow reveal">Driver Registration · August 2026</div>
   <h2 class="section-title reveal reveal-delay-1">YOU DON'T NEED<br><span class="gold">A KART.</span></h2>
-  <p class="section-lead reveal reveal-delay-2">The Zim Grand Prix is built for real racers — from total beginners to seasoned competitors. We provide everything you need. All you bring is the hunger to win.</p>
-
-  <div class="driver-hero" style="margin-top: 4rem;">
+  <p class="section-lead reveal reveal-delay-2">We provide everything you need to get on track. All you bring is the hunger to win.</p>
+  <div class="driver-hero" style="margin-top:4rem;">
     <div>
-      <div style="font-family: var(--font-condensed); font-size:0.8rem; font-weight:700; letter-spacing:0.3em; text-transform:uppercase; color:var(--gold); margin-bottom:1rem;">What's Included in Your Entry</div>
+      <div style="font-family:var(--font-condensed);font-size:0.8rem;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;">What's Included in Your Entry</div>
       <div class="driver-requirements">
-        <div class="req-card reveal"><span class="req-icon">🏎️</span><div class="req-title">Professional Kart</div><div class="req-text">Competition-grade kart provided. All karts are identical — your skill determines who wins.</div></div>
-        <div class="req-card reveal reveal-delay-1"><span class="req-icon">🪖</span><div class="req-title">Full Safety Gear</div><div class="req-text">Racing helmet, neck brace, gloves, and race suit. Certified and fitted before you get on track.</div></div>
-        <div class="req-card reveal reveal-delay-2"><span class="req-icon">🏁</span><div class="req-title">Track Time</div><div class="req-text">Practice sessions on Friday give you time to learn the circuit before qualifying.</div></div>
-        <div class="req-card reveal"><span class="req-icon">👥</span><div class="req-title">Technical Support</div><div class="req-text">Race officials and marshals on track at all times. Full briefings before every session.</div></div>
+        <div class="req-card reveal"><span class="req-icon">🏎️</span><div class="req-title">Professional Kart</div><div class="req-text">Competition-grade kart provided. All identical — your skill determines who wins.</div></div>
+        <div class="req-card reveal reveal-delay-1"><span class="req-icon">🪖</span><div class="req-title">Full Safety Gear</div><div class="req-text">Racing helmet, neck brace, gloves, and race suit. Certified and fitted before track.</div></div>
+        <div class="req-card reveal reveal-delay-2"><span class="req-icon">🏁</span><div class="req-title">Track Time</div><div class="req-text">Friday practice sessions to learn the circuit before qualifying.</div></div>
+        <div class="req-card reveal"><span class="req-icon">👥</span><div class="req-title">Technical Support</div><div class="req-text">Race officials and marshals on track at all times. Full briefings every session.</div></div>
         <div class="req-card reveal reveal-delay-1"><span class="req-icon">📋</span><div class="req-title">Driver Briefings</div><div class="req-text">Full pre-event briefing. Beginners welcome — we walk you through everything.</div></div>
-        <div class="req-card reveal reveal-delay-2"><span class="req-icon">🎟️</span><div class="req-title">Top 3 Perks</div><div class="req-text">Podium finishers receive prize money plus 2 event tickets for family members each.</div></div>
+        <div class="req-card reveal reveal-delay-2"><span class="req-icon">🎟️</span><div class="req-title">Top 3 Perks</div><div class="req-text">Podium finishers receive prize money plus 2 event tickets for family members.</div></div>
       </div>
-      <div style="margin-top:2rem; padding: 1.5rem; background: rgba(201,168,76,0.06); border-left: 3px solid var(--gold);">
-        <div style="font-family: var(--font-condensed); font-size:0.8rem; font-weight:700; letter-spacing:0.25em; text-transform:uppercase; color:var(--gold); margin-bottom:0.5rem;">Who Can Enter?</div>
-        <div style="font-size:0.9rem; color:var(--muted); line-height:1.7;">Open to <strong style="color:var(--white);">anyone 16 years and older</strong>. No racing licence required. No prior experience required. If you're willing to learn, push hard, and compete with integrity, there's a seat for you on this grid.</div>
-      </div>
-    </div>
-
-```
-<div>
-  <div class="pricing-breakdown reveal">
-    <div style="font-family: var(--font-condensed); font-size:0.8rem; font-weight:700; letter-spacing:0.3em; text-transform:uppercase; color:var(--gold); margin-bottom:1.5rem;">Driver Entry Fees</div>
-    <div class="pricing-row highlight">
-      <div>
-        <div class="pricing-label" style="color:var(--gold);">🔥 Early Bird Entry</div>
-        <div style="font-size:0.8rem; color:var(--muted); margin-top:0.2rem;">Limited spots · Closes early · August 2026</div>
-      </div>
-      <div class="pricing-amount">$150</div>
-    </div>
-    <div class="pricing-row">
-      <div>
-        <div class="pricing-label">Standard Entry</div>
-        <div style="font-size:0.8rem; color:var(--muted); margin-top:0.2rem;">After early bird closes</div>
-      </div>
-      <div class="pricing-amount" style="color:var(--muted);">$300</div>
-    </div>
-    <div style="margin-top:2rem; border-top:1px solid rgba(201,168,76,0.1); padding-top:2rem;">
-      <div style="font-family: var(--font-condensed); font-size:0.8rem; font-weight:700; letter-spacing:0.3em; text-transform:uppercase; color:var(--gold); margin-bottom:1rem;">Prize Pool</div>
-      <div class="prize-pool">
-        <div class="prize-item"><div class="prize-position">🥇 1st</div><div class="prize-amount">$3,000</div><div class="prize-extras">+ Tickets for you & 2 family</div></div>
-        <div class="prize-item"><div class="prize-position">🥈 2nd</div><div class="prize-amount">$500</div><div class="prize-extras">+ Tickets for you & 2 family</div></div>
-        <div class="prize-item"><div class="prize-position">🥉 3rd</div><div class="prize-amount">Glory</div><div class="prize-extras">Tickets for you & 2 family members</div></div>
+      <div style="margin-top:2rem;padding:1.5rem;background:rgba(201,168,76,0.06);border-left:3px solid var(--gold);">
+        <div style="font-family:var(--font-condensed);font-size:0.8rem;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem;">Who Can Enter?</div>
+        <div style="font-size:0.9rem;color:var(--muted);line-height:1.7;">Open to <strong style="color:var(--white);">anyone 16 years and older</strong>. No racing licence required. No prior experience required.</div>
       </div>
     </div>
-  </div>
-  <div style="margin-top:1.5rem;">
-    <button class="btn-primary" style="width:100%; font-size:1.1rem; padding:1.2rem;" onclick="switchToDriver()">Register as a Driver</button>
-    <p class="form-note" style="margin-top:0.75rem;">👇 Early bird pricing locked in for first registrants. August 2026.</p>
-  </div>
-</div>
-```
-
+    <div>
+      <div class="pricing-breakdown reveal">
+        <div style="font-family:var(--font-condensed);font-size:0.8rem;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;">Driver Entry Fees</div>
+        <div class="pricing-row highlight">
+          <div><div class="pricing-label" style="color:var(--gold);">🔥 Early Bird Entry</div><div style="font-size:0.8rem;color:var(--muted);margin-top:0.2rem;">Limited spots · Closes early</div></div>
+          <div class="pricing-amount">$150</div>
+        </div>
+        <div class="pricing-row">
+          <div><div class="pricing-label">Standard Entry</div><div style="font-size:0.8rem;color:var(--muted);margin-top:0.2rem;">After early bird closes</div></div>
+          <div class="pricing-amount" style="color:var(--muted);">$300</div>
+        </div>
+        <div style="margin-top:2rem;border-top:1px solid rgba(201,168,76,0.1);padding-top:2rem;">
+          <div style="font-family:var(--font-condensed);font-size:0.8rem;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;">Prize Pool</div>
+          <div class="prize-pool">
+            <div class="prize-item"><div class="prize-position">🥇 1st</div><div class="prize-amount">$3,000</div><div class="prize-extras">+ Tickets for you & 2 family</div></div>
+            <div class="prize-item"><div class="prize-position">🥈 2nd</div><div class="prize-amount">$500</div><div class="prize-extras">+ Tickets for you & 2 family</div></div>
+            <div class="prize-item"><div class="prize-position">🥉 3rd</div><div class="prize-amount">Glory</div><div class="prize-extras">Tickets for you & 2 family members</div></div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:1.5rem;">
+        <button class="btn-primary" style="width:100%;font-size:1.1rem;padding:1.2rem;" onclick="scrollToForm('driver','')">Register as a Driver</button>
+        <p class="form-note" style="margin-top:0.75rem;">Early bird pricing locked in for first registrants.</p>
+      </div>
+    </div>
   </div>
 </section>
 
 <div class="gold-divider"></div>
 
-<!-- ─── CORPORATE ─── -->
+<!-- CORPORATE -->
 
-<div id="corporate" style="background: var(--obsidian-mid); max-width:100%;">
-  <section class="corporate-inner" style="max-width:1400px; margin:0 auto; padding: 7rem 4rem;">
+<div id="corporate" style="background:var(--obsidian-mid);max-width:100%;">
+  <section style="max-width:1400px;margin:0 auto;padding:7rem 4rem;">
     <div class="section-eyebrow reveal">Corporate Teams · August 2026</div>
     <h2 class="section-title reveal reveal-delay-1">PUT YOUR BRAND<br><span class="gold">ON THE TRACK.</span></h2>
-    <p class="section-lead reveal reveal-delay-2">Enter a corporate team and compete for the Zim Grand Prix Brand of the Year title. Race in your company colours. Entertain clients. Build team culture in the most unforgettable setting possible.</p>
-
-```
-<div class="corporate-grid">
-  <div class="corporate-visual reveal">
-    <div class="team-price">$500</div>
-    <div class="team-price-label">Per Corporate Team Entry</div>
-    <ul class="team-includes">
-      <li>Professional karts for your team</li>
-      <li>Full safety gear included</li>
-      <li>VIP hospitality package</li>
-      <li>Brand of the Year competition</li>
-      <li>Corporate logo on race programme</li>
-      <li>Dedicated team pit area</li>
-      <li>Company branding opportunities</li>
-      <li>Full weekend access for team</li>
-    </ul>
-    <div style="margin-top:2rem; padding: 1.25rem; background: rgba(8,8,8,0.5); border:1px solid rgba(201,168,76,0.15);">
-      <div style="font-family: var(--font-condensed); font-size:0.75rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--gold); margin-bottom:0.3rem;">What You Win</div>
-      <div style="font-family: var(--font-display); font-size:1.5rem; color:var(--white);">Brand of the Year Trophy + Full Event Coverage</div>
+    <p class="section-lead reveal reveal-delay-2">Enter a corporate team and compete for the Zim Grand Prix Brand of the Year title.</p>
+    <div class="corporate-grid">
+      <div class="corporate-visual reveal">
+        <div class="team-price">$500</div>
+        <div class="team-price-label">Per Corporate Team Entry</div>
+        <ul class="team-includes">
+          <li>Professional karts for your team</li>
+          <li>Full safety gear included</li>
+          <li>VIP hospitality package</li>
+          <li>Brand of the Year competition</li>
+          <li>Corporate logo on race programme</li>
+          <li>Dedicated team pit area</li>
+          <li>Company branding opportunities</li>
+          <li>Full weekend access for team</li>
+        </ul>
+        <div style="margin-top:2rem;padding:1.25rem;background:rgba(8,8,8,0.5);border:1px solid rgba(201,168,76,0.15);">
+          <div style="font-family:var(--font-condensed);font-size:0.75rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:0.3rem;">What You Win</div>
+          <div style="font-family:var(--font-display);font-size:1.5rem;color:var(--white);">Brand of the Year Trophy + Full Event Coverage</div>
+        </div>
+      </div>
+      <div class="reveal reveal-delay-1">
+        <div style="font-family:var(--font-condensed);font-size:1rem;color:var(--muted);line-height:1.7;margin-bottom:2rem;">The Zim Grand Prix is the perfect arena to activate your brand in front of Zimbabwe's business community, motorsport fans, and a captive audience of thousands.</div>
+        <div style="padding:1.5rem;border:1px solid rgba(201,168,76,0.2);margin-bottom:2rem;">
+          <div style="font-family:var(--font-condensed);font-size:0.75rem;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem;">Also available</div>
+          <div style="font-family:var(--font-condensed);font-size:1.1rem;font-weight:600;color:var(--white);margin-bottom:0.5rem;">Sponsorship & Naming Rights</div>
+          <div style="font-size:0.9rem;color:var(--muted);">Interested in larger brand visibility? Contact our sponsorship team for a tailored proposal.</div>
+        </div>
+        <button class="btn-primary" style="width:100%;" onclick="scrollToForm('corporate','')">Register Corporate Team</button>
+        <div style="margin-top:1rem;"><a href="#contact" style="font-family:var(--font-condensed);font-size:0.85rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--muted)'">→ Enquire about sponsorship</a></div>
+      </div>
     </div>
-  </div>
-  <div class="reveal reveal-delay-1">
-    <div style="font-family:var(--font-condensed); font-size:1rem; color:var(--muted); line-height:1.7; margin-bottom:2rem;">The Zim Grand Prix is the perfect arena to activate your brand in front of Zimbabwe's business community, motorsport fans, and a captive audience of thousands. Your team races. Your brand leads.</div>
-    <div style="font-family:var(--font-condensed); font-size:1rem; color:var(--muted); line-height:1.7; margin-bottom:2rem;">Every corporate team competes on equal footing — same karts, same circuit, same 40 laps. This isn't about who has the most resources. It's about who has the best team.</div>
-    <div style="padding:1.5rem; border:1px solid rgba(201,168,76,0.2); margin-bottom:2rem;">
-      <div style="font-family:var(--font-condensed); font-size:0.75rem; font-weight:700; letter-spacing:0.3em; text-transform:uppercase; color:var(--gold); margin-bottom:0.5rem;">Also available</div>
-      <div style="font-family:var(--font-condensed); font-size:1.1rem; font-weight:600; color:var(--white); margin-bottom:0.5rem;">Sponsorship & Naming Rights</div>
-      <div style="font-size:0.9rem; color:var(--muted);">Interested in larger brand visibility? Sponsor the event, a trophy, or a race day. Contact our sponsorship team for a tailored proposal.</div>
-    </div>
-    <button class="btn-primary" style="width:100%;" onclick="openCorpForm()">Register Corporate Team</button>
-    <div style="margin-top:1rem;">
-      <a href="#contact" style="font-family:var(--font-condensed); font-size:0.85rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); text-decoration:none; transition: color 0.2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--muted)'">→ Enquire about sponsorship</a>
-    </div>
-  </div>
-</div>
-```
-
   </section>
 </div>
 
 <div class="gold-divider"></div>
 
-<!-- ─── REGISTRATION FORM ─── -->
+<!-- REGISTRATION -->
 
 <section id="waitlist">
   <div class="section-eyebrow reveal">Waitlist Registration · August 2026</div>
   <h2 class="section-title reveal reveal-delay-1">SECURE YOUR<br><span class="gold">PLACE.</span></h2>
-  <p class="section-lead reveal reveal-delay-2">Register now to lock in early bird pricing. Spots are limited. Every registration receives a unique reference ID — your confirmed spot before the event goes public.</p>
+  <p class="section-lead reveal reveal-delay-2">Register now. No payment today. Lock in your spot and your early bird pricing — payment details will follow once the event is confirmed.</p>
 
   <div class="form-container">
     <div class="form-left">
-      <div style="margin-bottom:3rem;">
-        <div style="font-family:var(--font-condensed); font-size:0.75rem; font-weight:700; letter-spacing:0.35em; text-transform:uppercase; color:var(--gold); margin-bottom:1.5rem;">Why Register Now?</div>
-        <div style="display:flex; flex-direction:column; gap:1.2rem;">
-          <div style="display:flex; gap:1rem; align-items:flex-start;">
-            <div style="color:var(--gold); font-size:1.2rem; flex-shrink:0; margin-top:0.1rem;">→</div>
-            <div><div style="font-family:var(--font-condensed); font-weight:700; color:var(--white); font-size:1rem;">Lock in Early Bird Driver Pricing</div><div style="font-size:0.85rem; color:var(--muted); margin-top:0.2rem;">$150 vs $300 standard. Register first, save $150 on your entry.</div></div>
-          </div>
-          <div style="display:flex; gap:1rem; align-items:flex-start;">
-            <div style="color:var(--gold); font-size:1.2rem; flex-shrink:0; margin-top:0.1rem;">→</div>
-            <div><div style="font-family:var(--font-condensed); font-weight:700; color:var(--white); font-size:1rem;">Get Your Official Reference ID</div><div style="font-size:0.85rem; color:var(--muted); margin-top:0.2rem;">Every registration generates a unique ZGP ID — your place in line, officially recorded.</div></div>
-          </div>
-          <div style="display:flex; gap:1rem; align-items:flex-start;">
-            <div style="color:var(--gold); font-size:1.2rem; flex-shrink:0; margin-top:0.1rem;">→</div>
-            <div><div style="font-family:var(--font-condensed); font-weight:700; color:var(--white); font-size:1rem;">First Access to Artist Announcements</div><div style="font-size:0.85rem; color:var(--muted); margin-top:0.2rem;">After party artist lineup revealed to registered members first.</div></div>
-          </div>
-          <div style="display:flex; gap:1rem; align-items:flex-start;">
-            <div style="color:var(--gold); font-size:1.2rem; flex-shrink:0; margin-top:0.1rem;">→</div>
-            <div><div style="font-family:var(--font-condensed); font-weight:700; color:var(--white); font-size:1rem;">Limited Grid & Numbered Passes</div><div style="font-size:0.85rem; color:var(--muted); margin-top:0.2rem;">Driver entries capped. HERO and VIP passes are numbered. First come, first served.</div></div>
-          </div>
+      <div style="margin-bottom:2.5rem;">
+        <div style="font-family:var(--font-condensed);font-size:0.75rem;font-weight:700;letter-spacing:0.35em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;">Why Register Now?</div>
+        <div style="display:flex;flex-direction:column;gap:1.2rem;">
+          <div style="display:flex;gap:1rem;align-items:flex-start;"><div style="color:var(--gold);font-size:1.2rem;flex-shrink:0;">→</div><div><div style="font-family:var(--font-condensed);font-weight:700;color:var(--white);font-size:1rem;">Lock in Early Bird Pricing</div><div style="font-size:0.85rem;color:var(--muted);margin-top:0.2rem;">Driver entry: $150 now vs $300 later. Register first, save $150.</div></div></div>
+          <div style="display:flex;gap:1rem;align-items:flex-start;"><div style="color:var(--gold);font-size:1.2rem;flex-shrink:0;">→</div><div><div style="font-family:var(--font-condensed);font-weight:700;color:var(--white);font-size:1rem;">Get a Unique Sequential Ref ID</div><div style="font-size:0.85rem;color:var(--muted);margin-top:0.2rem;">Every registrant gets their own ZGP ID — ordered, official, yours.</div></div></div>
+          <div style="display:flex;gap:1rem;align-items:flex-start;"><div style="color:var(--gold);font-size:1.2rem;flex-shrink:0;">→</div><div><div style="font-family:var(--font-condensed);font-weight:700;color:var(--white);font-size:1rem;">First Access to Artist Announcements</div><div style="font-size:0.85rem;color:var(--muted);margin-top:0.2rem;">After party lineup released to registered members first.</div></div></div>
+          <div style="display:flex;gap:1rem;align-items:flex-start;"><div style="color:var(--gold);font-size:1.2rem;flex-shrink:0;">→</div><div><div style="font-family:var(--font-condensed);font-weight:700;color:var(--white);font-size:1rem;">Limited Spots & Numbered Passes</div><div style="font-size:0.85rem;color:var(--muted);margin-top:0.2rem;">Driver entries capped. HERO and VIP passes are numbered. First come, first served.</div></div></div>
         </div>
       </div>
-      <div class="result-card" id="main-result"></div>
+      <!-- CONFIRMATION SHOWS HERE -->
+      <div class="confirmation-card" id="main-confirmation"></div>
     </div>
 
 ```
@@ -1243,48 +848,63 @@ footer { background: var(--obsidian); border-top: 1px solid rgba(201,168,76,0.1)
     <button class="form-tab" id="tab-corporate" onclick="switchTab('corporate')">Corporate</button>
   </div>
 
-  <!-- Spectator Form -->
+  <!-- SPECTATOR FORM -->
   <div class="reg-form" id="form-spectator">
     <div class="form-row">
       <div class="form-group"><label>First Name *</label><input type="text" id="s-firstname" placeholder="First name"></div>
       <div class="form-group"><label>Last Name *</label><input type="text" id="s-lastname" placeholder="Last name"></div>
     </div>
-    <div class="form-group"><label>Email Address *</label><input type="email" id="s-email" placeholder="your@email.com"></div>
-    <div class="form-group"><label>Phone Number</label><input type="tel" id="s-phone" placeholder="+263 77..."></div>
+    <div class="form-group"><label>Phone Number * <span class="opt">(primary contact)</span></label><input type="tel" id="s-phone" placeholder="+263 77..."></div>
+    <div class="form-group"><label>Email Address <span class="opt">(optional)</span></label><input type="email" id="s-email" placeholder="your@email.com"></div>
+    <div class="form-group"><label>City / Town *</label><input type="text" id="s-city" placeholder="e.g. Harare, Bulawayo, Mutare..."></div>
     <div class="form-group">
       <label>Ticket Type *</label>
-      <select id="s-ticket" onchange="toggleWaitlistAfterParty()">
+      <select id="s-ticket" onchange="handleTicketChange()">
         <option value="">Select your pass</option>
         <option value="SINGLE DAY — $25">Single Day — $25</option>
         <option value="HERO PASS — $60">✦ Hero Pass — $60 (Most Popular)</option>
         <option value="VIP PASS — $120">VIP Pass — $120</option>
       </select>
     </div>
-    <div class="form-group" id="waitlist-afterparty-row" style="display:none;">
-      <label>After Party Add-on (Single Day only)</label>
+    <div class="form-group" id="afterparty-row" style="display:none;">
+      <label>🎵 Add After Party Access <span class="opt">(Single Day only)</span></label>
       <select id="s-afterparty">
         <option value="NO">No thanks</option>
-        <option value="YES">Yes — add after party (+$20 p/person)</option>
+        <option value="YES">Yes — add after party (+$20 per person)</option>
       </select>
     </div>
     <div class="form-group">
-      <label>Number of Tickets</label>
-      <select id="s-qty">
-        <option>1 ticket</option><option>2 tickets</option><option>3 tickets</option><option>4 tickets</option><option>5 or more</option>
+      <label>Number of Tickets *</label>
+      <select id="s-qty" onchange="renderAttendeeFields()">
+        <option value="1">1 ticket</option>
+        <option value="2">2 tickets</option>
+        <option value="3">3 tickets</option>
+        <option value="4">4 tickets</option>
+        <option value="5">5 tickets</option>
+        <option value="6">6 tickets</option>
+        <option value="7">7 tickets</option>
+        <option value="8">8 tickets</option>
+        <option value="9">9 tickets</option>
+        <option value="10">10 tickets</option>
       </select>
     </div>
-    <button class="btn-primary form-submit" onclick="submitForm('spectator')">Secure My Spot on the Waitlist</button>
-    <p class="form-note">No payment required now. You'll receive your reference ID immediately. We'll follow up with event details and payment instructions.</p>
+    <div id="attendee-fields-wrapper" style="display:none;margin-bottom:1.5rem;">
+      <label style="display:block;font-family:var(--font-condensed);font-size:0.75rem;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:0.75rem;">Attendee Names <span class="opt">(one per ticket)</span></label>
+      <div class="attendee-fields" id="attendee-fields"></div>
+    </div>
+    <button class="btn-primary" style="width:100%;" id="s-submit-btn" onclick="submitForm('spectator')">Secure My Spot on the Waitlist</button>
+    <p class="form-note">No payment required now. You'll receive your unique reference ID immediately. Payment details, ticket delivery info, and event updates will follow.</p>
   </div>
 
-  <!-- Driver Form -->
+  <!-- DRIVER FORM -->
   <div class="reg-form" id="form-driver" style="display:none;">
     <div class="form-row">
       <div class="form-group"><label>First Name *</label><input type="text" id="d-firstname" placeholder="First name"></div>
       <div class="form-group"><label>Last Name *</label><input type="text" id="d-lastname" placeholder="Last name"></div>
     </div>
-    <div class="form-group"><label>Email Address *</label><input type="email" id="d-email" placeholder="your@email.com"></div>
-    <div class="form-group"><label>Phone Number *</label><input type="tel" id="d-phone" placeholder="+263 77..."></div>
+    <div class="form-group"><label>Phone Number * <span class="opt">(primary contact)</span></label><input type="tel" id="d-phone" placeholder="+263 77..."></div>
+    <div class="form-group"><label>Email Address <span class="opt">(optional)</span></label><input type="email" id="d-email" placeholder="your@email.com"></div>
+    <div class="form-group"><label>City / Town *</label><input type="text" id="d-city" placeholder="e.g. Harare, Bulawayo..."></div>
     <div class="form-row">
       <div class="form-group"><label>Date of Birth *</label><input type="date" id="d-dob"></div>
       <div class="form-group"><label>Nationality</label><input type="text" id="d-nationality" placeholder="e.g. Zimbabwean"></div>
@@ -1308,34 +928,33 @@ footer { background: var(--obsidian); border-top: 1px solid rgba(201,168,76,0.1)
     </div>
     <div class="form-group"><label>Emergency Contact Name *</label><input type="text" id="d-emergency-name" placeholder="Full name"></div>
     <div class="form-group"><label>Emergency Contact Number *</label><input type="tel" id="d-emergency-phone" placeholder="+263 77..."></div>
-    <div class="form-group"><label>Anything else we should know?</label><textarea id="d-notes" placeholder="Medical conditions, dietary requirements, questions..."></textarea></div>
-    <button class="btn-primary form-submit" onclick="submitForm('driver')">Register as a Driver</button>
-    <p class="form-note">All drivers must be 16+. Valid ID required at check-in. No payment now — payment instructions and driver reference ID sent by email.</p>
+    <div class="form-group"><label>Anything else we should know? <span class="opt">(optional)</span></label><textarea id="d-notes" placeholder="Medical conditions, dietary requirements, questions..."></textarea></div>
+    <button class="btn-primary" style="width:100%;" id="d-submit-btn" onclick="submitForm('driver')">Register as a Driver</button>
+    <p class="form-note">All drivers must be 16+. Valid ID required at check-in. No payment now — payment instructions sent after confirmation.</p>
   </div>
 
-  <!-- Corporate Form -->
+  <!-- CORPORATE FORM -->
   <div class="reg-form" id="form-corporate" style="display:none;">
     <div class="form-group"><label>Company Name *</label><input type="text" id="c-company" placeholder="Your company name"></div>
     <div class="form-row">
       <div class="form-group"><label>Contact Person *</label><input type="text" id="c-contact" placeholder="Full name"></div>
-      <div class="form-group"><label>Position / Title</label><input type="text" id="c-title" placeholder="e.g. Marketing Director"></div>
+      <div class="form-group"><label>Position / Title <span class="opt">(optional)</span></label><input type="text" id="c-title" placeholder="e.g. Marketing Director"></div>
     </div>
-    <div class="form-row">
-      <div class="form-group"><label>Email Address *</label><input type="email" id="c-email" placeholder="your@company.com"></div>
-      <div class="form-group"><label>Phone *</label><input type="tel" id="c-phone" placeholder="+263 77..."></div>
-    </div>
+    <div class="form-group"><label>Phone Number * <span class="opt">(primary contact)</span></label><input type="tel" id="c-phone" placeholder="+263 77..."></div>
+    <div class="form-group"><label>Email Address <span class="opt">(optional)</span></label><input type="email" id="c-email" placeholder="your@company.com"></div>
+    <div class="form-group"><label>City / Town *</label><input type="text" id="c-city" placeholder="e.g. Harare"></div>
     <div class="form-group">
       <label>Number of Teams</label>
-      <select id="c-teams"><option value="1">1 team — $500</option><option value="2">2 teams — $1,000</option><option value="3">3+ teams — contact us for pricing</option></select>
+      <select id="c-teams"><option value="1 team">1 team — $500</option><option value="2 teams">2 teams — $1,000</option><option value="3+ teams">3+ teams — contact us for pricing</option></select>
     </div>
     <div class="form-group">
       <label>Interested in Sponsorship?</label>
-      <select id="c-sponsor"><option value="NO">No — team entry only</option><option value="YES">Yes — send me sponsorship options</option><option value="NAMING">Interested in naming rights / major sponsorship</option></select>
+      <select id="c-sponsor"><option value="No">No — team entry only</option><option value="Yes - send options">Yes — send me sponsorship options</option><option value="Naming rights interest">Interested in naming rights / major sponsorship</option></select>
     </div>
-    <div class="form-group"><label>Team Name (optional)</label><input type="text" id="c-team-name" placeholder="e.g. EcoBank Racing"></div>
-    <div class="form-group"><label>Message</label><textarea id="c-message" placeholder="Any questions or requirements..."></textarea></div>
-    <button class="btn-primary form-submit" onclick="submitForm('corporate')">Register Corporate Team</button>
-    <p class="form-note">Corporate team entry: $500 per team. Includes karts, full safety gear, VIP hospitality. No payment now — we'll be in touch within 48 hours.</p>
+    <div class="form-group"><label>Team Name <span class="opt">(optional)</span></label><input type="text" id="c-team-name" placeholder="e.g. EcoBank Racing"></div>
+    <div class="form-group"><label>Message <span class="opt">(optional)</span></label><textarea id="c-message" placeholder="Any questions or requirements..."></textarea></div>
+    <button class="btn-primary" style="width:100%;" id="c-submit-btn" onclick="submitForm('corporate')">Register Corporate Team</button>
+    <p class="form-note">$500 per team. Includes karts, full safety gear, VIP hospitality. No payment now — we'll be in touch within 48 hours.</p>
   </div>
 </div>
 ```
@@ -1345,99 +964,63 @@ footer { background: var(--obsidian); border-top: 1px solid rgba(201,168,76,0.1)
 
 <div class="gold-divider"></div>
 
-<!-- ─── FAQ ─── -->
+<!-- FAQ -->
 
-<div id="faq" style="background: var(--obsidian-mid); max-width:100%;">
-  <section class="faq-inner" style="max-width:1400px; margin:0 auto; padding: 7rem 4rem;">
+<div id="faq" style="background:var(--obsidian-mid);max-width:100%;">
+  <section style="max-width:1400px;margin:0 auto;padding:7rem 4rem;">
     <div class="section-eyebrow reveal">Frequently Asked Questions</div>
     <h2 class="section-title reveal reveal-delay-1">GOT<br><span class="gold">QUESTIONS?</span></h2>
-
-```
-<div class="faq-grid reveal" id="faq-grid">
-  <button class="faq-item" onclick="toggleFaq(this)">
-    <div class="faq-question">Do I need my own kart to race? <span class="icon">+</span></div>
-    <div class="faq-answer">No. Professional competition karts are provided for all drivers as part of your entry fee. Karts, helmets, race suits, gloves — it's all included. You don't need to bring any equipment.</div>
-  </button>
-  <button class="faq-item" onclick="toggleFaq(this)">
-    <div class="faq-question">Can beginners race? <span class="icon">+</span></div>
-    <div class="faq-answer">Beginners are very welcome. We run full driver briefings before every session. Friday's practice sessions give you time to learn before qualifying. You don't need a licence — just the desire to race.</div>
-  </button>
-  <button class="faq-item" onclick="toggleFaq(this)">
-    <div class="faq-question">Is it safe? <span class="icon">+</span></div>
-    <div class="faq-answer">Safety is our first priority. Every driver receives a certified racing helmet, neck brace, race suit, and gloves. Marshals are stationed around the circuit at all times. Medical personnel are on site for the full event.</div>
-  </button>
-  <button class="faq-item" onclick="toggleFaq(this)">
-    <div class="faq-question">How does qualifying and heat races work? <span class="icon">+</span></div>
-    <div class="faq-answer">On Friday evening, each driver completes a timed qualifying lap. Your time determines your grid position for Saturday's heat races. The fastest drivers from the heats advance to Sunday's 40-lap Championship Final.</div>
-  </button>
-  <button class="faq-item" onclick="toggleFaq(this)">
-    <div class="faq-question">When exactly is the event? <span class="icon">+</span></div>
-    <div class="faq-answer">The Zim Grand Prix takes place in August 2026, Harare, Zimbabwe. Exact dates will be announced soon and shared with all registered waitlist members first. Register now to be first to know.</div>
-  </button>
-  <button class="faq-item" onclick="toggleFaq(this)">
-    <div class="faq-question">What age do I need to be to race? <span class="icon">+</span></div>
-    <div class="faq-answer">Drivers must be 16 years of age or older. Valid ID required at driver check-in. There is no upper age limit.</div>
-  </button>
-  <button class="faq-item" onclick="toggleFaq(this)">
-    <div class="faq-question">What is the waitlist? <span class="icon">+</span></div>
-    <div class="faq-answer">The waitlist captures your interest and locks in your early bird pricing. Once you register you receive a unique reference ID that secures your place. Payment details and confirmation follow by email. Your spot is reserved, your pricing is locked.</div>
-  </button>
-  <button class="faq-item" onclick="toggleFaq(this)">
-    <div class="faq-question">Is it family-friendly? <span class="icon">+</span></div>
-    <div class="faq-answer">Absolutely. Saturday's event is designed as a family festival. Food vendors, live entertainment, music, and a full festival atmosphere run alongside the racing. Children are welcome.</div>
-  </button>
-  <button class="faq-item" onclick="toggleFaq(this)">
-    <div class="faq-question">What's included in the HERO Pass and why is it best value? <span class="icon">+</span></div>
-    <div class="faq-answer">The Hero Pass at $60 gives you all 3 days, paddock access, official programme, photo opportunity, a limited edition numbered wristband, and Sunday's after party with live music. A Single Day ticket ($25) plus the after party add-on ($20) alone is $45 for just one day. The Hero Pass gives you everything for $60 — it's not even a close comparison.</div>
-  </button>
-  <button class="faq-item" onclick="toggleFaq(this)">
-    <div class="faq-question">Who performs at the after party? <span class="icon">+</span></div>
-    <div class="faq-answer">The Sunday night after party features live performances from Zimbabwean artists — lineup to be announced. Registered waitlist members will receive the artist announcements first. HERO Pass and VIP holders have after party access included. Single Day ticket holders can add it for $20.</div>
-  </button>
-</div>
-```
-
+    <div class="faq-grid reveal">
+      <button class="faq-item" onclick="toggleFaq(this)"><div class="faq-question">Do I need my own kart to race? <span class="icon">+</span></div><div class="faq-answer">No. Professional competition karts are provided for all drivers. Karts, helmets, race suits, gloves — all included. You don't need to bring any equipment.</div></button>
+      <button class="faq-item" onclick="toggleFaq(this)"><div class="faq-question">Can beginners race? <span class="icon">+</span></div><div class="faq-answer">Absolutely. We run full driver briefings before every session. Friday's practice sessions give you time to learn before qualifying. No licence needed — just the desire to race.</div></button>
+      <button class="faq-item" onclick="toggleFaq(this)"><div class="faq-question">When exactly is the event? <span class="icon">+</span></div><div class="faq-answer">The Zim Grand Prix takes place in August 2026, Harare, Zimbabwe. Exact dates will be announced soon. Register now to be first to know — waitlist members get dates before anyone else.</div></button>
+      <button class="faq-item" onclick="toggleFaq(this)"><div class="faq-question">What is the waitlist and when do I pay? <span class="icon">+</span></div><div class="faq-answer">The waitlist secures your spot and locks in your pricing. No payment today. Once exact dates are confirmed, you'll receive payment instructions — cash and InnBucks accepted. Your physical ticket and e-ticket are issued on payment.</div></button>
+      <button class="faq-item" onclick="toggleFaq(this)"><div class="faq-question">How do I pay when the time comes? <span class="icon">+</span></div><div class="faq-answer">Payment will be by cash or InnBucks. Once dates are confirmed, all registered waitlist members will receive full payment instructions including collection points, InnBucks details, and deadlines. No online card payments required.</div></button>
+      <button class="faq-item" onclick="toggleFaq(this)"><div class="faq-question">What do I get after payment? <span class="icon">+</span></div><div class="faq-answer">Once payment is confirmed you'll receive an e-ticket and a physical ticket. Your ref ID is your proof of registration in the meantime — keep it safe.</div></button>
+      <button class="faq-item" onclick="toggleFaq(this)"><div class="faq-question">If I buy multiple tickets, how does it work? <span class="icon">+</span></div><div class="faq-answer">Each ticket gets its own unique ref ID and is registered in its attendee's name. You fill in each person's name during registration. Every member of your group has their own official reference — no confusion at the gate.</div></button>
+      <button class="faq-item" onclick="toggleFaq(this)"><div class="faq-question">Is the HERO Pass really the best value? <span class="icon">+</span></div><div class="faq-answer">Yes. A Single Day ticket ($25) plus the after party add-on ($20) costs $45 for just one day. The Hero Pass gives you all 3 days, paddock access, wristband, programme, and the after party for $60. It's genuinely not a close call.</div></button>
+      <button class="faq-item" onclick="toggleFaq(this)"><div class="faq-question">Who performs at the after party? <span class="icon">+</span></div><div class="faq-answer">Live performances from Zimbabwean artists — full lineup to be announced. Registered waitlist members receive the artist announcement first. Hero Pass and VIP holders have after party access included. Single Day ticket holders can add it for $20.</div></button>
+      <button class="faq-item" onclick="toggleFaq(this)"><div class="faq-question">Is it family-friendly? <span class="icon">+</span></div><div class="faq-answer">Yes. Saturday is designed as a full family festival — food vendors, live entertainment, and a festival atmosphere alongside the racing. Children are welcome.</div></button>
+    </div>
   </section>
 </div>
 
 <div class="gold-divider"></div>
 
-<!-- ─── CONTACT ─── -->
+<!-- CONTACT -->
 
 <section id="contact">
   <div class="section-eyebrow reveal">Contact & Sponsorship</div>
   <h2 class="section-title reveal reveal-delay-1">LET'S<br><span class="gold">TALK.</span></h2>
   <div class="contact-grid">
     <div class="contact-info reveal">
-      <div><div class="contact-block-title">General Enquiries</div><div class="contact-block-text">info@zimgrandprix.com</div><div class="contact-block-sub">For event information, registration questions, and general enquiries.</div></div>
-      <div><div class="contact-block-title">Driver & Team Registration</div><div class="contact-block-text">drivers@zimgrandprix.com</div><div class="contact-block-sub">Questions about driver entry, requirements, or corporate team registration.</div></div>
-      <div><div class="contact-block-title">Sponsorship & Partnerships</div><div class="contact-block-text">sponsors@zimgrandprix.com</div><div class="contact-block-sub">Naming rights, race sponsorship, trophy sponsors, and media partnerships.</div></div>
+      <div><div class="contact-block-title">General Enquiries</div><div class="contact-block-text">info@zimgrandprix.com</div><div class="contact-block-sub">Event information, registration questions, general enquiries.</div></div>
+      <div><div class="contact-block-title">Driver & Team Registration</div><div class="contact-block-text">drivers@zimgrandprix.com</div><div class="contact-block-sub">Driver entry, requirements, corporate team registration.</div></div>
+      <div><div class="contact-block-title">Sponsorship & Partnerships</div><div class="contact-block-text">sponsors@zimgrandprix.com</div><div class="contact-block-sub">Naming rights, race sponsorship, trophy sponsors, media partnerships.</div></div>
       <div><div class="contact-block-title">Location</div><div class="contact-block-text">Harare, Zimbabwe</div><div class="contact-block-sub">Full venue details shared with all registered waitlist members. August 2026.</div></div>
     </div>
     <div class="reveal reveal-delay-1">
       <div class="reg-form">
-        <div style="font-family: var(--font-condensed); font-size:0.75rem; font-weight:700; letter-spacing:0.3em; text-transform:uppercase; color:var(--gold); margin-bottom:1.5rem;">Send a Message</div>
+        <div style="font-family:var(--font-condensed);font-size:0.75rem;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;">Send a Message</div>
         <div class="form-row">
           <div class="form-group"><label>Name *</label><input type="text" id="cn-name" placeholder="Your full name"></div>
-          <div class="form-group"><label>Organisation</label><input type="text" id="cn-org" placeholder="Company / Organisation"></div>
+          <div class="form-group"><label>Organisation <span class="opt">(optional)</span></label><input type="text" id="cn-org" placeholder="Company / Organisation"></div>
         </div>
-        <div class="form-group"><label>Email *</label><input type="email" id="cn-email" placeholder="your@email.com"></div>
-        <div class="form-group">
-          <label>Enquiry Type</label>
-          <select id="cn-type"><option>General enquiry</option><option>Sponsorship interest</option><option>Media / Press</option><option>Driver registration</option><option>Corporate team</option><option>Vendor / Partner</option></select>
-        </div>
+        <div class="form-group"><label>Phone * <span class="opt">(primary contact)</span></label><input type="tel" id="cn-phone" placeholder="+263 77..."></div>
+        <div class="form-group"><label>Email <span class="opt">(optional)</span></label><input type="email" id="cn-email" placeholder="your@email.com"></div>
+        <div class="form-group"><label>Enquiry Type</label><select id="cn-type"><option>General enquiry</option><option>Sponsorship interest</option><option>Media / Press</option><option>Driver registration</option><option>Corporate team</option><option>Vendor / Partner</option></select></div>
         <div class="form-group"><label>Message *</label><textarea id="cn-message" placeholder="Tell us what you'd like to know..."></textarea></div>
-        <button class="btn-primary form-submit" onclick="submitContact()">Send Message</button>
-        <div class="result-card" id="contact-result" style="margin-top:1rem;"></div>
+        <button class="btn-primary" style="width:100%;" id="cn-submit-btn" onclick="submitContact()">Send Message</button>
+        <div class="confirmation-card" id="contact-confirmation" style="margin-top:1rem;padding:1.5rem;"></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ─── FOOTER ─── -->
+<!-- FOOTER -->
 
 <footer>
-  <div class="footer-logo">ZIM<span>GP</span> 2026</div>
+  <a href="#hero" class="footer-logo-img"><img src="data:image/jpeg;base64,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" alt="Zim Grand Prix" class="footer-logo-image"></a>
   <div class="footer-text">Zimbabwe's First Professional Kart Racing Championship<br>Harare, Zimbabwe · August 2026</div>
   <ul class="footer-links">
     <li><a href="#format">Event</a></li>
@@ -1449,79 +1032,77 @@ footer { background: var(--obsidian); border-top: 1px solid rgba(201,168,76,0.1)
   </ul>
 </footer>
 
-<!-- ─── URGENCY BAR (alternates) ─── -->
+<!-- URGENCY BAR -->
 
 <div class="urgency-bar mode-driver" id="urgency-bar">
-  <div class="urgency-text" id="urgency-text">🔥 Early Bird Driver Entry — $150 · Limited Spots Remaining</div>
-  <a href="#waitlist" class="btn-primary" id="urgency-cta" onclick="urgencyDismiss()">Register Now</a>
+  <div class="urgency-text" id="urgency-text">🔥 Early Bird Driver Entry — $150 · Limited Spots · August 2026</div>
+  <button class="btn-primary" id="urgency-cta" onclick="urgencyAction()">Register Now</button>
   <button class="urgency-close" onclick="urgencyDismiss()">✕</button>
 </div>
 
-<!-- ─── JAVASCRIPT ─── -->
-
 <script>
-// ─── ID GENERATION ───
-function generateId(prefix) {
-  const now = new Date();
-  const yr = now.getFullYear().toString().slice(-2);
-  const mo = String(now.getMonth() + 1).padStart(2, '0');
-  const dy = String(now.getDate()).padStart(2, '0');
-  const rand = Math.floor(Math.random() * 9000) + 1000;
-  const suffix = String.fromCharCode(65 + Math.floor(Math.random() * 26));
-  return `${prefix}-${yr}${mo}${dy}-${rand}${suffix}`;
+// ─── CONFIG ───
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxA54Y1HSD-f2YTKUfXQIDxUyMNlbmRkA98Id8ccohbmHefybJ9LAXe352Zv4eb_GD9/exec';
+
+// ─── SEQUENTIAL ID COUNTER ───
+// Stored in localStorage so IDs never repeat across sessions
+function getNextCounter() {
+  let counter = parseInt(localStorage.getItem('zgp_counter') || '0');
+  counter++;
+  localStorage.setItem('zgp_counter', counter.toString());
+  return counter;
 }
 
-// ─── IN-BROWSER DATA STORE (spreadsheet) ───
-let registrations = JSON.parse(localStorage.getItem('zgp_registrations') || '[]');
-
-function saveToStore(row) {
-  registrations.push(row);
-  localStorage.setItem('zgp_registrations', JSON.stringify(registrations));
-  // also write to hidden table DOM for export
-  const tbody = document.getElementById('data-rows');
-  const tr = document.createElement('tr');
-  tr.innerHTML = Object.values(row).map(v => `<td>${v}</td>`).join('');
-  tbody.appendChild(tr);
+function formatRefId(prefix, num) {
+  return `${prefix}-${String(num).padStart(4, '0')}`;
 }
 
-function exportCSV() {
-  const headers = ['Timestamp','RefID','Type','FirstName','LastName','Email','Phone','Detail1','Detail2','Detail3','Notes'];
-  const rows = registrations.map(r => headers.map(h => `"${(r[h]||'').toString().replace(/"/g,'""')}"`).join(','));
-  const csv = [headers.join(','), ...rows].join('\n');
-  const a = document.createElement('a');
-  a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
-  a.download = 'zgp2026_registrations.csv';
-  a.click();
+function getNextTransactionId() {
+  let txn = parseInt(localStorage.getItem('zgp_txn') || '0');
+  txn++;
+  localStorage.setItem('zgp_txn', txn.toString());
+  return `TXN-${String(txn).padStart(4, '0')}`;
+}
+
+// ─── SEND TO GOOGLE SHEETS ───
+async function sendToSheet(row) {
+  try {
+    await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(row)
+    });
+  } catch(e) {
+    // Silent fail — data still shown to user
+    console.warn('Sheet sync:', e);
+  }
 }
 
 // ─── NAV SCROLL ───
 window.addEventListener('scroll', () => {
-  const scrolled = window.scrollY > 60;
-  document.getElementById('nav').classList.toggle('scrolled', scrolled);
-  document.getElementById('section-nav').classList.toggle('visible', scrolled);
-
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60);
+  document.getElementById('section-nav').classList.toggle('visible', window.scrollY > 100);
   if (window.scrollY > 800 && !urgencyDismissed) {
     document.getElementById('urgency-bar').classList.add('visible');
   }
   highlightActiveNav();
 });
 
-// ─── SECTION NAV ACTIVE ───
 function highlightActiveNav() {
   const sections = ['format','tickets','afterparty-section','drivers','corporate','waitlist'];
-  const pills = document.querySelectorAll('.snav-pill');
   let current = '';
   sections.forEach(id => {
     const el = document.getElementById(id);
     if (el && window.scrollY >= el.offsetTop - 200) current = id;
   });
-  pills.forEach(p => {
+  document.querySelectorAll('.snav-pill').forEach(p => {
     p.classList.toggle('active', p.dataset.section === current);
   });
 }
 
 // ─── REVEAL ───
-const observer = new IntersectionObserver((entries) => {
+const observer = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('revealed'); });
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
@@ -1532,22 +1113,268 @@ function switchTab(tab) {
     document.getElementById('form-' + t).style.display = t === tab ? 'block' : 'none';
     document.getElementById('tab-' + t).classList.toggle('active', t === tab);
   });
-  document.getElementById('main-result').classList.remove('visible');
+  document.getElementById('main-confirmation').classList.remove('visible');
 }
 
-function switchToDriver() {
-  document.getElementById('waitlist').scrollIntoView({behavior:'smooth'});
-  setTimeout(() => switchTab('driver'), 600);
-}
-function openCorpForm() {
-  document.getElementById('waitlist').scrollIntoView({behavior:'smooth'});
-  setTimeout(() => switchTab('corporate'), 600);
+function scrollToForm(tab, ticketValue) {
+  document.getElementById('waitlist').scrollIntoView({ behavior: 'smooth' });
+  setTimeout(() => {
+    switchTab(tab);
+    if (ticketValue && tab === 'spectator') {
+      document.getElementById('s-ticket').value = ticketValue;
+      handleTicketChange();
+    }
+  }, 600);
 }
 
-// ─── AFTER PARTY TOGGLE (spectator form) ───
-function toggleWaitlistAfterParty() {
+// ─── TICKET CHANGE ───
+function handleTicketChange() {
   const val = document.getElementById('s-ticket').value;
-  document.getElementById('waitlist-afterparty-row').style.display = val === 'SINGLE DAY — $25' ? 'block' : 'none';
+  document.getElementById('afterparty-row').style.display = val === 'SINGLE DAY — $25' ? 'block' : 'none';
+  renderAttendeeFields();
+}
+
+// ─── ATTENDEE FIELDS ───
+function renderAttendeeFields() {
+  const qty = parseInt(document.getElementById('s-qty').value);
+  const wrapper = document.getElementById('attendee-fields-wrapper');
+  const container = document.getElementById('attendee-fields');
+  if (qty <= 1) { wrapper.style.display = 'none'; container.innerHTML = ''; return; }
+  wrapper.style.display = 'block';
+  container.innerHTML = '';
+  for (let i = 1; i <= qty; i++) {
+    const row = document.createElement('div');
+    row.className = 'attendee-row';
+    row.innerHTML = `<span class="attendee-num">${i}</span><input type="text" id="attendee-${i}" placeholder="Attendee ${i} full name">`;
+    container.appendChild(row);
+  }
+}
+
+// ─── FORM SUBMIT ───
+async function submitForm(type) {
+  const btn = document.getElementById(type[0] + '-submit-btn');
+  btn.innerHTML = '<span class="spinner"></span>Registering...';
+  btn.disabled = true;
+
+  try {
+    if (type === 'spectator') {
+      const fn = document.getElementById('s-firstname').value.trim();
+      const ln = document.getElementById('s-lastname').value.trim();
+      const phone = document.getElementById('s-phone').value.trim();
+      const email = document.getElementById('s-email').value.trim();
+      const city = document.getElementById('s-city').value.trim();
+      const ticket = document.getElementById('s-ticket').value;
+      const qty = parseInt(document.getElementById('s-qty').value);
+      const ap = document.getElementById('s-afterparty') ? document.getElementById('s-afterparty').value : 'NO';
+
+      if (!fn || !ln || !phone || !city || !ticket) {
+        alert('Please fill in all required fields marked with *'); btn.innerHTML = 'Secure My Spot on the Waitlist'; btn.disabled = false; return;
+      }
+
+      const txnId = getNextTransactionId();
+      const refIds = [];
+      const attendeeNames = [];
+
+      for (let i = 0; i < qty; i++) {
+        const num = getNextCounter();
+        const refId = formatRefId('ZGP', num);
+        refIds.push(refId);
+        let attendeeName = i === 0 ? `${fn} ${ln}` : (document.getElementById(`attendee-${i+1}`) ? document.getElementById(`attendee-${i+1}`).value.trim() || `Guest ${i+1}` : `Guest ${i+1}`);
+        attendeeNames.push(attendeeName);
+
+        await sendToSheet({
+          timestamp: new Date().toISOString(),
+          refId: refId,
+          transactionId: txnId,
+          firstName: fn,
+          lastName: ln,
+          type: 'SPECTATOR',
+          email: email,
+          phone: phone,
+          city: city,
+          attendeeName: attendeeName,
+          details: `${ticket}${ap === 'YES' ? ' + After Party' : ''}`,
+          notes: qty > 1 ? `Group booking ${i+1}/${qty}` : ''
+        });
+      }
+
+      showConfirmation('main-confirmation', fn, refIds, attendeeNames, ticket, type);
+
+    } else if (type === 'driver') {
+      const fn = document.getElementById('d-firstname').value.trim();
+      const ln = document.getElementById('d-lastname').value.trim();
+      const phone = document.getElementById('d-phone').value.trim();
+      const email = document.getElementById('d-email').value.trim();
+      const city = document.getElementById('d-city').value.trim();
+      const dob = document.getElementById('d-dob').value;
+      const entry = document.getElementById('d-entry').value;
+      const exp = document.getElementById('d-exp').value;
+      const ename = document.getElementById('d-emergency-name').value.trim();
+      const ephone = document.getElementById('d-emergency-phone').value.trim();
+      const notes = document.getElementById('d-notes').value.trim();
+
+      if (!fn || !ln || !phone || !city || !dob || !entry || !ename || !ephone) {
+        alert('Please fill in all required fields marked with *'); btn.innerHTML = 'Register as a Driver'; btn.disabled = false; return;
+      }
+      const age = Math.floor((new Date() - new Date(dob)) / (365.25*24*60*60*1000));
+      if (age < 16) { alert('Drivers must be 16 years or older.'); btn.innerHTML = 'Register as a Driver'; btn.disabled = false; return; }
+
+      const num = getNextCounter();
+      const refId = formatRefId('ZGP-D', num);
+      const txnId = getNextTransactionId();
+
+      await sendToSheet({
+        timestamp: new Date().toISOString(),
+        refId: refId,
+        transactionId: txnId,
+        firstName: fn,
+        lastName: ln,
+        type: 'DRIVER',
+        email: email,
+        phone: phone,
+        city: city,
+        attendeeName: `${fn} ${ln}`,
+        details: `${entry} · Age ${age} · Exp: ${exp}`,
+        notes: `Emergency: ${ename} ${ephone}${notes ? ' | ' + notes : ''}`
+      });
+
+      showConfirmation('main-confirmation', fn, [refId], [`${fn} ${ln}`], entry, type);
+
+    } else if (type === 'corporate') {
+      const company = document.getElementById('c-company').value.trim();
+      const contact = document.getElementById('c-contact').value.trim();
+      const phone = document.getElementById('c-phone').value.trim();
+      const email = document.getElementById('c-email').value.trim();
+      const city = document.getElementById('c-city').value.trim();
+      const teams = document.getElementById('c-teams').value;
+      const sponsor = document.getElementById('c-sponsor').value;
+      const teamName = document.getElementById('c-team-name').value.trim();
+      const message = document.getElementById('c-message').value.trim();
+
+      if (!company || !contact || !phone || !city) {
+        alert('Please fill in all required fields marked with *'); btn.innerHTML = 'Register Corporate Team'; btn.disabled = false; return;
+      }
+
+      const num = getNextCounter();
+      const refId = formatRefId('ZGP-C', num);
+      const txnId = getNextTransactionId();
+      const fn = contact.split(' ')[0];
+      const ln = contact.split(' ').slice(1).join(' ') || '';
+
+      await sendToSheet({
+        timestamp: new Date().toISOString(),
+        refId: refId,
+        transactionId: txnId,
+        firstName: fn,
+        lastName: ln,
+        type: 'CORPORATE',
+        email: email,
+        phone: phone,
+        city: city,
+        attendeeName: company,
+        details: `${teams} · Sponsorship: ${sponsor}${teamName ? ' · Team: ' + teamName : ''}`,
+        notes: message
+      });
+
+      showConfirmation('main-confirmation', fn, [refId], [company], `Corporate Team · ${teams}`, type);
+    }
+
+  } catch(err) {
+    console.error(err);
+    alert('Something went wrong. Please try again.');
+    btn.disabled = false;
+  }
+
+  // Reset button
+  const labels = { spectator: 'Secure My Spot on the Waitlist', driver: 'Register as a Driver', corporate: 'Register Corporate Team' };
+  btn.innerHTML = labels[type];
+  btn.disabled = false;
+}
+
+// ─── SHOW CONFIRMATION ───
+function showConfirmation(targetId, firstName, refIds, attendeeNames, ticketType, regType) {
+  const el = document.getElementById(targetId);
+  const isMultiple = refIds.length > 1;
+
+  const refsHtml = refIds.map((id, i) => `
+    <div class="conf-ref-item">
+      <div class="conf-ref-id">${id}</div>
+      <div class="conf-ref-name">${attendeeNames[i] || ''}</div>
+    </div>
+  `).join('');
+
+  const typeMessages = {
+    spectator: `Your <strong>${ticketType}</strong> waitlist spot${isMultiple ? 's are' : ' is'} officially secured.`,
+    driver: `Your <strong>${ticketType}</strong> driver registration is officially secured.`,
+    corporate: `Your <strong>${ticketType}</strong> registration is officially secured.`
+  };
+
+  el.innerHTML = `
+    <span class="conf-check">✦</span>
+    <div class="conf-title">YOU'RE ON THE LIST</div>
+    <div class="conf-name">Welcome, ${firstName}</div>
+    <div class="conf-divider"></div>
+    <div style="font-family:var(--font-condensed);font-size:0.7rem;font-weight:700;letter-spacing:0.35em;text-transform:uppercase;color:var(--muted);margin-bottom:0.75rem;">Your Reference ${refIds.length > 1 ? 'IDs' : 'ID'}</div>
+    <div class="conf-refs">${refsHtml}</div>
+    <div class="conf-message">
+      <p>${typeMessages[regType]}</p>
+      <br>
+      <p>Keep your reference ${refIds.length > 1 ? 'IDs' : 'ID'} safe — ${refIds.length > 1 ? 'they are' : 'it is'} your official proof of registration for the <span class="gold">Zim Grand Prix 2026</span>.</p>
+      <br>
+      <p>As soon as event dates are confirmed, you will be the <strong>first to know</strong>. We will reach out with full payment details — <strong>cash and InnBucks accepted</strong>. Once payment is received, your <strong>e-ticket and physical ticket</strong> will be issued.</p>
+      <br>
+      <p>We genuinely <span class="gold">cannot wait</span> to see you on the track in <strong>August 2026</strong>. 🏁</p>
+    </div>
+    <div class="conf-footer">◆ Zim Grand Prix 2026 · Harare, Zimbabwe ◆</div>
+  `;
+  el.classList.add('visible');
+  setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
+}
+
+// ─── CONTACT SUBMIT ───
+async function submitContact() {
+  const btn = document.getElementById('cn-submit-btn');
+  const name = document.getElementById('cn-name').value.trim();
+  const phone = document.getElementById('cn-phone').value.trim();
+  const email = document.getElementById('cn-email').value.trim();
+  const msg = document.getElementById('cn-message').value.trim();
+  const org = document.getElementById('cn-org').value.trim();
+  const type = document.getElementById('cn-type').value;
+
+  if (!name || !phone || !msg) { alert('Please fill in your name, phone number, and message.'); return; }
+
+  btn.innerHTML = '<span class="spinner"></span>Sending...';
+  btn.disabled = true;
+
+  const num = getNextCounter();
+  const refId = formatRefId('ZGP-MSG', num);
+
+  await sendToSheet({
+    timestamp: new Date().toISOString(),
+    refId: refId,
+    transactionId: refId,
+    firstName: name,
+    lastName: '',
+    type: 'CONTACT',
+    email: email,
+    phone: phone,
+    city: '',
+    attendeeName: org || name,
+    details: type,
+    notes: msg
+  });
+
+  const el = document.getElementById('contact-confirmation');
+  el.innerHTML = `
+    <span class="conf-check" style="font-size:2rem;">✓</span>
+    <div class="conf-title" style="font-size:1.8rem;">Message Received</div>
+    <div class="conf-name">${name}</div>
+    <div class="conf-divider"></div>
+    <div class="conf-message">We've received your message and will respond within 48 hours. For urgent enquiries email <span class="gold">info@zimgrandprix.com</span></div>
+  `;
+  el.classList.add('visible');
+  btn.innerHTML = 'Send Message';
+  btn.disabled = false;
 }
 
 // ─── FAQ ───
@@ -1557,10 +1384,19 @@ function toggleFaq(el) {
   if (!isOpen) el.classList.add('open');
 }
 
-// ─── URGENCY BAR — alternates between driver & ticket ───
+// ─── URGENCY BAR ───
 let urgencyDismissed = false;
 let urgencyMode = 'driver';
-let urgencyInterval;
+let urgencyInterval = null;
+
+function urgencyAction() {
+  if (urgencyMode === 'driver') {
+    scrollToForm('driver', '');
+  } else {
+    scrollToForm('spectator', 'HERO PASS — $60');
+  }
+  urgencyDismiss();
+}
 
 function setUrgencyMode(mode) {
   urgencyMode = mode;
@@ -1572,26 +1408,18 @@ function setUrgencyMode(mode) {
     bar.classList.add('mode-driver');
     text.textContent = '🔥 Early Bird Driver Entry — $150 · Limited Spots · August 2026';
     cta.textContent = 'Register Now';
-    cta.href = '#waitlist';
-    cta.onclick = () => { urgencyDismiss(); setTimeout(() => switchTab('driver'), 600); };
   } else {
     bar.classList.add('mode-ticket');
     text.textContent = '✦ Hero Pass — $60 · All 3 Days + After Party · Numbered & Limited';
     cta.textContent = 'Get Hero Pass';
-    cta.href = '#tickets';
-    cta.onclick = () => { urgencyDismiss(); setTimeout(() => openTicketForm('HERO PASS — $60','ZGP-T'), 600); };
   }
 }
 
 window.addEventListener('scroll', () => {
-  if (window.scrollY > 800 && !urgencyDismissed) {
-    if (!urgencyInterval) {
-      urgencyInterval = setInterval(() => {
-        if (!urgencyDismissed) {
-          setUrgencyMode(urgencyMode === 'driver' ? 'ticket' : 'driver');
-        }
-      }, 7000);
-    }
+  if (window.scrollY > 800 && !urgencyDismissed && !urgencyInterval) {
+    urgencyInterval = setInterval(() => {
+      if (!urgencyDismissed) setUrgencyMode(urgencyMode === 'driver' ? 'ticket' : 'driver');
+    }, 7000);
   }
 });
 
@@ -1601,156 +1429,25 @@ function urgencyDismiss() {
   document.getElementById('urgency-bar').classList.remove('visible');
 }
 
-// ─── TICKET QUICK FORM ───
-let selectedTicketPrefix = 'ZGP-T';
-let currentTicketLabel = '';
-
-function openTicketForm(label, prefix) {
-  currentTicketLabel = label;
-  document.getElementById('selected-ticket-label').textContent = label;
-  selectedTicketPrefix = prefix;
-  const panel = document.getElementById('ticket-quick-form');
-  panel.classList.add('open');
-  panel.scrollIntoView({behavior:'smooth', block:'center'});
-  document.getElementById('ticket-result').classList.remove('visible');
-  // show after party option only for single day
-  document.getElementById('afterparty-addon-row').style.display =
-    label.includes('SINGLE DAY') ? 'block' : 'none';
-}
-
-function closeTicketForm() {
-  document.getElementById('ticket-quick-form').classList.remove('open');
-}
-
-function submitTicket() {
-  const fn = document.getElementById('tkt-firstname').value.trim();
-  const ln = document.getElementById('tkt-lastname').value.trim();
-  const em = document.getElementById('tkt-email').value.trim();
-  const ph = document.getElementById('tkt-phone').value.trim();
-  const qty = document.getElementById('tkt-qty').value;
-  const ap = document.getElementById('tkt-afterparty') ? document.getElementById('tkt-afterparty').value : 'N/A';
-  if (!fn || !ln || !em) { alert('Please fill in your name and email.'); return; }
-  if (!em.includes('@')) { alert('Please enter a valid email address.'); return; }
-  const id = generateId('ZGP-T');
-  saveToStore({
-    Timestamp: new Date().toISOString(), RefID: id, Type: 'SPECTATOR',
-    FirstName: fn, LastName: ln, Email: em, Phone: ph,
-    Detail1: currentTicketLabel, Detail2: qty, Detail3: ap.includes('YES') ? 'After Party Add-on: YES' : 'After Party: NO', Notes: ''
-  });
-  showResult('ticket-result', id, fn + ' ' + ln, 'Spectator Waitlist', currentTicketLabel + ' · ' + qty);
-}
-
-// ─── MAIN FORM SUBMIT ───
-function submitForm(type) {
-  let fn, ln, em, ph, id, desc, label, d1, d2, d3, notes = '';
-
-  if (type === 'spectator') {
-    fn = document.getElementById('s-firstname').value.trim();
-    ln = document.getElementById('s-lastname').value.trim();
-    em = document.getElementById('s-email').value.trim();
-    ph = document.getElementById('s-phone').value.trim();
-    const tkt = document.getElementById('s-ticket').value;
-    const qty = document.getElementById('s-qty').value;
-    const ap = document.getElementById('s-afterparty') ? document.getElementById('s-afterparty').value : 'NO';
-    if (!fn || !ln || !em || !tkt) { alert('Please fill in all required fields and select a ticket type.'); return; }
-    if (!em.includes('@')) { alert('Please enter a valid email.'); return; }
-    id = generateId('ZGP-T');
-    label = 'Spectator Waitlist';
-    d1 = tkt; d2 = qty; d3 = ap === 'YES' ? 'After Party Add-on: YES (+$20)' : 'After Party: NO';
-    desc = tkt + ' · ' + qty;
-
-  } else if (type === 'driver') {
-    fn = document.getElementById('d-firstname').value.trim();
-    ln = document.getElementById('d-lastname').value.trim();
-    em = document.getElementById('d-email').value.trim();
-    ph = document.getElementById('d-phone').value.trim();
-    const dob = document.getElementById('d-dob').value;
-    const entry = document.getElementById('d-entry').value;
-    const exp = document.getElementById('d-exp').value;
-    const ename = document.getElementById('d-emergency-name').value.trim();
-    const ephone = document.getElementById('d-emergency-phone').value.trim();
-    notes = document.getElementById('d-notes').value.trim();
-    if (!fn || !ln || !em || !ph || !dob || !entry || !ename || !ephone) { alert('Please fill in all required fields marked with *'); return; }
-    const age = Math.floor((new Date() - new Date(dob)) / (365.25*24*60*60*1000));
-    if (age < 16) { alert('Drivers must be 16 years or older to register.'); return; }
-    if (!em.includes('@')) { alert('Please enter a valid email.'); return; }
-    id = generateId('ZGP-D');
-    label = 'Driver Registration';
-    d1 = entry; d2 = 'Age: ' + age + ' · Exp: ' + exp; d3 = 'Emergency: ' + ename + ' ' + ephone;
-    desc = entry + ' · Age ' + age;
-
-  } else if (type === 'corporate') {
-    const co = document.getElementById('c-company').value.trim();
-    const ct = document.getElementById('c-contact').value.trim();
-    em = document.getElementById('c-email').value.trim();
-    ph = document.getElementById('c-phone').value.trim();
-    const teams = document.getElementById('c-teams').value;
-    const sponsor = document.getElementById('c-sponsor').value;
-    const teamName = document.getElementById('c-team-name').value.trim();
-    notes = document.getElementById('c-message').value.trim();
-    if (!co || !ct || !em || !ph) { alert('Please fill in all required fields.'); return; }
-    if (!em.includes('@')) { alert('Please enter a valid email.'); return; }
-    fn = ct.split(' ')[0]; ln = ct.split(' ').slice(1).join(' ') || '';
-    id = generateId('ZGP-C');
-    label = 'Corporate Team Registration';
-    d1 = co; d2 = teams + ' team(s)'; d3 = 'Sponsorship interest: ' + sponsor + (teamName ? ' · Team: ' + teamName : '');
-    desc = co + ' · ' + teams + ' team(s)';
-  }
-
-  saveToStore({
-    Timestamp: new Date().toISOString(), RefID: id, Type: type.toUpperCase(),
-    FirstName: fn, LastName: ln, Email: em, Phone: ph,
-    Detail1: d1, Detail2: d2, Detail3: d3, Notes: notes
-  });
-
-  showResult('main-result', id, fn + ' ' + ln, label, desc);
-  document.getElementById('main-result').scrollIntoView({behavior:'smooth', block:'center'});
-}
-
-function showResult(targetId, id, name, label, desc) {
-  const el = document.getElementById(targetId);
-  el.innerHTML = `
-    <div class="result-type">${label}</div>
-    <div class="result-id">${id}</div>
-    <div class="result-name">${name}</div>
-    <div class="result-divider"></div>
-    <div style="font-family:var(--font-condensed); font-size:0.85rem; color:var(--gold); letter-spacing:0.1em; margin-bottom:0.5rem;">${desc}</div>
-    <div class="result-message">Your reference ID has been generated. We'll send confirmation details and payment instructions to your email shortly. Keep this ID safe — it is your official waitlist reference for the Zim Grand Prix 2026.</div>
-    <div style="margin-top:1.5rem; font-family:var(--font-condensed); font-size:0.75rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--gold);">✓ You're on the List · August 2026</div>
-  `;
-  el.classList.add('visible');
-}
-
-// ─── CONTACT ───
-function submitContact() {
-  const name = document.getElementById('cn-name').value.trim();
-  const em = document.getElementById('cn-email').value.trim();
-  const msg = document.getElementById('cn-message').value.trim();
-  const org = document.getElementById('cn-org').value.trim();
-  const type = document.getElementById('cn-type').value;
-  if (!name || !em || !msg) { alert('Please fill in your name, email, and message.'); return; }
-  if (!em.includes('@')) { alert('Please enter a valid email.'); return; }
-  saveToStore({
-    Timestamp: new Date().toISOString(), RefID: generateId('ZGP-MSG'), Type: 'CONTACT',
-    FirstName: name, LastName: '', Email: em, Phone: '',
-    Detail1: type, Detail2: org, Detail3: '', Notes: msg
-  });
-  const el = document.getElementById('contact-result');
-  el.innerHTML = `
-    <div class="result-type">Message Received</div>
-    <div class="result-id" style="font-size:1.5rem;">Thank You</div>
-    <div class="result-name">${name}</div>
-    <div class="result-divider"></div>
-    <div class="result-message">We've received your message and will respond within 48 hours. For urgent enquiries, email us directly at info@zimgrandprix.com</div>
-  `;
-  el.classList.add('visible');
-}
-
-// ─── LOAD ───
 window.addEventListener('load', () => {
-  if (window.location.hash === '#drivers') switchToDriver();
   setUrgencyMode('driver');
+  renderAttendeeFields();
 });
+
+// ─── MOBILE NAV ───
+function toggleMobileNav() {
+  const nav = document.getElementById('mobile-nav');
+  const btn = document.getElementById('hamburger');
+  nav.classList.toggle('open');
+  btn.classList.toggle('open');
+  document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
+}
+function closeMobileNav() {
+  document.getElementById('mobile-nav').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
 </script>
 
 </body>
