@@ -489,6 +489,22 @@ nav { padding:0.75rem 1rem; }
 <style>
 /* FORCE DARK THEME - override any browser defaults */
 
+
+/* FIX BUTTON COLORS EXPLICITLY */
+.btn-primary { color: #080808 !important; background-color: #C9A84C !important; }
+.btn-primary:hover { color: #080808 !important; background-color: #E8C96A !important; }
+.btn-secondary { color: #F5F0E8 !important; background: transparent !important; }
+.btn-secondary:hover { color: #C9A84C !important; }
+.hero-ctas .btn-primary, .hero-ctas .btn-primary:visited, .hero-ctas .btn-primary:link { color: #080808 !important; }
+.hero-ctas .btn-secondary, .hero-ctas .btn-secondary:visited, .hero-ctas .btn-secondary:link { color: #F5F0E8 !important; }
+/* Urgency bar buttons */
+.urgency-bar.mode-driver .btn-primary { background: #080808 !important; color: #C9A84C !important; }
+.urgency-bar.mode-ticket .btn-primary { background: #C9A84C !important; color: #080808 !important; }
+#urgency-cta { color: #C9A84C !important; background: #080808 !important; }
+.urgency-bar.mode-ticket #urgency-cta { color: #080808 !important; background: #C9A84C !important; }
+/* All buttons that are <button> elements */
+button.btn-primary { color: #080808 !important; background-color: #C9A84C !important; }
+
 /* FIX ALL LINK COLORS */
 a, a:visited, a:link { color: inherit !important; text-decoration: none !important; }
 .btn-primary, .btn-primary:visited, .btn-primary:link { color: #080808 !important; }
