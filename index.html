@@ -3,85 +3,53 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="theme-color" content="#080808">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ZIM GRAND PRIX 2026 — Harare, Zimbabwe</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-/* Font fallback stack — ensures design holds even if Google Fonts is slow */
 :root {
-  --font-display: 'Bebas Neue', 'Arial Narrow', Arial, sans-serif;
-  --font-condensed: 'Barlow Condensed', 'Arial Narrow', Arial, sans-serif;
-  --font-body: 'Barlow', Arial, sans-serif;
-}
-</style>
-<style>
-
-/* ─── GLOBAL ANCHOR RESET (prevents browser blue) ─── */
-a { color: inherit; text-decoration: none; }
-a:link, a:visited, a:hover, a:active { text-decoration: none; }
-.nav-links a { color: var(–muted) !important; }
-.nav-links a:hover { color: var(–gold) !important; }
-.nav-cta { color: var(–obsidian) !important; background: var(–gold) !important; }
-.footer-links a { color: var(–muted) !important; }
-.footer-links a:hover { color: var(–gold) !important; }
-.mobile-nav-overlay a { color: var(–muted) !important; }
-.mobile-nav-overlay a:hover { color: var(–gold) !important; }
-.mobile-nav-overlay .mobile-cta { color: var(–obsidian) !important; background: var(–gold) !important; }
-.ap-pill { color: var(–gold) !important; }
-.ap-pill:hover { color: var(–obsidian) !important; background: var(–gold) !important; }
-.snav-pill { color: var(–muted) !important; }
-.snav-pill:hover, .snav-pill.active { color: var(–obsidian) !important; }
-.snav-pill.hl { color: var(–gold) !important; }
-.snav-pill.hl:hover { color: var(–obsidian) !important; }
-.btn-primary { color: var(–obsidian) !important; background: var(–gold) !important; }
-.btn-primary:hover { color: var(–obsidian) !important; background: var(–gold-light) !important; }
-.btn-secondary { color: var(–white) !important; }
-.btn-secondary:hover { color: var(–gold) !important; }
-
-:root {
-–gold: #C9A84C;
-–gold-light: #E8C96A;
-–gold-dark: #8B6914;
-–obsidian: #080808;
-–obsidian-mid: #111111;
-–obsidian-light: #1A1A1A;
-–surface: #141414;
-–surface-2: #1E1E1E;
-–white: #F5F0E8;
-–muted: #888880;
-–green: #2ECC71;
-–font-display: ‘Bebas Neue’, sans-serif;
-–font-condensed: ‘Barlow Condensed’, sans-serif;
-–font-body: ‘Barlow’, sans-serif;
+  --gold: #C9A84C;
+  --gold-light: #E8C96A;
+  --gold-dark: #8B6914;
+  --obsidian: #080808;
+  --obsidian-mid: #111111;
+  --obsidian-light: #1A1A1A;
+  --surface: #141414;
+  --surface-2: #1E1E1E;
+  --white: #F5F0E8;
+  --muted: #888880;
+  --green: #2ECC71;
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-condensed: 'Barlow Condensed', sans-serif;
+  --font-body: 'Barlow', sans-serif;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-a{color:inherit;text-decoration:none;-webkit-tap-highlight-color:transparent}
-button{font-family:inherit;cursor:pointer}
-html{scroll-behavior:smooth;font-size:16px}
-body{background:var(–obsidian);color:var(–white);font-family:var(–font-body);font-weight:400;line-height:1.6;overflow-x:hidden;cursor:crosshair}
-body::before{content:’’;position:fixed;inset:0;background-image:url(“data:image/svg+xml,%3Csvg viewBox=‘0 0 256 256’ xmlns=‘http://www.w3.org/2000/svg’%3E%3Cfilter id=‘noise’%3E%3CfeTurbulence type=‘fractalNoise’ baseFrequency=‘0.9’ numOctaves=‘4’ stitchTiles=‘stitch’/%3E%3C/filter%3E%3Crect width=‘100%25’ height=‘100%25’ filter=‘url(%23noise)’ opacity=‘0.04’/%3E%3C/svg%3E”);pointer-events:none;z-index:9999;opacity:0.35}
-::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(–obsidian)}::-webkit-scrollbar-thumb{background:var(–gold-dark)}
-::selection{background:var(–gold);color:var(–obsidian)}
+html{scroll-behavior:smooth;font-size:16px;background:#080808;color:#F5F0E8}
+body{background:#080808;background:#080808;color:#F5F0E8;color:#F5F0E8;font-family:var(--font-body);font-weight:400;line-height:1.6;overflow-x:hidden;cursor:crosshair}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:0.35}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:#080808}::-webkit-scrollbar-thumb{background:var(--gold-dark)}
+::selection{background:var(--gold);color:var(--obsidian)}
 
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1.25rem 4rem;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(to bottom,rgba(8,8,8,0.95),transparent);backdrop-filter:blur(2px);transition:background 0.4s}
 nav.scrolled{background:rgba(8,8,8,0.97);border-bottom:1px solid rgba(201,168,76,0.15)}
-.nav-logo{font-family:var(–font-display);font-size:1.5rem;letter-spacing:0.15em;color:var(–gold);text-decoration:none}
-.nav-logo span{color:var(–white)}
+.nav-logo{font-family:var(–font-display);font-size:1.5rem;letter-spacing:0.15em;color:#C9A84C;text-decoration:none}
+.nav-logo span{color:#F5F0E8}
 .nav-links{display:flex;gap:2rem;list-style:none;align-items:center}
-.nav-links a{font-family:var(–font-condensed);font-size:0.82rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(–muted);text-decoration:none;transition:color 0.2s}
-.nav-links a:hover{color:var(–gold)}
+.nav-links a{font-family:var(–font-condensed);font-size:0.82rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#888880;text-decoration:none;transition:color 0.2s}
+.nav-links a:hover{color:#C9A84C}
 .nav-cta{background:var(–gold);color:var(–obsidian)!important;padding:0.6rem 1.4rem;font-weight:700!important;letter-spacing:0.15em!important;transition:background 0.2s,transform 0.2s!important}
 .nav-cta:hover{background:var(–gold-light)!important;transform:translateY(-1px)}
 
 /* SECTION NAV PILLS */
 .section-nav{position:fixed;top:80px;left:50%;transform:translateX(-50%);z-index:990;display:flex;gap:0.4rem;background:rgba(8,8,8,0.92);border:1px solid rgba(201,168,76,0.2);border-radius:100px;padding:0.5rem 0.75rem;backdrop-filter:blur(10px);opacity:0;transition:opacity 0.4s;white-space:nowrap}
 .section-nav.visible{opacity:1}
-.snav-pill{font-family:var(–font-condensed);font-size:0.72rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(–muted);text-decoration:none;padding:0.4rem 0.9rem;border-radius:100px;transition:all 0.2s;cursor:pointer;background:transparent;border:none}
+.snav-pill{font-family:var(–font-condensed);font-size:0.72rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#888880;text-decoration:none;padding:0.4rem 0.9rem;border-radius:100px;transition:all 0.2s;cursor:pointer;background:transparent;border:none}
 .snav-pill:hover,.snav-pill.active{background:var(–gold);color:var(–obsidian)}
-.snav-pill.hl{background:rgba(201,168,76,0.15);color:var(–gold);border:1px solid rgba(201,168,76,0.3)}
+.snav-pill.hl{background:rgba(201,168,76,0.15);color:#C9A84C;border:1px solid rgba(201,168,76,0.3)}
 .snav-pill.hl:hover{background:var(–gold);color:var(–obsidian)}
 
 /* HERO */
@@ -95,20 +63,20 @@ nav.scrolled{background:rgba(8,8,8,0.97);border-bottom:1px solid rgba(201,168,76
 @keyframes stripeMove{from{opacity:0.1}to{opacity:0.45}}
 
 .hero-august-banner{display:inline-flex;align-items:center;gap:0.75rem;background:var(–gold);color:var(–obsidian);font-family:var(–font-condensed);font-size:0.8rem;font-weight:800;letter-spacing:0.3em;text-transform:uppercase;padding:0.5rem 1.5rem;margin-bottom:1.5rem;opacity:0;animation:fadeUp 0.8s 0.1s ease forwards}
-.hero-eyebrow{font-family:var(–font-condensed);font-size:0.8rem;font-weight:700;letter-spacing:0.45em;text-transform:uppercase;color:var(–gold);margin-bottom:1.5rem;opacity:0;animation:fadeUp 0.8s 0.2s ease forwards}
-.hero-title{font-family:var(–font-display);font-size:clamp(5rem,15vw,14rem);line-height:0.85;letter-spacing:0.02em;color:var(–white);position:relative;opacity:0;animation:fadeUp 0.8s 0.4s ease forwards}
-.hero-title .gold{color:var(–gold)}
+.hero-eyebrow{font-family:var(–font-condensed);font-size:0.8rem;font-weight:700;letter-spacing:0.45em;text-transform:uppercase;color:#C9A84C;margin-bottom:1.5rem;opacity:0;animation:fadeUp 0.8s 0.2s ease forwards}
+.hero-title{font-family:var(–font-display);font-size:clamp(5rem,15vw,14rem);line-height:0.85;letter-spacing:0.02em;color:#F5F0E8;position:relative;opacity:0;animation:fadeUp 0.8s 0.4s ease forwards}
+.hero-title .gold{color:#C9A84C}
 .hero-title::after{content:‘ZIM GRAND PRIX’;position:absolute;inset:0;color:transparent;-webkit-text-stroke:1px rgba(201,168,76,0.15);transform:translate(3px,3px);z-index:-1}
-.hero-sub{font-family:var(–font-condensed);font-size:clamp(1.1rem,2.5vw,1.6rem);font-weight:300;letter-spacing:0.3em;text-transform:uppercase;color:var(–muted);margin-top:1.5rem;margin-bottom:3rem;opacity:0;animation:fadeUp 0.8s 0.6s ease forwards}
-.hero-sub strong{color:var(–gold);font-weight:600}
+.hero-sub{font-family:var(–font-condensed);font-size:clamp(1.1rem,2.5vw,1.6rem);font-weight:300;letter-spacing:0.3em;text-transform:uppercase;color:#888880;margin-top:1.5rem;margin-bottom:3rem;opacity:0;animation:fadeUp 0.8s 0.6s ease forwards}
+.hero-sub strong{color:#C9A84C;font-weight:600}
 .hero-date-badge{display:inline-flex;align-items:center;gap:1.5rem;border:1px solid rgba(201,168,76,0.3);padding:1rem 2rem;margin-bottom:3rem;opacity:0;animation:fadeUp 0.8s 0.8s ease forwards}
 .hero-date-badge .divider{width:1px;height:30px;background:rgba(201,168,76,0.3)}
 .hero-date-item{text-align:center}
-.hero-date-item .label{font-family:var(–font-condensed);font-size:0.7rem;letter-spacing:0.3em;text-transform:uppercase;color:var(–gold);display:block}
-.hero-date-item .value{font-family:var(–font-condensed);font-size:1.1rem;font-weight:600;color:var(–white);display:block}
+.hero-date-item .label{font-family:var(–font-condensed);font-size:0.7rem;letter-spacing:0.3em;text-transform:uppercase;color:#C9A84C;display:block}
+.hero-date-item .value{font-family:var(–font-condensed);font-size:1.1rem;font-weight:600;color:#F5F0E8;display:block}
 .hero-ctas{display:flex;gap:1rem;align-items:center;flex-wrap:wrap;justify-content:center;opacity:0;animation:fadeUp 0.8s 1s ease forwards}
 .hero-scroll{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:0.5rem;opacity:0;animation:fadeUp 0.8s 1.4s ease forwards}
-.hero-scroll span{font-family:var(–font-condensed);font-size:0.65rem;letter-spacing:0.4em;text-transform:uppercase;color:var(–gold)}
+.hero-scroll span{font-family:var(–font-condensed);font-size:0.65rem;letter-spacing:0.4em;text-transform:uppercase;color:#C9A84C}
 .scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(–gold),transparent);animation:scrollPulse 2s ease-in-out infinite}
 @keyframes scrollPulse{0%,100%{opacity:0.3;transform:scaleY(1)}50%{opacity:1;transform:scaleY(1.1)}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
@@ -118,11 +86,11 @@ nav.scrolled{background:rgba(8,8,8,0.97);border-bottom:1px solid rgba(201,168,76
 .btn-primary::before{content:’’;position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);transition:left 0.4s}
 .btn-primary:hover::before{left:100%}
 .btn-primary:hover{background:var(–gold-light);transform:translateY(-2px)}
-.btn-secondary{font-family:var(–font-condensed);font-size:1rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;background:transparent;color:var(–white);padding:1rem 2.5rem;text-decoration:none;display:inline-block;border:1px solid rgba(245,240,232,0.3);transition:all 0.2s;cursor:pointer}
-.btn-secondary:hover{border-color:var(–gold);color:var(–gold);transform:translateY(-2px)}
+.btn-secondary{font-family:var(–font-condensed);font-size:1rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;background:transparent;color:#F5F0E8;padding:1rem 2.5rem;text-decoration:none;display:inline-block;border:1px solid rgba(245,240,232,0.3);transition:all 0.2s;cursor:pointer}
+.btn-secondary:hover{border-color:#C9A84C;color:#C9A84C;transform:translateY(-2px)}
 
 /* STATS BAR */
-.stats-bar{background:var(–gold);padding:1.2rem 4rem;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.stats-bar{background:#C9A84C;padding:1.2rem 4rem;display:flex;align-items:center;justify-content:center;overflow:hidden}
 .stat-item{display:flex;flex-direction:column;align-items:center;padding:0 3rem;border-right:1px solid rgba(8,8,8,0.2);flex:1;max-width:200px}
 .stat-item:last-child{border-right:none}
 .stat-num{font-family:var(–font-display);font-size:2rem;color:var(–obsidian);line-height:1}
@@ -132,41 +100,41 @@ nav.scrolled{background:rgba(8,8,8,0.97);border-bottom:1px solid rgba(201,168,76
 .afterparty-banner{background:linear-gradient(135deg,#0D0A02,#1A1205,#0D0A02);border-top:1px solid rgba(201,168,76,0.3);border-bottom:1px solid rgba(201,168,76,0.3);padding:2.5rem 4rem;display:flex;align-items:center;justify-content:center;gap:4rem;position:relative;overflow:hidden}
 .afterparty-banner::before{content:‘🎵’;position:absolute;font-size:8rem;opacity:0.04;left:5%;top:50%;transform:translateY(-50%)}
 .afterparty-banner::after{content:‘🎶’;position:absolute;font-size:8rem;opacity:0.04;right:5%;top:50%;transform:translateY(-50%)}
-.ap-label{font-family:var(–font-condensed);font-size:0.7rem;font-weight:700;letter-spacing:0.45em;text-transform:uppercase;color:var(–gold);margin-bottom:0.4rem}
-.ap-title{font-family:var(–font-display);font-size:clamp(2rem,4vw,3.5rem);color:var(–white);line-height:1;margin-bottom:0.5rem}
-.ap-sub{font-family:var(–font-condensed);font-size:1rem;color:var(–muted);letter-spacing:0.1em}
-.ap-sub strong{color:var(–gold)}
-.ap-pill{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.35);padding:0.6rem 1.5rem;font-family:var(–font-condensed);font-size:0.85rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(–gold);margin-top:1rem;cursor:pointer;text-decoration:none;transition:all 0.2s}
+.ap-label{font-family:var(–font-condensed);font-size:0.7rem;font-weight:700;letter-spacing:0.45em;text-transform:uppercase;color:#C9A84C;margin-bottom:0.4rem}
+.ap-title{font-family:var(–font-display);font-size:clamp(2rem,4vw,3.5rem);color:#F5F0E8;line-height:1;margin-bottom:0.5rem}
+.ap-sub{font-family:var(–font-condensed);font-size:1rem;color:#888880;letter-spacing:0.1em}
+.ap-sub strong{color:#C9A84C}
+.ap-pill{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.35);padding:0.6rem 1.5rem;font-family:var(–font-condensed);font-size:0.85rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#C9A84C;margin-top:1rem;cursor:pointer;text-decoration:none;transition:all 0.2s}
 .ap-pill:hover{background:var(–gold);color:var(–obsidian)}
 
 /* SECTIONS */
 section{padding:7rem 4rem;max-width:1400px;margin:0 auto}
 .section-full{max-width:100%;padding-left:0;padding-right:0}
-.section-eyebrow{font-family:var(–font-condensed);font-size:0.75rem;font-weight:700;letter-spacing:0.45em;text-transform:uppercase;color:var(–gold);margin-bottom:1rem;display:flex;align-items:center;gap:1rem}
+.section-eyebrow{font-family:var(–font-condensed);font-size:0.75rem;font-weight:700;letter-spacing:0.45em;text-transform:uppercase;color:#C9A84C;margin-bottom:1rem;display:flex;align-items:center;gap:1rem}
 .section-eyebrow::before{content:’’;width:30px;height:1px;background:var(–gold)}
-.section-title{font-family:var(–font-display);font-size:clamp(2.5rem,6vw,5rem);line-height:0.9;letter-spacing:0.02em;color:var(–white);margin-bottom:1.5rem}
-.section-title .gold{color:var(–gold)}
-.section-lead{font-size:1.15rem;color:var(–muted);max-width:600px;line-height:1.7}
+.section-title{font-family:var(–font-display);font-size:clamp(2.5rem,6vw,5rem);line-height:0.9;letter-spacing:0.02em;color:#F5F0E8;margin-bottom:1.5rem}
+.section-title .gold{color:#C9A84C}
+.section-lead{font-size:1.15rem;color:#888880;max-width:600px;line-height:1.7}
 
 /* FORMAT */
 .format-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:4rem;background:rgba(201,168,76,0.1)}
-.format-day{background:var(–surface);padding:3rem 2.5rem;position:relative;overflow:hidden;transition:transform 0.3s}
+.format-day{background:#141414;padding:3rem 2.5rem;position:relative;overflow:hidden;transition:transform 0.3s}
 .format-day::before{content:’’;position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(–gold-dark),var(–gold));transform:scaleX(0);transform-origin:left;transition:transform 0.4s ease}
 .format-day:hover::before{transform:scaleX(1)}
 .format-day:hover{transform:translateY(-4px)}
 .day-number{font-family:var(–font-display);font-size:6rem;line-height:1;color:rgba(201,168,76,0.08);position:absolute;top:1rem;right:1.5rem;pointer-events:none}
-.day-label{font-family:var(–font-condensed);font-size:0.75rem;font-weight:700;letter-spacing:0.35em;text-transform:uppercase;color:var(–gold);margin-bottom:0.4rem}
-.day-name{font-family:var(–font-display);font-size:2.5rem;letter-spacing:0.05em;color:var(–white);margin-bottom:2rem}
+.day-label{font-family:var(–font-condensed);font-size:0.75rem;font-weight:700;letter-spacing:0.35em;text-transform:uppercase;color:#C9A84C;margin-bottom:0.4rem}
+.day-name{font-family:var(–font-display);font-size:2.5rem;letter-spacing:0.05em;color:#F5F0E8;margin-bottom:2rem}
 .day-events{list-style:none;display:flex;flex-direction:column;gap:1.2rem}
 .day-event{display:flex;flex-direction:column;gap:0.2rem;padding-left:1rem;border-left:2px solid rgba(201,168,76,0.2);transition:border-color 0.3s}
 .format-day:hover .day-event{border-color:rgba(201,168,76,0.4)}
-.event-time{font-family:var(–font-condensed);font-size:0.7rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(–gold)}
-.event-name{font-family:var(–font-condensed);font-size:1rem;font-weight:600;color:var(–white)}
-.event-desc{font-size:0.85rem;color:var(–muted);line-height:1.4}
+.event-time{font-family:var(–font-condensed);font-size:0.7rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#C9A84C}
+.event-name{font-family:var(–font-condensed);font-size:1rem;font-weight:600;color:#F5F0E8}
+.event-desc{font-size:0.85rem;color:#888880;line-height:1.4}
 
 /* TICKETS */
 .tickets-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:4rem;background:rgba(201,168,76,0.06)}
-.ticket-card{background:var(–surface);padding:2.5rem 2rem;display:flex;flex-direction:column;position:relative;overflow:hidden;transition:transform 0.3s;cursor:pointer}
+.ticket-card{background:#141414;padding:2.5rem 2rem;display:flex;flex-direction:column;position:relative;overflow:hidden;transition:transform 0.3s;cursor:pointer}
 .ticket-card::after{content:’’;position:absolute;bottom:0;left:0;right:0;height:0;background:linear-gradient(to top,rgba(201,168,76,0.06),transparent);transition:height 0.4s}
 .ticket-card:hover{transform:translateY(-6px)}
 .ticket-card:hover::after{height:100%}
@@ -178,141 +146,141 @@ section{padding:7rem 4rem;max-width:1400px;margin:0 auto}
 .scarcity-bar{background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);padding:0.6rem 0.75rem;margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem}
 .scarcity-dot{width:6px;height:6px;background:#E8B84B;border-radius:50%;animation:pulse 1.5s ease-in-out infinite;flex-shrink:0}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
-.scarcity-text{font-family:var(–font-condensed);font-size:0.72rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(–gold)}
-.ticket-tier{font-family:var(–font-condensed);font-size:0.7rem;font-weight:700;letter-spacing:0.35em;text-transform:uppercase;color:var(–gold);margin-bottom:0.5rem}
-.ticket-name{font-family:var(–font-display);font-size:2rem;letter-spacing:0.05em;color:var(–white);margin-bottom:1.5rem;line-height:1}
-.ticket-price{font-family:var(–font-display);font-size:3.5rem;color:var(–gold);line-height:1;margin-bottom:0.5rem}
+.scarcity-text{font-family:var(–font-condensed);font-size:0.72rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#C9A84C}
+.ticket-tier{font-family:var(–font-condensed);font-size:0.7rem;font-weight:700;letter-spacing:0.35em;text-transform:uppercase;color:#C9A84C;margin-bottom:0.5rem}
+.ticket-name{font-family:var(–font-display);font-size:2rem;letter-spacing:0.05em;color:#F5F0E8;margin-bottom:1.5rem;line-height:1}
+.ticket-price{font-family:var(–font-display);font-size:3.5rem;color:#C9A84C;line-height:1;margin-bottom:0.5rem}
 .ticket-price sup{font-size:1.5rem;vertical-align:top;margin-top:0.5rem}
-.ticket-price-note{font-family:var(–font-condensed);font-size:0.75rem;color:var(–muted);letter-spacing:0.1em;margin-bottom:1.5rem}
+.ticket-price-note{font-family:var(–font-condensed);font-size:0.75rem;color:#888880;letter-spacing:0.1em;margin-bottom:1.5rem}
 .ticket-value-anchor{font-family:var(–font-condensed);font-size:0.8rem;color:rgba(201,168,76,0.4);text-decoration:line-through;margin-bottom:0.3rem}
 .ticket-includes{list-style:none;display:flex;flex-direction:column;gap:0.75rem;flex:1;margin-bottom:2rem}
-.ticket-includes li{font-size:0.9rem;color:var(–muted);display:flex;align-items:flex-start;gap:0.6rem;line-height:1.3}
-.ticket-includes li::before{content:‘✓’;color:var(–gold);font-weight:700;flex-shrink:0;margin-top:0.05rem}
+.ticket-includes li{font-size:0.9rem;color:#888880;display:flex;align-items:flex-start;gap:0.6rem;line-height:1.3}
+.ticket-includes li::before{content:‘✓’;color:#C9A84C;font-weight:700;flex-shrink:0;margin-top:0.05rem}
 .ticket-includes li.no{opacity:0.4;text-decoration:line-through}
-.ticket-includes li.no::before{content:‘✗’;color:var(–muted)}
+.ticket-includes li.no::before{content:‘✗’;color:#888880}
 .afterparty-addon{background:rgba(201,168,76,0.06);border:1px dashed rgba(201,168,76,0.3);padding:0.9rem 1rem;margin-bottom:1.2rem}
-.afterparty-addon .addon-label{font-family:var(–font-condensed);font-size:0.7rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(–gold);margin-bottom:0.3rem}
-.afterparty-addon .addon-text{font-size:0.82rem;color:var(–muted);line-height:1.4}
+.afterparty-addon .addon-label{font-family:var(–font-condensed);font-size:0.7rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#C9A84C;margin-bottom:0.3rem}
+.afterparty-addon .addon-text{font-size:0.82rem;color:#888880;line-height:1.4}
 .afterparty-addon .addon-price{font-family:var(–font-display);font-size:1.4rem;color:var(–gold-light);margin-top:0.3rem}
 
 /* DRIVERS */
 .driver-hero{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start}
 .driver-requirements{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2.5rem}
-.req-card{background:var(–surface);padding:1.5rem;border-left:3px solid var(–gold-dark);transition:border-color 0.3s}
-.req-card:hover{border-color:var(–gold)}
+.req-card{background:#141414;padding:1.5rem;border-left:3px solid var(–gold-dark);transition:border-color 0.3s}
+.req-card:hover{border-color:#C9A84C}
 .req-icon{font-size:1.5rem;margin-bottom:0.5rem;display:block}
-.req-title{font-family:var(–font-condensed);font-size:0.85rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(–gold);margin-bottom:0.3rem}
-.req-text{font-size:0.85rem;color:var(–muted);line-height:1.5}
-.pricing-breakdown{background:var(–surface);padding:2.5rem;border:1px solid rgba(201,168,76,0.15)}
+.req-title{font-family:var(–font-condensed);font-size:0.85rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#C9A84C;margin-bottom:0.3rem}
+.req-text{font-size:0.85rem;color:#888880;line-height:1.5}
+.pricing-breakdown{background:#141414;padding:2.5rem;border:1px solid rgba(201,168,76,0.15)}
 .pricing-row{display:flex;justify-content:space-between;align-items:center;padding:1.2rem 0;border-bottom:1px solid rgba(255,255,255,0.05)}
 .pricing-row:last-of-type{border-bottom:none}
 .pricing-label{font-family:var(–font-condensed);font-size:0.95rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase}
-.pricing-amount{font-family:var(–font-display);font-size:1.8rem;color:var(–gold)}
+.pricing-amount{font-family:var(–font-display);font-size:1.8rem;color:#C9A84C}
 .pricing-row.highlight{background:rgba(201,168,76,0.05);padding:1.2rem 1rem;margin:0 -1rem}
 .prize-pool{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2rem}
-.prize-item{background:var(–obsidian-light);padding:1.5rem;text-align:center;border-top:3px solid transparent}
-.prize-item:nth-child(1){border-color:var(–gold)}
+.prize-item{background:#1A1A1A;padding:1.5rem;text-align:center;border-top:3px solid transparent}
+.prize-item:nth-child(1){border-color:#C9A84C}
 .prize-item:nth-child(2){border-color:#C0C0C0}
 .prize-item:nth-child(3){border-color:#CD7F32}
 .prize-position{font-family:var(–font-display);font-size:1.5rem;letter-spacing:0.05em}
-.prize-amount{font-family:var(–font-display);font-size:2rem;color:var(–gold)}
-.prize-extras{font-size:0.75rem;color:var(–muted);margin-top:0.3rem;line-height:1.4}
+.prize-amount{font-family:var(–font-display);font-size:2rem;color:#C9A84C}
+.prize-extras{font-size:0.75rem;color:#888880;margin-top:0.3rem;line-height:1.4}
 
 /* CORPORATE */
 .corporate-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:6rem;align-items:center;margin-top:4rem}
-.corporate-visual{background:var(–surface);padding:3rem;border:1px solid rgba(201,168,76,0.2);position:relative}
+.corporate-visual{background:#141414;padding:3rem;border:1px solid rgba(201,168,76,0.2);position:relative}
 .corporate-visual::before{content:‘CORPORATE TEAM’;position:absolute;top:1.5rem;right:1.5rem;font-family:var(–font-display);font-size:4rem;color:rgba(201,168,76,0.04);line-height:1;text-align:right}
-.team-price{font-family:var(–font-display);font-size:6rem;color:var(–gold);line-height:1;margin-bottom:0.5rem}
-.team-price-label{font-family:var(–font-condensed);font-size:0.8rem;letter-spacing:0.3em;text-transform:uppercase;color:var(–muted);margin-bottom:2rem}
+.team-price{font-family:var(–font-display);font-size:6rem;color:#C9A84C;line-height:1;margin-bottom:0.5rem}
+.team-price-label{font-family:var(–font-condensed);font-size:0.8rem;letter-spacing:0.3em;text-transform:uppercase;color:#888880;margin-bottom:2rem}
 .team-includes{list-style:none;display:flex;flex-direction:column;gap:1rem}
-.team-includes li{display:flex;align-items:center;gap:1rem;font-family:var(–font-condensed);font-size:1.05rem;font-weight:600;letter-spacing:0.05em;color:var(–white)}
+.team-includes li{display:flex;align-items:center;gap:1rem;font-family:var(–font-condensed);font-size:1.05rem;font-weight:600;letter-spacing:0.05em;color:#F5F0E8}
 .team-includes li::before{content:’’;width:8px;height:8px;background:var(–gold);flex-shrink:0;transform:rotate(45deg)}
 
 /* FORMS */
 #waitlist{position:relative;overflow:hidden}
 .form-container{display:grid;grid-template-columns:1fr 1fr;gap:4rem;margin-top:4rem}
 .form-tabs{display:flex;gap:0;margin-bottom:2rem;border:1px solid rgba(201,168,76,0.2)}
-.form-tab{flex:1;font-family:var(–font-condensed);font-size:0.85rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;padding:0.9rem;text-align:center;cursor:pointer;transition:all 0.2s;background:transparent;color:var(–muted);border:none;border-right:1px solid rgba(201,168,76,0.2)}
+.form-tab{flex:1;font-family:var(–font-condensed);font-size:0.85rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;padding:0.9rem;text-align:center;cursor:pointer;transition:all 0.2s;background:transparent;color:#888880;border:none;border-right:1px solid rgba(201,168,76,0.2)}
 .form-tab:last-child{border-right:none}
 .form-tab.active{background:var(–gold);color:var(–obsidian)}
-.form-tab:hover:not(.active){color:var(–gold)}
-.reg-form{background:var(–surface);padding:2.5rem;border:1px solid rgba(201,168,76,0.1)}
+.form-tab:hover:not(.active){color:#C9A84C}
+.reg-form{background:#141414;padding:2.5rem;border:1px solid rgba(201,168,76,0.1)}
 .form-group{margin-bottom:1.5rem}
-.form-group label{display:block;font-family:var(–font-condensed);font-size:0.75rem;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:var(–gold);margin-bottom:0.5rem}
-.form-group label .opt{color:var(–muted);font-weight:400;letter-spacing:0.1em;text-transform:none;font-size:0.7rem}
-.form-group input,.form-group select,.form-group textarea{width:100%;background:var(–obsidian-light);border:1px solid rgba(201,168,76,0.15);color:var(–white);font-family:var(–font-body);font-size:0.95rem;padding:0.85rem 1rem;outline:none;transition:border-color 0.2s;cursor:crosshair}
-.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(–gold)}
-.form-group select option{background:var(–obsidian-light)}
+.form-group label{display:block;font-family:var(–font-condensed);font-size:0.75rem;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:#C9A84C;margin-bottom:0.5rem}
+.form-group label .opt{color:#888880;font-weight:400;letter-spacing:0.1em;text-transform:none;font-size:0.7rem}
+.form-group input,.form-group select,.form-group textarea{width:100%;background:#1A1A1A;border:1px solid rgba(201,168,76,0.15);color:#F5F0E8;font-family:var(–font-body);font-size:0.95rem;padding:0.85rem 1rem;outline:none;transition:border-color 0.2s;cursor:crosshair}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:#C9A84C}
+.form-group select option{background:#1A1A1A}
 .form-group textarea{resize:vertical;min-height:80px}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-.form-note{font-size:0.8rem;color:var(–muted);margin-top:1rem;line-height:1.5;text-align:center}
+.form-note{font-size:0.8rem;color:#888880;margin-top:1rem;line-height:1.5;text-align:center}
 .field-error{border-color:#E74C3C !important}
 .error-msg{font-size:0.75rem;color:#E74C3C;margin-top:0.3rem}
 
 /* ATTENDEE FIELDS */
 .attendee-fields{display:flex;flex-direction:column;gap:0.75rem;margin-top:0.75rem}
 .attendee-row{display:flex;gap:0.5rem;align-items:center}
-.attendee-row input{flex:1;background:var(–obsidian-light);border:1px solid rgba(201,168,76,0.15);color:var(–white);font-family:var(–font-body);font-size:0.9rem;padding:0.7rem 0.85rem;outline:none;transition:border-color 0.2s;cursor:crosshair}
-.attendee-row input:focus{border-color:var(–gold)}
-.attendee-num{font-family:var(–font-condensed);font-size:0.75rem;font-weight:700;color:var(–gold);width:24px;flex-shrink:0}
+.attendee-row input{flex:1;background:#1A1A1A;border:1px solid rgba(201,168,76,0.15);color:#F5F0E8;font-family:var(–font-body);font-size:0.9rem;padding:0.7rem 0.85rem;outline:none;transition:border-color 0.2s;cursor:crosshair}
+.attendee-row input:focus{border-color:#C9A84C}
+.attendee-num{font-family:var(–font-condensed);font-size:0.75rem;font-weight:700;color:#C9A84C;width:24px;flex-shrink:0}
 
 /* CONFIRMATION CARD */
 .confirmation-card{display:none;background:linear-gradient(145deg,#0D0A02,#141410,#0D0A02);border:1px solid var(–gold);padding:3rem;text-align:center;position:relative;overflow:hidden}
 .confirmation-card.visible{display:block}
 .confirmation-card::before{content:‘ZGP’;position:absolute;font-family:var(–font-display);font-size:12rem;color:rgba(201,168,76,0.03);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;white-space:nowrap}
 .conf-check{font-size:3rem;margin-bottom:1rem;display:block}
-.conf-title{font-family:var(–font-display);font-size:2.5rem;color:var(–gold);letter-spacing:0.1em;margin-bottom:0.5rem}
-.conf-name{font-family:var(–font-condensed);font-size:1.3rem;font-weight:600;color:var(–white);margin-bottom:0.5rem}
+.conf-title{font-family:var(–font-display);font-size:2.5rem;color:#C9A84C;letter-spacing:0.1em;margin-bottom:0.5rem}
+.conf-name{font-family:var(–font-condensed);font-size:1.3rem;font-weight:600;color:#F5F0E8;margin-bottom:0.5rem}
 .conf-divider{width:60px;height:1px;background:var(–gold);margin:1.5rem auto}
 .conf-refs{display:flex;flex-direction:column;gap:0.5rem;margin-bottom:1.5rem}
 .conf-ref-item{display:flex;align-items:center;justify-content:center;gap:1rem;background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.2);padding:0.75rem 1.5rem}
-.conf-ref-id{font-family:var(–font-display);font-size:1.5rem;color:var(–gold);letter-spacing:0.1em}
-.conf-ref-name{font-family:var(–font-condensed);font-size:0.85rem;color:var(–muted)}
-.conf-message{font-size:0.9rem;color:var(–muted);line-height:1.8;max-width:500px;margin:0 auto}
-.conf-message strong{color:var(–white)}
-.conf-message .gold{color:var(–gold);font-weight:600}
-.conf-footer{margin-top:2rem;padding-top:1.5rem;border-top:1px solid rgba(201,168,76,0.15);font-family:var(–font-condensed);font-size:0.8rem;letter-spacing:0.2em;text-transform:uppercase;color:var(–gold)}
+.conf-ref-id{font-family:var(–font-display);font-size:1.5rem;color:#C9A84C;letter-spacing:0.1em}
+.conf-ref-name{font-family:var(–font-condensed);font-size:0.85rem;color:#888880}
+.conf-message{font-size:0.9rem;color:#888880;line-height:1.8;max-width:500px;margin:0 auto}
+.conf-message strong{color:#F5F0E8}
+.conf-message .gold{color:#C9A84C;font-weight:600}
+.conf-footer{margin-top:2rem;padding-top:1.5rem;border-top:1px solid rgba(201,168,76,0.15);font-family:var(–font-condensed);font-size:0.8rem;letter-spacing:0.2em;text-transform:uppercase;color:#C9A84C}
 
 /* FAQ */
 .faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:4rem;background:rgba(201,168,76,0.06)}
-.faq-item{background:var(–surface);border:none;cursor:pointer;text-align:left;width:100%;padding:2rem;position:relative;transition:background 0.2s}
-.faq-item:hover,.faq-item.open{background:var(–obsidian-light)}
-.faq-question{font-family:var(–font-condensed);font-size:1.05rem;font-weight:700;letter-spacing:0.05em;color:var(–white);display:flex;justify-content:space-between;align-items:center;gap:1rem}
-.faq-question .icon{color:var(–gold);font-size:1.2rem;transition:transform 0.3s;flex-shrink:0}
+.faq-item{background:#141414;border:none;cursor:pointer;text-align:left;width:100%;padding:2rem;position:relative;transition:background 0.2s}
+.faq-item:hover,.faq-item.open{background:#1A1A1A}
+.faq-question{font-family:var(–font-condensed);font-size:1.05rem;font-weight:700;letter-spacing:0.05em;color:#F5F0E8;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.faq-question .icon{color:#C9A84C;font-size:1.2rem;transition:transform 0.3s;flex-shrink:0}
 .faq-item.open .faq-question .icon{transform:rotate(45deg)}
-.faq-answer{font-size:0.9rem;color:var(–muted);line-height:1.7;max-height:0;overflow:hidden;transition:max-height 0.4s ease,padding 0.3s}
+.faq-answer{font-size:0.9rem;color:#888880;line-height:1.7;max-height:0;overflow:hidden;transition:max-height 0.4s ease,padding 0.3s}
 .faq-item.open .faq-answer{max-height:300px;padding-top:1rem}
 
 /* CONTACT */
 .contact-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:6rem;align-items:start;margin-top:4rem}
 .contact-info{display:flex;flex-direction:column;gap:2.5rem}
-.contact-block-title{font-family:var(–font-condensed);font-size:0.75rem;font-weight:700;letter-spacing:0.35em;text-transform:uppercase;color:var(–gold);margin-bottom:0.5rem}
-.contact-block-text{font-size:1rem;color:var(–white)}
-.contact-block-sub{font-size:0.85rem;color:var(–muted);margin-top:0.25rem}
+.contact-block-title{font-family:var(–font-condensed);font-size:0.75rem;font-weight:700;letter-spacing:0.35em;text-transform:uppercase;color:#C9A84C;margin-bottom:0.5rem}
+.contact-block-text{font-size:1rem;color:#F5F0E8}
+.contact-block-sub{font-size:0.85rem;color:#888880;margin-top:0.25rem}
 
 /* FOOTER */
-footer{background:var(–obsidian);border-top:1px solid rgba(201,168,76,0.1);padding:4rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap}
-.footer-logo{font-family:var(–font-display);font-size:2rem;letter-spacing:0.15em;color:var(–gold)}
+footer{background:#080808;border-top:1px solid rgba(201,168,76,0.1);padding:4rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap}
+.footer-logo{font-family:var(–font-display);font-size:2rem;letter-spacing:0.15em;color:#C9A84C}
 .footer-logo span{color:rgba(245,240,232,0.4)}
-.footer-text{font-family:var(–font-condensed);font-size:0.8rem;letter-spacing:0.15em;color:var(–muted);text-align:center}
+.footer-text{font-family:var(–font-condensed);font-size:0.8rem;letter-spacing:0.15em;color:#888880;text-align:center}
 .footer-links{display:flex;gap:2rem;list-style:none}
-.footer-links a{font-family:var(–font-condensed);font-size:0.8rem;letter-spacing:0.15em;text-transform:uppercase;color:var(–muted);text-decoration:none;transition:color 0.2s}
-.footer-links a:hover{color:var(–gold)}
+.footer-links a{font-family:var(–font-condensed);font-size:0.8rem;letter-spacing:0.15em;text-transform:uppercase;color:#888880;text-decoration:none;transition:color 0.2s}
+.footer-links a:hover{color:#C9A84C}
 .gold-divider{width:100%;height:1px;background:linear-gradient(90deg,transparent,var(–gold-dark),var(–gold),var(–gold-dark),transparent);opacity:0.4}
 
 /* URGENCY BAR */
 .urgency-bar{position:fixed;bottom:0;left:0;right:0;z-index:900;text-align:center;padding:0.75rem 2rem;display:flex;align-items:center;justify-content:center;gap:2rem;transform:translateY(100%);transition:transform 0.4s ease,background 0.6s ease}
 .urgency-bar.visible{transform:translateY(0)}
-.urgency-bar.mode-driver{background:var(–gold);color:var(–obsidian)}
-.urgency-bar.mode-ticket{background:linear-gradient(90deg,#1A1205,#252010,#1A1205);border-top:1px solid var(–gold);color:var(–white)}
+.urgency-bar.mode-driver{background:#C9A84C;color:var(–obsidian)}
+.urgency-bar.mode-ticket{background:linear-gradient(90deg,#1A1205,#252010,#1A1205);border-top:1px solid var(–gold);color:#F5F0E8}
 .urgency-text{font-family:var(–font-condensed);font-size:0.9rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase}
-.urgency-bar.mode-ticket .urgency-text{color:var(–gold)}
+.urgency-bar.mode-ticket .urgency-text{color:#C9A84C}
 .urgency-bar .btn-primary{padding:0.5rem 1.5rem;font-size:0.85rem}
-.urgency-bar.mode-driver .btn-primary{background:var(–obsidian);color:var(–gold)}
+.urgency-bar.mode-driver .btn-primary{background:#080808;color:#C9A84C}
 .urgency-bar.mode-ticket .btn-primary{background:var(–gold);color:var(–obsidian)}
 .urgency-close{position:absolute;right:1.5rem;background:none;border:none;cursor:pointer;font-size:1.2rem;opacity:0.6}
 .urgency-bar.mode-driver .urgency-close{color:var(–obsidian)}
-.urgency-bar.mode-ticket .urgency-close{color:var(–white)}
+.urgency-bar.mode-ticket .urgency-close{color:#F5F0E8}
 
 /* SPINNER */
 .spinner{display:inline-block;width:16px;height:16px;border:2px solid rgba(8,8,8,0.3);border-top-color:var(–obsidian);border-radius:50%;animation:spin 0.7s linear infinite;vertical-align:middle;margin-right:0.5rem}
@@ -397,11 +365,11 @@ gap:2rem;
 font-family:var(–font-display);
 font-size:2.5rem;
 letter-spacing:0.15em;
-color:var(–muted);
+color:#888880;
 text-decoration:none;
 transition:color 0.2s;
 }
-.mobile-nav-overlay a:hover { color:var(–gold); }
+.mobile-nav-overlay a:hover { color:#C9A84C; }
 .mobile-nav-overlay .mobile-cta {
 background:var(–gold);
 color:var(–obsidian);
@@ -517,9 +485,26 @@ nav { padding:0.75rem 1rem; }
 }
 
 </style>
-<noscript>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
-</noscript>
+
+<style>
+/* FORCE DARK THEME - override any browser defaults */
+html, body { background-color: #080808 !important; color: #F5F0E8 !important; }
+.format-day, .ticket-card, .reg-form, .req-card, .pricing-breakdown, 
+.corporate-visual, .faq-item, .confirmation-card { background-color: #141414 !important; }
+.prize-item { background-color: #1A1A1A !important; }
+.faq-item:hover, .faq-item.open { background-color: #1A1A1A !important; }
+.stats-bar { background-color: #C9A84C !important; }
+.ticket-card.hero-star { background: linear-gradient(145deg,#1A1508,#141410,#1A1508) !important; border: 2px solid #C9A84C !important; }
+footer { background-color: #080808 !important; }
+.form-group input, .form-group select, .form-group textarea { 
+  background-color: #1A1A1A !important; 
+  color: #F5F0E8 !important; 
+  border-color: rgba(201,168,76,0.15) !important;
+}
+.attendee-row input { background-color: #1A1A1A !important; color: #F5F0E8 !important; }
+section { background-color: transparent !important; }
+</style>
+
 </head>
 <body>
 
@@ -650,11 +635,11 @@ nav { padding:0.75rem 1rem; }
     <a href="#tickets" class="ap-pill">🎟 Get After Party Access</a>
   </div>
   <div>
-    <div style="font-family:var(--font-condensed);font-size:0.7rem;font-weight:700;letter-spacing:0.35em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;">How to Attend</div>
+    <div style="font-family:var(--font-condensed);font-size:0.7rem;font-weight:700;letter-spacing:0.35em;text-transform:uppercase;color:#C9A84C;margin-bottom:1rem;">How to Attend</div>
     <div style="display:flex;flex-direction:column;gap:0.75rem;">
-      <div style="display:flex;align-items:center;gap:1rem;background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.15);padding:0.9rem 1.2rem;"><span style="font-family:var(--font-display);font-size:1.5rem;color:var(--gold);">HERO</span><div style="font-family:var(--font-condensed);font-size:0.82rem;color:var(--muted);">Hero Pass ($60) — included</div></div>
-      <div style="display:flex;align-items:center;gap:1rem;background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.15);padding:0.9rem 1.2rem;"><span style="font-family:var(--font-display);font-size:1.5rem;color:var(--gold);">VIP</span><div style="font-family:var(--font-condensed);font-size:0.82rem;color:var(--muted);">VIP Pass ($120) — included</div></div>
-      <div style="display:flex;align-items:center;gap:1rem;background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.15);padding:0.9rem 1.2rem;"><span style="font-family:var(--font-display);font-size:1.2rem;color:var(--gold);">+$20</span><div style="font-family:var(--font-condensed);font-size:0.82rem;color:var(--muted);">Add-on with Single Day ($25) ticket</div></div>
+      <div style="display:flex;align-items:center;gap:1rem;background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.15);padding:0.9rem 1.2rem;"><span style="font-family:var(--font-display);font-size:1.5rem;color:#C9A84C;">HERO</span><div style="font-family:var(--font-condensed);font-size:0.82rem;color:#888880;">Hero Pass ($60) — included</div></div>
+      <div style="display:flex;align-items:center;gap:1rem;background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.15);padding:0.9rem 1.2rem;"><span style="font-family:var(--font-display);font-size:1.5rem;color:#C9A84C;">VIP</span><div style="font-family:var(--font-condensed);font-size:0.82rem;color:#888880;">VIP Pass ($120) — included</div></div>
+      <div style="display:flex;align-items:center;gap:1rem;background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.15);padding:0.9rem 1.2rem;"><span style="font-family:var(--font-display);font-size:1.2rem;color:#C9A84C;">+$20</span><div style="font-family:var(--font-condensed);font-size:0.82rem;color:#888880;">Add-on with Single Day ($25) ticket</div></div>
     </div>
   </div>
 </div>
@@ -663,7 +648,7 @@ nav { padding:0.75rem 1rem; }
 
 <!-- TICKETS -->
 
-<div id="tickets" style="background:var(--obsidian-mid);max-width:100%;">
+<div id="tickets" style="background:#111111;max-width:100%;">
   <section style="max-width:1400px;margin:0 auto;padding:7rem 4rem;">
     <div class="section-eyebrow reveal">Spectator Tickets · August 2026</div>
     <h2 class="section-title reveal reveal-delay-1">CHOOSE YOUR<br><span class="gold">EXPERIENCE.</span></h2>
@@ -689,7 +674,7 @@ nav { padding:0.75rem 1rem; }
     <div class="afterparty-addon">
       <div class="addon-label">🎵 Add After Party</div>
       <div class="addon-text">Stay for live music from Zimbabwe's top artists Sunday night.</div>
-      <div class="addon-price">+$20 <span style="font-size:0.8rem;color:var(--muted);font-family:var(--font-body);font-style:italic;">add-on</span></div>
+      <div class="addon-price">+$20 <span style="font-size:0.8rem;color:#888880;font-family:var(--font-body);font-style:italic;">add-on</span></div>
     </div>
     <button class="btn-primary" style="width:100%;" onclick="event.stopPropagation();scrollToForm('spectator','SINGLE DAY — $25')">Join Waitlist — $25</button>
   </div>
@@ -701,18 +686,18 @@ nav { padding:0.75rem 1rem; }
     <div class="ticket-name">HERO PASS</div>
     <div class="ticket-value-anchor">Worth $100+ individually</div>
     <div class="ticket-price"><sup>$</sup>60</div>
-    <div class="ticket-price-note" style="color:var(--gold);">Everything. All 3 days. No compromises.</div>
+    <div class="ticket-price-note" style="color:#C9A84C;">Everything. All 3 days. No compromises.</div>
     <div class="scarcity-bar"><div class="scarcity-dot"></div><div class="scarcity-text">Limited numbered passes — securing fast</div></div>
-    <div style="font-family:var(--font-condensed);font-size:0.75rem;color:var(--muted);font-style:italic;margin-bottom:1rem;line-height:1.4;"><strong style="color:var(--gold-light);">"The only pass where you won't spend the weekend wishing you'd upgraded."</strong></div>
+    <div style="font-family:var(--font-condensed);font-size:0.75rem;color:#888880;font-style:italic;margin-bottom:1rem;line-height:1.4;"><strong style="color:var(--gold-light);">"The only pass where you won't spend the weekend wishing you'd upgraded."</strong></div>
     <ul class="ticket-includes">
-      <li><strong style="color:var(--white);">All 3 days</strong> — Friday through Sunday</li>
-      <li><strong style="color:var(--white);">Paddock access</strong> — trackside, close to the action</li>
+      <li><strong style="color:#F5F0E8;">All 3 days</strong> — Friday through Sunday</li>
+      <li><strong style="color:#F5F0E8;">Paddock access</strong> — trackside, close to the action</li>
       <li>Official event programme</li>
       <li>Exclusive photo opportunity</li>
-      <li><strong style="color:var(--white);">Limited edition ZGP wristband</strong> (numbered)</li>
-      <li><strong style="color:var(--white);">🎵 After party included</strong> — live music, Sunday night</li>
+      <li><strong style="color:#F5F0E8;">Limited edition ZGP wristband</strong> (numbered)</li>
+      <li><strong style="color:#F5F0E8;">🎵 After party included</strong> — live music, Sunday night</li>
     </ul>
-    <div style="background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.3);padding:0.8rem 1rem;margin-bottom:1.2rem;font-family:var(--font-condensed);font-size:0.82rem;color:var(--muted);line-height:1.5;">💡 <strong style="color:var(--gold);">The maths:</strong> Single Day ($25) + After Party ($20) = $45 for <em>one</em> day. Hero Pass = all 3 days + after party + paddock + wristband + programme for <strong style="color:var(--white);">$60</strong>.</div>
+    <div style="background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.3);padding:0.8rem 1rem;margin-bottom:1.2rem;font-family:var(--font-condensed);font-size:0.82rem;color:#888880;line-height:1.5;">💡 <strong style="color:#C9A84C;">The maths:</strong> Single Day ($25) + After Party ($20) = $45 for <em>one</em> day. Hero Pass = all 3 days + after party + paddock + wristband + programme for <strong style="color:#F5F0E8;">$60</strong>.</div>
     <button class="btn-primary" style="width:100%;font-size:1.05rem;padding:1.1rem;" onclick="event.stopPropagation();scrollToForm('spectator','HERO PASS — $60')">✦ Claim Your Hero Pass — $60</button>
   </div>
 
@@ -768,7 +753,7 @@ nav { padding:0.75rem 1rem; }
   <p class="section-lead reveal reveal-delay-2">We provide everything you need to get on track. All you bring is the hunger to win.</p>
   <div class="driver-hero" style="margin-top:4rem;">
     <div>
-      <div style="font-family:var(--font-condensed);font-size:0.8rem;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;">What's Included in Your Entry</div>
+      <div style="font-family:var(--font-condensed);font-size:0.8rem;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:#C9A84C;margin-bottom:1rem;">What's Included in Your Entry</div>
       <div class="driver-requirements">
         <div class="req-card reveal"><span class="req-icon">🏎️</span><div class="req-title">Professional Kart</div><div class="req-text">Competition-grade kart provided. All identical — your skill determines who wins.</div></div>
         <div class="req-card reveal reveal-delay-1"><span class="req-icon">🪖</span><div class="req-title">Full Safety Gear</div><div class="req-text">Racing helmet, neck brace, gloves, and race suit. Certified and fitted before track.</div></div>
@@ -778,23 +763,23 @@ nav { padding:0.75rem 1rem; }
         <div class="req-card reveal reveal-delay-2"><span class="req-icon">🎟️</span><div class="req-title">Top 3 Perks</div><div class="req-text">Podium finishers receive prize money plus 2 event tickets for family members.</div></div>
       </div>
       <div style="margin-top:2rem;padding:1.5rem;background:rgba(201,168,76,0.06);border-left:3px solid var(--gold);">
-        <div style="font-family:var(--font-condensed);font-size:0.8rem;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem;">Who Can Enter?</div>
-        <div style="font-size:0.9rem;color:var(--muted);line-height:1.7;">Open to <strong style="color:var(--white);">anyone 16 years and older</strong>. No racing licence required. No prior experience required.</div>
+        <div style="font-family:var(--font-condensed);font-size:0.8rem;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:#C9A84C;margin-bottom:0.5rem;">Who Can Enter?</div>
+        <div style="font-size:0.9rem;color:#888880;line-height:1.7;">Open to <strong style="color:#F5F0E8;">anyone 16 years and older</strong>. No racing licence required. No prior experience required.</div>
       </div>
     </div>
     <div>
       <div class="pricing-breakdown reveal">
-        <div style="font-family:var(--font-condensed);font-size:0.8rem;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;">Driver Entry Fees</div>
+        <div style="font-family:var(--font-condensed);font-size:0.8rem;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:#C9A84C;margin-bottom:1.5rem;">Driver Entry Fees</div>
         <div class="pricing-row highlight">
-          <div><div class="pricing-label" style="color:var(--gold);">🔥 Early Bird Entry</div><div style="font-size:0.8rem;color:var(--muted);margin-top:0.2rem;">Limited spots · Closes early</div></div>
+          <div><div class="pricing-label" style="color:#C9A84C;">🔥 Early Bird Entry</div><div style="font-size:0.8rem;color:#888880;margin-top:0.2rem;">Limited spots · Closes early</div></div>
           <div class="pricing-amount">$150</div>
         </div>
         <div class="pricing-row">
-          <div><div class="pricing-label">Standard Entry</div><div style="font-size:0.8rem;color:var(--muted);margin-top:0.2rem;">After early bird closes</div></div>
-          <div class="pricing-amount" style="color:var(--muted);">$300</div>
+          <div><div class="pricing-label">Standard Entry</div><div style="font-size:0.8rem;color:#888880;margin-top:0.2rem;">After early bird closes</div></div>
+          <div class="pricing-amount" style="color:#888880;">$300</div>
         </div>
         <div style="margin-top:2rem;border-top:1px solid rgba(201,168,76,0.1);padding-top:2rem;">
-          <div style="font-family:var(--font-condensed);font-size:0.8rem;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;">Prize Pool</div>
+          <div style="font-family:var(--font-condensed);font-size:0.8rem;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:#C9A84C;margin-bottom:1rem;">Prize Pool</div>
           <div class="prize-pool">
             <div class="prize-item"><div class="prize-position">🥇 1st</div><div class="prize-amount">$3,000</div><div class="prize-extras">+ Tickets for you & 2 family</div></div>
             <div class="prize-item"><div class="prize-position">🥈 2nd</div><div class="prize-amount">$500</div><div class="prize-extras">+ Tickets for you & 2 family</div></div>
@@ -814,7 +799,7 @@ nav { padding:0.75rem 1rem; }
 
 <!-- CORPORATE -->
 
-<div id="corporate" style="background:var(--obsidian-mid);max-width:100%;">
+<div id="corporate" style="background:#111111;max-width:100%;">
   <section style="max-width:1400px;margin:0 auto;padding:7rem 4rem;">
     <div class="section-eyebrow reveal">Corporate Teams · August 2026</div>
     <h2 class="section-title reveal reveal-delay-1">PUT YOUR BRAND<br><span class="gold">ON THE TRACK.</span></h2>
@@ -834,19 +819,19 @@ nav { padding:0.75rem 1rem; }
           <li>Full weekend access for team</li>
         </ul>
         <div style="margin-top:2rem;padding:1.25rem;background:rgba(8,8,8,0.5);border:1px solid rgba(201,168,76,0.15);">
-          <div style="font-family:var(--font-condensed);font-size:0.75rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:0.3rem;">What You Win</div>
-          <div style="font-family:var(--font-display);font-size:1.5rem;color:var(--white);">Brand of the Year Trophy + Full Event Coverage</div>
+          <div style="font-family:var(--font-condensed);font-size:0.75rem;letter-spacing:0.25em;text-transform:uppercase;color:#C9A84C;margin-bottom:0.3rem;">What You Win</div>
+          <div style="font-family:var(--font-display);font-size:1.5rem;color:#F5F0E8;">Brand of the Year Trophy + Full Event Coverage</div>
         </div>
       </div>
       <div class="reveal reveal-delay-1">
-        <div style="font-family:var(--font-condensed);font-size:1rem;color:var(--muted);line-height:1.7;margin-bottom:2rem;">The Zim Grand Prix is the perfect arena to activate your brand in front of Zimbabwe's business community, motorsport fans, and a captive audience of thousands.</div>
+        <div style="font-family:var(--font-condensed);font-size:1rem;color:#888880;line-height:1.7;margin-bottom:2rem;">The Zim Grand Prix is the perfect arena to activate your brand in front of Zimbabwe's business community, motorsport fans, and a captive audience of thousands.</div>
         <div style="padding:1.5rem;border:1px solid rgba(201,168,76,0.2);margin-bottom:2rem;">
-          <div style="font-family:var(--font-condensed);font-size:0.75rem;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem;">Also available</div>
-          <div style="font-family:var(--font-condensed);font-size:1.1rem;font-weight:600;color:var(--white);margin-bottom:0.5rem;">Sponsorship & Naming Rights</div>
-          <div style="font-size:0.9rem;color:var(--muted);">Interested in larger brand visibility? Contact our sponsorship team for a tailored proposal.</div>
+          <div style="font-family:var(--font-condensed);font-size:0.75rem;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:#C9A84C;margin-bottom:0.5rem;">Also available</div>
+          <div style="font-family:var(--font-condensed);font-size:1.1rem;font-weight:600;color:#F5F0E8;margin-bottom:0.5rem;">Sponsorship & Naming Rights</div>
+          <div style="font-size:0.9rem;color:#888880;">Interested in larger brand visibility? Contact our sponsorship team for a tailored proposal.</div>
         </div>
         <button class="btn-primary" style="width:100%;" onclick="scrollToForm('corporate','')">Register Corporate Team</button>
-        <div style="margin-top:1rem;"><a href="#contact" style="font-family:var(--font-condensed);font-size:0.85rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--muted)'">→ Enquire about sponsorship</a></div>
+        <div style="margin-top:1rem;"><a href="#contact" style="font-family:var(--font-condensed);font-size:0.85rem;letter-spacing:0.15em;text-transform:uppercase;color:#888880;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--muted)'">→ Enquire about sponsorship</a></div>
       </div>
     </div>
   </section>
@@ -864,12 +849,12 @@ nav { padding:0.75rem 1rem; }
   <div class="form-container">
     <div class="form-left">
       <div style="margin-bottom:2.5rem;">
-        <div style="font-family:var(--font-condensed);font-size:0.75rem;font-weight:700;letter-spacing:0.35em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;">Why Register Now?</div>
+        <div style="font-family:var(--font-condensed);font-size:0.75rem;font-weight:700;letter-spacing:0.35em;text-transform:uppercase;color:#C9A84C;margin-bottom:1.5rem;">Why Register Now?</div>
         <div style="display:flex;flex-direction:column;gap:1.2rem;">
-          <div style="display:flex;gap:1rem;align-items:flex-start;"><div style="color:var(--gold);font-size:1.2rem;flex-shrink:0;">→</div><div><div style="font-family:var(--font-condensed);font-weight:700;color:var(--white);font-size:1rem;">Lock in Early Bird Pricing</div><div style="font-size:0.85rem;color:var(--muted);margin-top:0.2rem;">Driver entry: $150 now vs $300 later. Register first, save $150.</div></div></div>
-          <div style="display:flex;gap:1rem;align-items:flex-start;"><div style="color:var(--gold);font-size:1.2rem;flex-shrink:0;">→</div><div><div style="font-family:var(--font-condensed);font-weight:700;color:var(--white);font-size:1rem;">Get a Unique Sequential Ref ID</div><div style="font-size:0.85rem;color:var(--muted);margin-top:0.2rem;">Every registrant gets their own ZGP ID — ordered, official, yours.</div></div></div>
-          <div style="display:flex;gap:1rem;align-items:flex-start;"><div style="color:var(--gold);font-size:1.2rem;flex-shrink:0;">→</div><div><div style="font-family:var(--font-condensed);font-weight:700;color:var(--white);font-size:1rem;">First Access to Artist Announcements</div><div style="font-size:0.85rem;color:var(--muted);margin-top:0.2rem;">After party lineup released to registered members first.</div></div></div>
-          <div style="display:flex;gap:1rem;align-items:flex-start;"><div style="color:var(--gold);font-size:1.2rem;flex-shrink:0;">→</div><div><div style="font-family:var(--font-condensed);font-weight:700;color:var(--white);font-size:1rem;">Limited Spots & Numbered Passes</div><div style="font-size:0.85rem;color:var(--muted);margin-top:0.2rem;">Driver entries capped. HERO and VIP passes are numbered. First come, first served.</div></div></div>
+          <div style="display:flex;gap:1rem;align-items:flex-start;"><div style="color:#C9A84C;font-size:1.2rem;flex-shrink:0;">→</div><div><div style="font-family:var(--font-condensed);font-weight:700;color:#F5F0E8;font-size:1rem;">Lock in Early Bird Pricing</div><div style="font-size:0.85rem;color:#888880;margin-top:0.2rem;">Driver entry: $150 now vs $300 later. Register first, save $150.</div></div></div>
+          <div style="display:flex;gap:1rem;align-items:flex-start;"><div style="color:#C9A84C;font-size:1.2rem;flex-shrink:0;">→</div><div><div style="font-family:var(--font-condensed);font-weight:700;color:#F5F0E8;font-size:1rem;">Get a Unique Sequential Ref ID</div><div style="font-size:0.85rem;color:#888880;margin-top:0.2rem;">Every registrant gets their own ZGP ID — ordered, official, yours.</div></div></div>
+          <div style="display:flex;gap:1rem;align-items:flex-start;"><div style="color:#C9A84C;font-size:1.2rem;flex-shrink:0;">→</div><div><div style="font-family:var(--font-condensed);font-weight:700;color:#F5F0E8;font-size:1rem;">First Access to Artist Announcements</div><div style="font-size:0.85rem;color:#888880;margin-top:0.2rem;">After party lineup released to registered members first.</div></div></div>
+          <div style="display:flex;gap:1rem;align-items:flex-start;"><div style="color:#C9A84C;font-size:1.2rem;flex-shrink:0;">→</div><div><div style="font-family:var(--font-condensed);font-weight:700;color:#F5F0E8;font-size:1rem;">Limited Spots & Numbered Passes</div><div style="font-size:0.85rem;color:#888880;margin-top:0.2rem;">Driver entries capped. HERO and VIP passes are numbered. First come, first served.</div></div></div>
         </div>
       </div>
       <!-- CONFIRMATION SHOWS HERE -->
@@ -925,7 +910,7 @@ nav { padding:0.75rem 1rem; }
       </select>
     </div>
     <div id="attendee-fields-wrapper" style="display:none;margin-bottom:1.5rem;">
-      <label style="display:block;font-family:var(--font-condensed);font-size:0.75rem;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:0.75rem;">Attendee Names <span class="opt">(one per ticket)</span></label>
+      <label style="display:block;font-family:var(--font-condensed);font-size:0.75rem;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:#C9A84C;margin-bottom:0.75rem;">Attendee Names <span class="opt">(one per ticket)</span></label>
       <div class="attendee-fields" id="attendee-fields"></div>
     </div>
     <button class="btn-primary" style="width:100%;" id="s-submit-btn" onclick="submitForm('spectator')">Secure My Spot on the Waitlist</button>
@@ -1002,7 +987,7 @@ nav { padding:0.75rem 1rem; }
 
 <!-- FAQ -->
 
-<div id="faq" style="background:var(--obsidian-mid);max-width:100%;">
+<div id="faq" style="background:#111111;max-width:100%;">
   <section style="max-width:1400px;margin:0 auto;padding:7rem 4rem;">
     <div class="section-eyebrow reveal">Frequently Asked Questions</div>
     <h2 class="section-title reveal reveal-delay-1">GOT<br><span class="gold">QUESTIONS?</span></h2>
@@ -1037,7 +1022,7 @@ nav { padding:0.75rem 1rem; }
     </div>
     <div class="reveal reveal-delay-1">
       <div class="reg-form">
-        <div style="font-family:var(--font-condensed);font-size:0.75rem;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;">Send a Message</div>
+        <div style="font-family:var(--font-condensed);font-size:0.75rem;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:#C9A84C;margin-bottom:1.5rem;">Send a Message</div>
         <div class="form-row">
           <div class="form-group"><label>Name *</label><input type="text" id="cn-name" placeholder="Your full name"></div>
           <div class="form-group"><label>Organisation <span class="opt">(optional)</span></label><input type="text" id="cn-org" placeholder="Company / Organisation"></div>
@@ -1350,7 +1335,7 @@ function showConfirmation(targetId, firstName, refIds, attendeeNames, ticketType
     <div class="conf-title">YOU'RE ON THE LIST</div>
     <div class="conf-name">Welcome, ${firstName}</div>
     <div class="conf-divider"></div>
-    <div style="font-family:var(--font-condensed);font-size:0.7rem;font-weight:700;letter-spacing:0.35em;text-transform:uppercase;color:var(--muted);margin-bottom:0.75rem;">Your Reference ${refIds.length > 1 ? 'IDs' : 'ID'}</div>
+    <div style="font-family:var(--font-condensed);font-size:0.7rem;font-weight:700;letter-spacing:0.35em;text-transform:uppercase;color:#888880;margin-bottom:0.75rem;">Your Reference ${refIds.length > 1 ? 'IDs' : 'ID'}</div>
     <div class="conf-refs">${refsHtml}</div>
     <div class="conf-message">
       <p>${typeMessages[regType]}</p>
